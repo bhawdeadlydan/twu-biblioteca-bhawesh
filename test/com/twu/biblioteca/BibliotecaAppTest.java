@@ -16,7 +16,7 @@ public class BibliotecaAppTest  {
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     @Before
-    public void setSytemOutputToByteArrayOutputStream() {
+    public void setUp() {
         System.setOut(new PrintStream(outputStream));
     }
 
@@ -30,8 +30,21 @@ public class BibliotecaAppTest  {
         assertThat(actualWelcomeMessage, is("Welcome"));
     }
 
+    @Test
+    public void shouldDisplayListOfAllLibraryBooks(){
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+
+        bibliotecaApp.printListOfBooks();
+        String actualListOfBooks = outputStream.toString();
+        String expectedListOfBooks = "Book 1"+System.lineSeparator()+
+                                     "Book 2"+System.lineSeparator()+
+                                     "Book 3"+System.lineSeparator();
+
+        assertThat(actualListOfBooks,is(expectedListOfBooks));
+    }
+
     @After
-    public void setSystemOutputToDefault() {
+    public void tearDown() {
         System.setOut(null);
     }
 }
