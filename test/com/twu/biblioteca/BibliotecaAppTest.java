@@ -31,14 +31,12 @@ public class BibliotecaAppTest  {
     }
 
     @Test
-    public void shouldDisplayListOfAllLibraryBooks(){
+    public void shouldDisplayListOfAllLibraryBooksWithNameAuthorYearOfPublication(){
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
 
         bibliotecaApp.printListOfBooks();
         String actualListOfBooks = outputStream.toString();
-        String expectedListOfBooks = "Book 1"+System.lineSeparator()+
-                                     "Book 2"+System.lineSeparator()+
-                                     "Book 3"+System.lineSeparator();
+        String expectedListOfBooks = "\nName\tAuthor\tPublication Year \nBook 1\tJK Rowling\t2003\nBook 2\tArthur Conan Doyle\t1886\nBook 3\tAgatha Christie\t1800";
 
         assertThat(actualListOfBooks,is(expectedListOfBooks));
     }

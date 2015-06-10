@@ -16,9 +16,12 @@ public class BibliotecaApp {
     }
 
     public void printListOfBooks() {
-        ArrayList<String> books = library.books();
-        for(String book : books) {
-            System.out.println(book);
+        ArrayList<String[]> books = library.books();
+        System.out.print("\nName\t" + "Author\t" + "Publication Year ");
+        for (String bookDetails[] : books) {
+            System.out.print("\n" + bookDetails[0]);
+            System.out.print("\t" + bookDetails[1]);
+            System.out.print("\t" + bookDetails[2]);
         }
     }
 }
