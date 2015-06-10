@@ -11,16 +11,16 @@ import static org.hamcrest.core.Is.is;
 
 public class LibraryTest {
     @Test
-    public void shouldReturnAllBooksFromLibrary(){
+    public void shouldReturnAllBooksFromLibrary() {
         Library library = new Library();
 
-        ArrayList<String> actualBooksInLibrary = library.books();
-        ArrayList <String> expectedBooksInLibrary = new ArrayList<String>();
-        expectedBooksInLibrary.add("Book 1");
-        expectedBooksInLibrary.add("Book 2");
-        expectedBooksInLibrary.add("Book 3");
+        ArrayList<String[]> actualBooksInLibrary = library.books();
+        ArrayList<String[]> expectedBooksInLibrary = new ArrayList<String[]>();
+        expectedBooksInLibrary.add(new String[]{"Book 1", "JK Rowling", "2003"});
+        expectedBooksInLibrary.add(new String[]{"Book 2", "Arthur Conan Doyle", "1886"});
+        expectedBooksInLibrary.add(new String[]{"Book 3", "Agatha Christie", "1800"});
 
-        assertThat(actualBooksInLibrary,is(expectedBooksInLibrary));
+        assertThat(actualBooksInLibrary.toArray(), is(expectedBooksInLibrary.toArray()));
     }
 
 }
