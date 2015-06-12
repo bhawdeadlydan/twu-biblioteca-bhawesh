@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class BibliotecaApp {
 
-    private Library library;
+    private Books books;
 
     public BibliotecaApp() {
-        library = new Library();
+        books = new Books();
     }
 
     public void welcomeMessage() {
@@ -16,7 +16,7 @@ public class BibliotecaApp {
     }
 
     public void printListOfBooks() {
-        ArrayList<String[]> books = library.books();
+        ArrayList<String[]> books = this.books.books();
         System.out.print("\nName\t" + "Author\t" + "Publication Year ");
         for (String bookDetails[] : books) {
             System.out.print("\n" + bookDetails[0]);
