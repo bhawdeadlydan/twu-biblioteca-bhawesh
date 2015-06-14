@@ -19,5 +19,6 @@ public class EntryPoint {
         Menu menu = new Menu(menuMap);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(books, consoleView, menu);
+        bibliotecaApp.start();
     }
 }

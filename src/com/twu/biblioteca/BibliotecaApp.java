@@ -14,13 +14,9 @@ public class BibliotecaApp {
     }
 
     public void start() {
-        welcomeMessage();
+        consoleView.print(Messages.WELCOME_MESSAGE);
         displayMenu();
 
-    }
-
-    public void welcomeMessage() {
-        consoleView.print("Welcome");
     }
 
     public void printListOfBooks() {
