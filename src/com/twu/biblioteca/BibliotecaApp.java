@@ -16,6 +16,8 @@ public class BibliotecaApp {
     public void start() {
         consoleView.print(Messages.WELCOME_MESSAGE);
         displayMenu();
+        int getUserChoice = consoleView.read();
+
 
     }
 
