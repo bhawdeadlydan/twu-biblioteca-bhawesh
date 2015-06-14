@@ -4,21 +4,21 @@ package com.twu.biblioteca;
 public class BibliotecaApp {
 
     private Books books;
-    ConsoleView consoleView;
-    Menu menu;
+    private ConsoleView consoleView;
+    private Menu menu;
+    private MenuExecutor menuExecutor;
 
-    public BibliotecaApp(Books books, ConsoleView consoleView, Menu menu) {
-        this.books = books;
+    public BibliotecaApp(ConsoleView consoleView, Menu menu, MenuExecutor menuExecutor) {
         this.consoleView = consoleView;
         this.menu = menu;
+        this.menuExecutor = menuExecutor;
     }
 
     public void start() {
         consoleView.print(Messages.WELCOME_MESSAGE);
         displayMenu();
-        int getUserChoice = consoleView.read();
-
-
+        consoleView.print(Messages.ENTER_CHOICE_PROMPT);
+        menuExecutor.executeUserCommand();
     }
 
     public void printListOfBooks() {

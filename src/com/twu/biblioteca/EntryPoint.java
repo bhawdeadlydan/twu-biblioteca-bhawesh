@@ -17,8 +17,11 @@ public class EntryPoint {
         HashMap<Integer, String> menuMap = new HashMap<Integer, String>();
         menuMap.put(1, Messages.LIST_BOOKS);
         Menu menu = new Menu(menuMap);
+        HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
+        menuActionMap.put(1, new ListBooks(books, consoleView));
+        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleView);
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(books, consoleView, menu);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);
         bibliotecaApp.start();
     }
 }
