@@ -106,6 +106,8 @@ public class BibliotecaAppTest {
         assertThat(expectedMenu, is(actualMenu));
     }
 
+
+
     @After
     public void tearDown() {
         System.setOut(null);
