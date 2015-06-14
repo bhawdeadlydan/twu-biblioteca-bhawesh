@@ -15,10 +15,10 @@ public class Books {
 
     @Override
     public String toString() {
-        String bookPrint = "";
+        String bookPrint = "\nName\tAuthor\tPublication Year";
         for (String[] book : books) {
-            bookPrint += "\n" + book[0] + "...."
-                    + book[1] + "...."
+            bookPrint += "\n" + book[0] + "\t"
+                    + book[1] + "\t"
                     + book[2];
         }
         return bookPrint;

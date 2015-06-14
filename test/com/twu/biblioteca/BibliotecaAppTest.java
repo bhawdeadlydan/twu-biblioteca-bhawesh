@@ -7,14 +7,18 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 
-public class BibliotecaAppTest  {
+public class BibliotecaAppTest {
     private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private BibliotecaApp bibliotecaApp;
+    ConsoleView consoleView;
+    HashMap<Integer, String> menuMap;
+    Menu menu;
 
 
     @Before
@@ -24,8 +28,12 @@ public class BibliotecaAppTest  {
         bookList.add(new String[]{"Book 2", "Arthur Conan Doyle", "1886"});
         bookList.add(new String[]{"Book 3", "Agatha Christie", "1800"});
 
-        Books books =new Books(bookList);
-        bibliotecaApp = new BibliotecaApp(books);
+        Books books = new Books(bookList);
+        consoleView = new ConsoleView();
+        menuMap = new HashMap<Integer, String>();
+        menuMap.put(1, Messages.LIST_BOOKS);
+        menu = new Menu(menuMap);
+        bibliotecaApp = new BibliotecaApp(books, consoleView, menu);
         System.setOut(new PrintStream(outputStream));
     }
 
@@ -35,16 +43,25 @@ public class BibliotecaAppTest  {
 
         String actualWelcomeMessage = outputStream.toString();
 
-        assertThat(actualWelcomeMessage, is("Welcome"));
+        assertThat(actualWelcomeMessage, is("Welcome\n"));
     }
 
     @Test
-    public void shouldDisplayListOfAllLibraryBooksWithNameAuthorYearOfPublication(){
+    public void shouldDisplayListOfAllLibraryBooksWithNameAuthorYearOfPublication() {
         bibliotecaApp.printListOfBooks();
         String actualListOfBooks = outputStream.toString();
-        String expectedListOfBooks = "\nName\tAuthor\tPublication Year \nBook 1\tJK Rowling\t2003\nBook 2\tArthur Conan Doyle\t1886\nBook 3\tAgatha Christie\t1800";
+        String expectedListOfBooks = "\nName\tAuthor\tPublication Year\nBook 1\tJK Rowling\t2003\nBook 2\tArthur Conan Doyle\t1886\nBook 3\tAgatha Christie\t1800\n";
 
-        assertThat(actualListOfBooks,is(expectedListOfBooks));
+        assertThat(actualListOfBooks, is(expectedListOfBooks));
+    }
+
+    @Test
+    public void shouldDisplayMenuOptions() {
+        bibliotecaApp.displayMenu();
+        String actualMenu = outputStream.toString();
+        String expectedMenu = "\n1 List Books\n";
+
+        assertThat(expectedMenu, is(actualMenu));
     }
 
     @After

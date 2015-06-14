@@ -1,27 +1,27 @@
 package com.twu.biblioteca;
 
 
-import java.util.ArrayList;
-
 public class BibliotecaApp {
 
     private Books books;
+    ConsoleView consoleView;
+    Menu menu;
 
-    public BibliotecaApp(Books books) {
+    public BibliotecaApp(Books books, ConsoleView consoleView, Menu menu) {
         this.books = books;
+        this.consoleView = consoleView;
+        this.menu = menu;
     }
 
     public void welcomeMessage() {
-        System.out.print("Welcome");
+        consoleView.print("Welcome");
     }
 
     public void printListOfBooks() {
-        ArrayList<String[]> books = this.books.books();
-        System.out.print("\nName\t" + "Author\t" + "Publication Year ");
-        for (String bookDetails[] : books) {
-            System.out.print("\n" + bookDetails[0]);
-            System.out.print("\t" + bookDetails[1]);
-            System.out.print("\t" + bookDetails[2]);
-        }
+        consoleView.print(books.toString());
+    }
+
+    public void displayMenu() {
+        consoleView.print(menu.toString());
     }
 }
