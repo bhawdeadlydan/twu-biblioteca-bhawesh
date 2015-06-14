@@ -17,7 +17,7 @@ public class Menu {
         Iterator iterator = menuMap.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry pair = (Map.Entry) iterator.next();
-            menuList = menuList + "\n" + pair.getKey() +" "+ pair.getValue();
+            menuList = menuList + "\n" + pair.getKey() + " " + pair.getValue();
         }
         return menuList;
     }

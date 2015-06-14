@@ -22,7 +22,7 @@ public class ConsoleViewTest {
         bookList.add(new String[]{"Book 2", "Arthur Conan Doyle", "1886"});
         bookList.add(new String[]{"Book 3", "Agatha Christie", "1800"});
 
-        Books books =new Books(bookList);
+        books = new Books(bookList);
         System.setOut(new PrintStream(outputStream));
 
     }
@@ -34,7 +34,7 @@ public class ConsoleViewTest {
         consoleView.print(Messages.WELCOME_MESSAGE);
         String actualOutput = outputStream.toString();
 
-        assertThat(actualOutput, is(Messages.WELCOME_MESSAGE+'\n'));
+        assertThat(actualOutput, is(Messages.WELCOME_MESSAGE + '\n'));
     }
 
     @Test
@@ -42,8 +42,10 @@ public class ConsoleViewTest {
         ConsoleView consoleView = new ConsoleView();
         consoleView.print(books.toString());
         String actualBookListWithDetails = outputStream.toString();
-        String expectedBookListWithDetails = "\nBook 1....JK Rowling....2003\nBook 2....Arthur Conan Doyle....1886\nBook 3....Agatha Christie....1800\n";
-        ;
+        String expectedBookListWithDetails = "\nName\tAuthor\tPublication Year\n"
+                + "Book 1\tJK Rowling\t2003\n"
+                + "Book 2\tArthur Conan Doyle\t1886\n"
+                + "Book 3\tAgatha Christie\t1800\n";
 
         assertThat(actualBookListWithDetails, is(expectedBookListWithDetails));
     }

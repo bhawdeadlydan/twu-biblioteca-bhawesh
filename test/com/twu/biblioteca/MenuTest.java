@@ -14,6 +14,7 @@ public class MenuTest {
     @Before
     public void setUp() {
         HashMap<Integer, String> menuCodeMenuText = new HashMap<Integer, String>();
+        menuCodeMenuText.put(1, Messages.LIST_BOOKS);
         menu = new Menu(menuCodeMenuText);
     }
 
@@ -21,6 +22,6 @@ public class MenuTest {
     public void shouldReturnMenuOptions() {
         String actualMenu = menu.toString();
 
-        assertThat(actualMenu, is("1 " + Messages.LIST_BOOKS));
+        assertThat(actualMenu, is("\n" + "1 " + Messages.LIST_BOOKS));
     }
 }

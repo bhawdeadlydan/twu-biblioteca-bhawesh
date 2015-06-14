@@ -19,19 +19,16 @@ public class BooksTest {
         bookList.add(new String[]{"Book 2", "Arthur Conan Doyle", "1886"});
         bookList.add(new String[]{"Book 3", "Agatha Christie", "1800"});
 
-        Books books =new Books(bookList);
+        books = new Books(bookList);
     }
 
     @Test
-    public void shouldReturnAllBooksFromLibrary() {
+    public void shouldGiveAllBooksFromLibrary() {
 
-        ArrayList<String[]> actualBooksInLibrary = books.books();
-        ArrayList<String[]> expectedBooksInLibrary = new ArrayList<String[]>();
-        expectedBooksInLibrary.add(new String[]{"Book 1", "JK Rowling", "2003"});
-        expectedBooksInLibrary.add(new String[]{"Book 2", "Arthur Conan Doyle", "1886"});
-        expectedBooksInLibrary.add(new String[]{"Book 3", "Agatha Christie", "1800"});
+        String actualBooksInLibrary = books.toString();
+        String expectedBooksInLibrary = "\nName\tAuthor\tPublication Year\nBook 1\tJK Rowling\t2003\nBook 2\tArthur Conan Doyle\t1886\nBook 3\tAgatha Christie\t1800";
 
-        assertThat(actualBooksInLibrary.toArray(), is(expectedBooksInLibrary.toArray()));
+        assertThat(actualBooksInLibrary, is(expectedBooksInLibrary));
     }
 
 }

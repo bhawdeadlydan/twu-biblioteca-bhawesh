@@ -9,10 +9,6 @@ public class Books {
         this.books = bookList;
     }
 
-    public ArrayList<String[]> books() {
-        return books;
-    }
-
     @Override
     public String toString() {
         String bookPrint = "\nName\tAuthor\tPublication Year";
