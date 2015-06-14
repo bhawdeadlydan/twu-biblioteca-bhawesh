@@ -13,6 +13,12 @@ public class BibliotecaApp {
         this.menu = menu;
     }
 
+    public void start() {
+        welcomeMessage();
+        displayMenu();
+
+    }
+
     public void welcomeMessage() {
         consoleView.print("Welcome");
     }

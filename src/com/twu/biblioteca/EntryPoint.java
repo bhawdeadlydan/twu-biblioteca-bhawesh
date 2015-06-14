@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class EntryPoint {
     public static void main(String args[]) {
@@ -12,7 +13,7 @@ public class EntryPoint {
 
         Books books = new Books(bookList);
 
-        ConsoleView consoleView = new ConsoleView();
+        ConsoleView consoleView = new ConsoleView(new Scanner(System.in));
         HashMap<Integer, String> menuMap = new HashMap<Integer, String>();
         menuMap.put(1, Messages.LIST_BOOKS);
         Menu menu = new Menu(menuMap);

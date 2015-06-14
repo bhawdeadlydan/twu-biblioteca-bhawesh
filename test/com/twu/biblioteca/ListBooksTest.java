@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -14,7 +15,8 @@ public class ListBooksTest {
     private ListBooks listBooks;
     private ByteArrayOutputStream outputStream;
     private Books books;
-    ArrayList<String[]> bookList;
+    private ArrayList<String[]> bookList;
+    private ConsoleView consoleView;
 
     @Before
     public void setUp() {
@@ -26,7 +28,8 @@ public class ListBooksTest {
         bookList.add(new String[]{"Book 3", "Agatha Christie", "1800"});
 
         books = new Books(bookList);
-        listBooks = new ListBooks(books);
+        consoleView = new ConsoleView(new Scanner(System.in));
+        listBooks = new ListBooks(books, consoleView);
 
     }
 

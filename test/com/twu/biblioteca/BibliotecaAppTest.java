@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -29,7 +30,7 @@ public class BibliotecaAppTest {
         bookList.add(new String[]{"Book 3", "Agatha Christie", "1800"});
 
         Books books = new Books(bookList);
-        consoleView = new ConsoleView();
+        consoleView = new ConsoleView(new Scanner(System.in));
         menuMap = new HashMap<Integer, String>();
         menuMap.put(1, Messages.LIST_BOOKS);
         menu = new Menu(menuMap);
@@ -43,7 +44,7 @@ public class BibliotecaAppTest {
 
         String actualWelcomeMessage = outputStream.toString();
 
-        assertThat(actualWelcomeMessage, is("Welcome\n"));
+        assertThat(actualWelcomeMessage, is(Messages.WELCOME_MESSAGE+"\n"));
     }
 
     @Test
@@ -59,7 +60,7 @@ public class BibliotecaAppTest {
     public void shouldDisplayMenuOptions() {
         bibliotecaApp.displayMenu();
         String actualMenu = outputStream.toString();
-        String expectedMenu = "\n1 List Books\n";
+        String expectedMenu = "\n1 "+Messages.LIST_BOOKS+"\n";
 
         assertThat(expectedMenu, is(actualMenu));
     }

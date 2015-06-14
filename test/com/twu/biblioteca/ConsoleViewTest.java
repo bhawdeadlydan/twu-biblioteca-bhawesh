@@ -4,9 +4,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -14,6 +16,8 @@ import static org.junit.Assert.assertThat;
 public class ConsoleViewTest {
     private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private Books books;
+    ConsoleView consoleView;
+    private ByteArrayInputStream byteArrayInputStream;
 
     @Before
     public void setUp() {
@@ -23,14 +27,15 @@ public class ConsoleViewTest {
         bookList.add(new String[]{"Book 3", "Agatha Christie", "1800"});
 
         books = new Books(bookList);
+        byteArrayInputStream = new ByteArrayInputStream("1".getBytes());
+        System.setIn(byteArrayInputStream);
         System.setOut(new PrintStream(outputStream));
+        consoleView = new ConsoleView(new Scanner(System.in));
 
     }
 
     @Test
     public void shouldShowTheWelcomeMessage() {
-        ConsoleView consoleView = new ConsoleView();
-
         consoleView.print(Messages.WELCOME_MESSAGE);
         String actualOutput = outputStream.toString();
 
@@ -39,8 +44,8 @@ public class ConsoleViewTest {
 
     @Test
     public void shouldShowListOfBooksWithDetails() {
-        ConsoleView consoleView = new ConsoleView();
         consoleView.print(books.toString());
+
         String actualBookListWithDetails = outputStream.toString();
         String expectedBookListWithDetails = "\nName\tAuthor\tPublication Year\n"
                 + "Book 1\tJK Rowling\t2003\n"
@@ -48,6 +53,14 @@ public class ConsoleViewTest {
                 + "Book 3\tAgatha Christie\t1800\n";
 
         assertThat(actualBookListWithDetails, is(expectedBookListWithDetails));
+    }
+
+    @Test
+    public void shouldBeAbleToTakeUserInput() {
+        int actualUserInput = consoleView.read();
+        int expectedUserInput = 1;
+
+        assertThat(actualUserInput, is(expectedUserInput));
     }
 
     @After
