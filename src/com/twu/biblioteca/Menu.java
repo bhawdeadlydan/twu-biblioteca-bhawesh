@@ -1,8 +1,24 @@
 package com.twu.biblioteca;
 
-public class Menu {
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-    public String displayMenu() {
-        return "1. "+Messages.LIST_BOOKS;
+public class Menu {
+    private HashMap<Integer, String> menuMap;
+
+    public Menu(HashMap menuMap) {
+        this.menuMap = menuMap;
+    }
+
+    @Override
+    public String toString() {
+        String menuList = "";
+        Iterator iterator = menuMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry pair = (Map.Entry) iterator.next();
+            menuList = menuList + "\n" + pair.getKey() +" "+ pair.getValue();
+        }
+        return menuList;
     }
 }
