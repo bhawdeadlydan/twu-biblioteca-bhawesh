@@ -5,11 +5,8 @@ import java.util.ArrayList;
 public class Books {
     private ArrayList<String[]> books;
 
-    public Books() {
-        books = new ArrayList<String[]>();
-        books.add(new String[]{"Book 1", "JK Rowling", "2003"});
-        books.add(new String[]{"Book 2", "Arthur Conan Doyle", "1886"});
-        books.add(new String[]{"Book 3", "Agatha Christie", "1800"});
+    public Books(ArrayList<String[]> bookList) {
+        this.books = bookList;
     }
 
     public ArrayList<String[]> books() {
@@ -20,9 +17,9 @@ public class Books {
     public String toString() {
         String bookPrint = "";
         for (String[] book : books) {
-            bookPrint +="\n"+ book[0]+"...."
-                      + book[1]+"...."
-                      + book[2];
+            bookPrint += "\n" + book[0] + "...."
+                    + book[1] + "...."
+                    + book[2];
         }
         return bookPrint;
 

@@ -7,8 +7,8 @@ public class BibliotecaApp {
 
     private Books books;
 
-    public BibliotecaApp() {
-        books = new Books();
+    public BibliotecaApp(Books books) {
+        this.books = books;
     }
 
     public void welcomeMessage() {
