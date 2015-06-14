@@ -87,9 +87,21 @@ public class BibliotecaAppTest {
 
     @Test
     public void shouldDisplayMenuOptions() {
-        bibliotecaApp.displayMenu();
-        String actualMenu = outputStream.toString();
-        String expectedMenu = "\n1 " + Messages.LIST_BOOKS + "\n";
+        ConsoleView consoleViewStub1 = mock(ConsoleView.class);
+        HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
+        menuActionMap.put(1, new ListBooks(books, consoleView));
+        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleView);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleViewStub1, menu, menuExecutor);
+
+        bibliotecaApp.start();
+
+        ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
+        verify(consoleViewStub1, times(3)).print(stringArgumentCaptor.capture());
+
+        List<String> capturedStrings = stringArgumentCaptor.getAllValues();
+
+        String actualMenu = capturedStrings.get(1);
+        String expectedMenu = "\n1 " + Messages.LIST_BOOKS;
 
         assertThat(expectedMenu, is(actualMenu));
     }

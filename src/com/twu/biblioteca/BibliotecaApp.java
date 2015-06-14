@@ -16,16 +16,8 @@ public class BibliotecaApp {
 
     public void start() {
         consoleView.print(Messages.WELCOME_MESSAGE);
-        displayMenu();
+        consoleView.print(menu.toString());
         consoleView.print(Messages.ENTER_CHOICE_PROMPT);
         menuExecutor.executeUserCommand();
-    }
-
-    public void printListOfBooks() {
-        consoleView.print(books.toString());
-    }
-
-    public void displayMenu() {
-        consoleView.print(menu.toString());
     }
 }
