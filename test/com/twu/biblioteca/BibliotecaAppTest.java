@@ -45,6 +45,7 @@ public class BibliotecaAppTest {
         ConsoleView consoleView = new ConsoleView(new Scanner(System.in));
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
+        menuActionMap.put(2, new Quit());
         menuExecutor = new MenuExecutor(menuActionMap, consoleView);
         bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);
         System.setOut(new PrintStream(outputStream));
@@ -106,7 +107,22 @@ public class BibliotecaAppTest {
         assertThat(expectedMenu, is(actualMenu));
     }
 
+    @Test
+    public void shouldQuitWhenOptionIsSelected() {
+        Quit quitAction = mock(Quit.class);
+        ConsoleView consoleViewStub1 = mock(ConsoleView.class);
+        HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
+        menuActionMap.put(1, new ListBooks(books, consoleView));
+        menuActionMap.put(2, quitAction);
+        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub1);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);
+        when(consoleViewStub1.read()).thenReturn(2);
 
+        bibliotecaApp.start();
+
+        verify(quitAction).performAction();
+
+    }
 
     @After
     public void tearDown() {
