@@ -8,6 +8,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -19,9 +20,8 @@ public class MenuExecutorTest {
     @Mock
     ConsoleView consoleViewStub2;
 
-
+    private Quit quitMenuActionStub;
     private MenuExecutor menuExecutor;
-
     private HashMap<Integer, MenuAction> menuItemMap;
 
     @Before
@@ -34,8 +34,11 @@ public class MenuExecutorTest {
         bookList.add(new String[]{"Book 3", "Agatha Christie", "1800"});
 
         Books books = new Books(bookList);
+
+        quitMenuActionStub = mock(Quit.class);
         menuItemMap = new HashMap<Integer, MenuAction>();
         menuItemMap.put(1, new ListBooks(books, consoleViewStub1));
+        menuItemMap.put(2, quitMenuActionStub);
         menuExecutor = new MenuExecutor(menuItemMap, consoleViewStub2);
     }
 
@@ -52,5 +55,13 @@ public class MenuExecutorTest {
         menuExecutor.executeUserCommand();
 
         verify(consoleViewStub1).print("\nName\tAuthor\tPublication Year\nBook 1\tJK Rowling\t2003\nBook 2\tArthur Conan Doyle\t1886\nBook 3\tAgatha Christie\t1800");
+    }
+
+    @Test
+    public void shouldExitWhenQuitIsSelected() {
+        when(consoleViewStub2.read()).thenReturn(2);
+        menuExecutor.executeUserCommand();
+
+        verify(quitMenuActionStub).performAction();
     }
 }
