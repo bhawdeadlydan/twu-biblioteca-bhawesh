@@ -42,6 +42,8 @@ public class CheckOutBookTest {
     }
     @Test
     public void shouldCheckOutBook() {
+        Books books = mock(Books.class);
+        checkOutBook = new CheckOutBook(consoleViewStub, books);
         when(consoleViewStub.getBookName()).thenReturn("Book 1");
 
         checkOutBook.performAction();

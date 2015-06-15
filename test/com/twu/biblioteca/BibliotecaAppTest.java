@@ -41,7 +41,7 @@ public class BibliotecaAppTest {
         availableBookList.add(new Book("Book 3", "Agatha Christie", 1800));
 
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
-        Books books = new Books(availableBookList, checkedOutBookList);
+        books = new Books(availableBookList, checkedOutBookList);
         menuMap = new HashMap<Integer, String>();
         menuMap.put(1, Messages.LIST_BOOKS);
         menuMap.put(2, Messages.QUIT);

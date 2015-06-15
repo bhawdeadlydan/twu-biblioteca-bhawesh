@@ -2,7 +2,9 @@ package com.twu.biblioteca;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,6 +20,10 @@ public class ConsoleViewTest {
     private ByteArrayInputStream bookName = new ByteArrayInputStream("Book 1".getBytes());
     private Books books;
     private ConsoleView consoleView;
+    Scanner scanner;
+
+    @Rule
+    public TextFromStandardInputStream systemInMock = TextFromStandardInputStream.emptyStandardInputStream();
 
     @Before
     public void setUp() {
@@ -27,7 +33,8 @@ public class ConsoleViewTest {
         availableBookList.add(new Book("Book 3", "Agatha Christie", 1800));
 
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
-        Books books = new Books(availableBookList, checkedOutBookList);
+        books = new Books(availableBookList, checkedOutBookList);
+        scanner = new Scanner(System.in);
 
         System.setOut(new PrintStream(outputStream));
         consoleView = new ConsoleView(new Scanner(System.in));
@@ -57,6 +64,7 @@ public class ConsoleViewTest {
 
     @Test
     public void shouldBeAbleToTakeUserInput() {
+        systemInMock.provideText(String.valueOf(1));
         int actualUserInput = consoleView.read();
         int expectedUserInput = 1;
 
@@ -65,11 +73,11 @@ public class ConsoleViewTest {
 
     @Test
     public void shouldBeAbleToGetBookName() {
-        consoleView = new ConsoleView(new Scanner(System.in));
-        System.setIn(null);
-        System.setIn(bookName);
+        systemInMock.provideText("Book 1");
+
+        consoleView = new ConsoleView(scanner);
         String actualBookName = consoleView.getBookName();
-        String expectedBookName = "1";
+        String expectedBookName = "Book 1";
         assertThat(actualBookName, is(expectedBookName));
     }
 

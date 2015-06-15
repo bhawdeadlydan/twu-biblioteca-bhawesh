@@ -15,6 +15,7 @@ public class
 
         consoleView.print(Messages.BOOK_CHECKOUT_PROMPT);
         String bookName = consoleView.getBookName();
+        books.checkout(bookName);
     }
 }
 
