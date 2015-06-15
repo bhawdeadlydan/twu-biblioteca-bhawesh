@@ -17,4 +17,11 @@ public class Books {
         }
         return bookPrint;
     }
+
+    public boolean isBookInBookList(String greatBook) {
+        for (Book book : books)
+            if (book.isBookSame(greatBook))
+                return true;
+        return false;
+    }
 }

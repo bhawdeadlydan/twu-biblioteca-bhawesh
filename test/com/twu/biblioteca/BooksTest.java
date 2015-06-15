@@ -31,4 +31,10 @@ public class BooksTest {
         assertThat(actualBooksInLibrary, is(expectedBooksInLibrary));
     }
 
+    @Test
+    public void shouldMatchTheBookBasedOnNameInBookList() {
+        boolean actual = books.isBookInBookList("Book 1");
+
+        assertThat(actual, is(true));
+    }
 }
