@@ -15,9 +15,9 @@ import static org.junit.Assert.assertThat;
 
 public class ConsoleViewTest {
     private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    private ByteArrayInputStream bookName = new ByteArrayInputStream("Book 1".getBytes());
     private Books books;
-    ConsoleView consoleView;
-    private ByteArrayInputStream byteArrayInputStream;
+    private ConsoleView consoleView;
 
     @Before
     public void setUp() {
@@ -25,10 +25,9 @@ public class ConsoleViewTest {
         bookList.add(new Book("Book 1", "JK Rowling", 2003));
         bookList.add(new Book("Book 2", "Arthur Conan Doyle", 1886));
         bookList.add(new Book("Book 3", "Agatha Christie", 1800));
-
+        System.setIn(new ByteArrayInputStream("1".getBytes()));
         books = new Books(bookList);
-        byteArrayInputStream = new ByteArrayInputStream("1".getBytes());
-        System.setIn(byteArrayInputStream);
+
         System.setOut(new PrintStream(outputStream));
         consoleView = new ConsoleView(new Scanner(System.in));
 
@@ -63,9 +62,21 @@ public class ConsoleViewTest {
         assertThat(actualUserInput, is(expectedUserInput));
     }
 
+    @Test
+    public void shouldBeAbleToGetBookName() {
+        consoleView = new ConsoleView(new Scanner(System.in));
+        System.setIn(null);
+        System.setIn(bookName);
+        String actualBookName = consoleView.getBookName();
+        String expectedBookName = "1";
+        assertThat(actualBookName, is(expectedBookName));
+    }
+
+
     @After
     public void tearDown() {
         System.setOut(null);
+
     }
 
 }

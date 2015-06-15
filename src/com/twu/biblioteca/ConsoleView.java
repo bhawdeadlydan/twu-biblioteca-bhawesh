@@ -18,4 +18,8 @@ public class ConsoleView {
     public int read() {
         return scanner.nextInt();
     }
+
+    public String getBookName() {
+        return scanner.nextLine();
+    }
 }
