@@ -37,4 +37,11 @@ public class BooksTest {
 
         assertThat(actual, is(true));
     }
+
+    @Test
+    public void shouldCheckAvaiblityOfBook() {
+        boolean actual = books.isAvailable("Book 1");
+
+        assertThat(actual, is(true));
+    }
 }

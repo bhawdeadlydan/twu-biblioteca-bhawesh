@@ -3,24 +3,35 @@ package com.twu.biblioteca;
 import java.util.ArrayList;
 
 public class Books {
-    private ArrayList<Book> books;
+    private ArrayList<Book> availableBooks;
+    private ArrayList<Book> checkedOutBooks;
 
     public Books(ArrayList<Book> bookList) {
-        this.books = bookList;
+        this.availableBooks = bookList;
     }
 
     @Override
     public String toString() {
         String bookPrint = "\nName\tAuthor\tPublication Year";
-        for (Book book : books) {
+        for (Book book : availableBooks) {
             bookPrint += "\n" + book.toString();
         }
         return bookPrint;
     }
 
     public boolean isBookInBookList(String greatBook) {
-        for (Book book : books)
+        for (Book book : availableBooks)
             if (book.isBookSame(greatBook))
+                return true;
+        for (Book book : checkedOutBooks)
+            if (book.isBookSame(greatBook))
+                return true;
+        return false;
+    }
+
+    public boolean isAvailable(String bookName) {
+        for (Book book : availableBooks)
+            if (book.isBookSame(bookName))
                 return true;
         return false;
     }
