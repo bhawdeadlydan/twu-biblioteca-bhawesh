@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
-public class CheckOutBook implements MenuAction {
+public class
+        CheckOutBook implements MenuAction {
     private Books books;
     private ConsoleView consoleView;
 
@@ -12,6 +13,7 @@ public class CheckOutBook implements MenuAction {
     @Override
     public void performAction() {
 
+        consoleView.print(Messages.BOOK_CHECKOUT_PROMPT);
     }
 }
 

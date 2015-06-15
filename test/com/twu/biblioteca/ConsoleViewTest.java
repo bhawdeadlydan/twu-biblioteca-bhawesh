@@ -76,7 +76,6 @@ public class ConsoleViewTest {
     @After
     public void tearDown() {
         System.setOut(null);
-
     }
 
 }
