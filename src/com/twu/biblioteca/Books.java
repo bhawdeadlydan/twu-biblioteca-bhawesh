@@ -3,19 +3,17 @@ package com.twu.biblioteca;
 import java.util.ArrayList;
 
 public class Books {
-    private ArrayList<String[]> books;
+    private ArrayList<Book> books;
 
-    public Books(ArrayList<String[]> bookList) {
+    public Books(ArrayList<Book> bookList) {
         this.books = bookList;
     }
 
     @Override
     public String toString() {
         String bookPrint = "\nName\tAuthor\tPublication Year";
-        for (String[] book : books) {
-            bookPrint += "\n" + book[0] + "\t"
-                    + book[1] + "\t"
-                    + book[2];
+        for (Book book : books) {
+            bookPrint += "\n" + book.toString();
         }
         return bookPrint;
     }

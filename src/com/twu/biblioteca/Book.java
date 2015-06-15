@@ -14,7 +14,7 @@ public class Book {
 
     @Override
     public String toString() {
-        String bookDetail = "\n";
+        String bookDetail = "";
         bookDetail += bookName + "\t" + author + "\t" + publicationYear;
         return bookDetail;
     }

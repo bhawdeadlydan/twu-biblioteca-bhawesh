@@ -12,7 +12,7 @@ public class BookTest {
 
         String actualBookToString = book.toString();
 
-        assertThat(actualBookToString, is("\nGreatBook\tConan\t1994"));
+        assertThat(actualBookToString, is("GreatBook\tConan\t1994"));
     }
 
     @Test

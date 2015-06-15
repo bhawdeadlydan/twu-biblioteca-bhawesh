@@ -35,10 +35,10 @@ public class BibliotecaAppTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ArrayList<String[]> bookList = new ArrayList<String[]>();
-        bookList.add(new String[]{"Book 1", "JK Rowling", "2003"});
-        bookList.add(new String[]{"Book 2", "Arthur Conan Doyle", "1886"});
-        bookList.add(new String[]{"Book 3", "Agatha Christie", "1800"});
+        ArrayList<Book> bookList = new ArrayList<Book>();
+        bookList.add(new Book("Book 1", "JK Rowling", 2003));
+        bookList.add(new Book("Book 2", "Arthur Conan Doyle", 1886));
+        bookList.add(new Book("Book 3", "Agatha Christie", 1800));
 
         books = new Books(bookList);
         menuMap = new HashMap<Integer, String>();
