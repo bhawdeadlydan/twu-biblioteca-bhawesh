@@ -43,4 +43,8 @@ public class Book {
         result = 31 * result + author.hashCode();
         return result;
     }
+
+    public boolean isBookSame(String book) {
+        return book == this.bookName;
+    }
 }

@@ -57,7 +57,12 @@ public class BookTest {
         assertThat(actual, is(true));
     }
 
+    @Test
+    public void shouldMatchTheBookBasedOnName() {
+        Book firstBook = new Book("GreatBook", "Conan", 1994);
 
+        boolean actual = firstBook.isBookSame("GreatBook");
 
-
+        assertThat(actual, is(true));
+    }
 }
