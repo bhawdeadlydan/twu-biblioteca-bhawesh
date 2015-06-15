@@ -6,8 +6,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class CheckOutBookTest {
     private Books books;
@@ -17,12 +16,14 @@ public class CheckOutBookTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ArrayList<Book> bookList = new ArrayList<Book>();
-        bookList.add(new Book("Book 1", "JK Rowling", 2003));
-        bookList.add(new Book("Book 2", "Arthur Conan Doyle", 1886));
-        bookList.add(new Book("Book 3", "Agatha Christie", 1800));
+        ArrayList<Book> availableBookList = new ArrayList<Book>();
+        availableBookList.add(new Book("Book 1", "JK Rowling", 2003));
+        availableBookList.add(new Book("Book 2", "Arthur Conan Doyle", 1886));
+        availableBookList.add(new Book("Book 3", "Agatha Christie", 1800));
+
+        ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
+        books = new Books(availableBookList, checkedOutBookList);
         consoleViewStub = mock(ConsoleView.class);
-        books = new Books(bookList);
         checkOutBook = new CheckOutBook(consoleViewStub, books);
     }
 
@@ -41,8 +42,10 @@ public class CheckOutBookTest {
     }
     @Test
     public void shouldCheckOutBook() {
+        when(consoleViewStub.getBookName()).thenReturn("Book 1");
+
         checkOutBook.performAction();
 
-        verify()
+        verify(books).checkout("Book 1");
     }
 }

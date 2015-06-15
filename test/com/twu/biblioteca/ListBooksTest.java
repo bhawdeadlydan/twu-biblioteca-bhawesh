@@ -22,12 +22,13 @@ public class ListBooksTest {
     public void setUp() {
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        ArrayList<Book> bookList = new ArrayList<Book>();
-        bookList.add(new Book("Book 1", "JK Rowling", 2003));
-        bookList.add(new Book("Book 2", "Arthur Conan Doyle", 1886));
-        bookList.add(new Book("Book 3", "Agatha Christie", 1800));
+        ArrayList<Book> availableBookList = new ArrayList<Book>();
+        availableBookList.add(new Book("Book 1", "JK Rowling", 2003));
+        availableBookList.add(new Book("Book 2", "Arthur Conan Doyle", 1886));
+        availableBookList.add(new Book("Book 3", "Agatha Christie", 1800));
 
-        books = new Books(bookList);
+        ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
+        Books books = new Books(availableBookList, checkedOutBookList);
         consoleView = new ConsoleView(new Scanner(System.in));
         listBooks = new ListBooks(books, consoleView);
 

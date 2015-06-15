@@ -6,8 +6,9 @@ public class Books {
     private ArrayList<Book> availableBooks;
     private ArrayList<Book> checkedOutBooks;
 
-    public Books(ArrayList<Book> bookList) {
-        this.availableBooks = bookList;
+    public Books(ArrayList<Book> availableBookList, ArrayList<Book> checkedOutBooks) {
+        this.availableBooks = availableBookList;
+        this.checkedOutBooks = checkedOutBooks;
     }
 
     @Override
