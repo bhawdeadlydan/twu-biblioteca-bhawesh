@@ -35,4 +35,20 @@ public class Books {
                 return true;
         return false;
     }
+
+    public boolean checkout(String bookName) {
+        Book bookToCheckout = null;
+        if(isAvailable(bookName)){
+            for(Book book : availableBooks){
+                if(book.isBookSame(bookName)){
+                    bookToCheckout = book;
+                    checkedOutBooks.add(bookToCheckout);
+                    availableBooks.remove(bookToCheckout);
+                    return true;
+                }
+
+            }
+        }
+        return false;
+    }
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertTrue;
 
 
 public class BooksTest {
@@ -43,5 +44,13 @@ public class BooksTest {
         boolean actual = books.isAvailable("Book 1");
 
         assertThat(actual, is(true));
+    }
+
+    @Test
+    public void shouldCheckOutBook() {
+        String bookName = "Book 1";
+        boolean actual = books.checkout(bookName);
+
+        assertTrue(actual);
     }
 }

@@ -2,12 +2,12 @@ package com.twu.biblioteca;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class CheckOutBookTest {
     private Books books;
@@ -30,13 +30,19 @@ public class CheckOutBookTest {
     public void shouldPromptUserToEnterBookNameToCheckout() {
         checkOutBook.performAction();
 
-        Mockito.verify(consoleViewStub).print(Messages.BOOK_CHECKOUT_PROMPT);
+        verify(consoleViewStub).print(Messages.BOOK_CHECKOUT_PROMPT);
     }
 
     @Test
     public void shouldInputBookNameFromUser() {
         checkOutBook.performAction();
 
-        Mockito.verify(consoleViewStub).getBookName();
+        verify(consoleViewStub).getBookName();
+    }
+    @Test
+    public void shouldCheckOutBook() {
+        checkOutBook.performAction();
+
+        verify()
     }
 }
