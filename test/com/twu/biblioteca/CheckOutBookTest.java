@@ -33,4 +33,10 @@ public class CheckOutBookTest {
         Mockito.verify(consoleViewStub).print(Messages.BOOK_CHECKOUT_PROMPT);
     }
 
+    @Test
+    public void shouldInputBookNameFromUser() {
+        checkOutBook.performAction();
+
+        Mockito.verify(consoleViewStub).getBookName();
+    }
 }
