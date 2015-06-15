@@ -14,8 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 
@@ -41,6 +43,7 @@ public class BibliotecaAppTest {
         books = new Books(bookList);
         menuMap = new HashMap<Integer, String>();
         menuMap.put(1, Messages.LIST_BOOKS);
+        menuMap.put(2, Messages.QUIT);
         menu = new Menu(menuMap);
         ConsoleView consoleView = new ConsoleView(new Scanner(System.in));
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
@@ -55,14 +58,18 @@ public class BibliotecaAppTest {
     @Test
     public void shouldDisplayWelcomeMessageWhenBibliotecaAppStarts() {
         ConsoleView consoleViewStub = mock(ConsoleView.class);
+        ConsoleView consoleViewStub1 = mock(ConsoleView.class);
         Books booksStub = mock(Books.class);
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(booksStub, consoleView));
-        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleView);
+        menuActionMap.put(2, new Quit());
+        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub1);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleViewStub, menu, menuExecutor);
+        when(consoleViewStub1.read()).thenReturn(1, 2);
+
         bibliotecaApp.start();
 
-        verify(consoleViewStub).print(Messages.WELCOME_MESSAGE);
+        verify(consoleViewStub, times(2)).print(Messages.WELCOME_MESSAGE);
     }
 
     @Test
@@ -71,40 +78,44 @@ public class BibliotecaAppTest {
         ConsoleView consoleViewStub2 = mock(ConsoleView.class);
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleViewStub2));
+        menuActionMap.put(2, new Quit());
         MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub1);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);
 
-        when(consoleViewStub1.read()).thenReturn((int)1);
+        when(consoleViewStub1.read()).thenReturn(1, 2);
 
         bibliotecaApp.start();
+
         ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
         verify(consoleViewStub2, times(1)).print(stringArgumentCaptor.capture());
-
         List<String> capturedStrings = stringArgumentCaptor.getAllValues();
-
         String expectedString = "\nName\tAuthor\tPublication Year\nBook 1\tJK Rowling\t2003\nBook 2\tArthur Conan Doyle\t1886\nBook 3\tAgatha Christie\t1800";
+
         assertThat(capturedStrings.get(0), is(expectedString));
     }
 
     @Test
     public void shouldDisplayMenuOptions() {
         ConsoleView consoleViewStub1 = mock(ConsoleView.class);
+        ConsoleView consoleViewStub2 = mock(ConsoleView.class);
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
-        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleView);
+        menuActionMap.put(2, new Quit());
+        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub2);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleViewStub1, menu, menuExecutor);
-
+        when(consoleViewStub2.read()).thenReturn(1, 2);
         bibliotecaApp.start();
 
         ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
-        verify(consoleViewStub1, times(3)).print(stringArgumentCaptor.capture());
+        verify(consoleViewStub1, times(6)).print(stringArgumentCaptor.capture());
 
         List<String> capturedStrings = stringArgumentCaptor.getAllValues();
 
         String actualMenu = capturedStrings.get(1);
-        String expectedMenu = "\n1 " + Messages.LIST_BOOKS;
+        String expectedMenu = "\n1 " + Messages.LIST_BOOKS +
+                "\n2 " + Messages.QUIT;
 
-        assertThat(expectedMenu, is(actualMenu));
+        assertEquals(expectedMenu, actualMenu);
     }
 
     @Test
@@ -114,13 +125,30 @@ public class BibliotecaAppTest {
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
         menuActionMap.put(2, quitAction);
-        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub1);
+        menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub1);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);
         when(consoleViewStub1.read()).thenReturn(2);
 
         bibliotecaApp.start();
 
-        verify(quitAction).performAction();
+        assertFalse(menuExecutor.executeUserCommand());
+    }
+
+    @Test
+    public void shouldContinueToGiveMenuUntilQuitIsCalled() {
+        Quit quitAction = mock(Quit.class);
+        ConsoleView consoleViewStub1 = mock(ConsoleView.class);
+        HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
+        menuActionMap.put(1, new ListBooks(books, consoleView));
+        menuActionMap.put(2, quitAction);
+        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub1);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);
+        when(consoleViewStub1.read()).thenReturn(1, 1, 2);
+
+        bibliotecaApp.start();
+
+        verify(consoleViewStub1, times(3)).read();
+        assertFalse(menuExecutor.executeUserCommand());
 
     }
 

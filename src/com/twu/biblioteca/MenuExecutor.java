@@ -14,7 +14,10 @@ public class MenuExecutor {
     public boolean executeUserCommand() {
         int userChoice = consoleView.read();
         if (menuActionMap.containsKey(userChoice)) {
-             menuActionMap.get(userChoice).performAction();
+            if (menuActionMap.get(userChoice) instanceof Quit) {
+                return false;
+            }
+            menuActionMap.get(userChoice).performAction();
             return true;
         } else {
             consoleView.print(Messages.INVALID_OPTION_MESSAGE);

@@ -15,7 +15,9 @@ public class EntryPoint {
 
         ConsoleView consoleView = new ConsoleView(new Scanner(System.in));
         HashMap<Integer, String> menuMap = new HashMap<Integer, String>();
+
         menuMap.put(1, Messages.LIST_BOOKS);
+        menuMap.put(2, Messages.QUIT);
         Menu menu = new Menu(menuMap);
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));

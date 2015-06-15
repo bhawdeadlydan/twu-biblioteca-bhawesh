@@ -8,9 +8,9 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 public class MenuExecutorTest {
 
@@ -22,7 +22,7 @@ public class MenuExecutorTest {
 
     private Quit quitMenuActionStub;
     private MenuExecutor menuExecutor;
-    private HashMap<Integer, MenuAction> menuItemMap;
+    private HashMap<Integer, MenuAction> menuActionMap;
 
     @Before
     public void setUp() {
@@ -36,10 +36,10 @@ public class MenuExecutorTest {
         Books books = new Books(bookList);
 
         quitMenuActionStub = mock(Quit.class);
-        menuItemMap = new HashMap<Integer, MenuAction>();
-        menuItemMap.put(1, new ListBooks(books, consoleViewStub1));
-        menuItemMap.put(2, quitMenuActionStub);
-        menuExecutor = new MenuExecutor(menuItemMap, consoleViewStub2);
+        menuActionMap = new HashMap<Integer, MenuAction>();
+        menuActionMap.put(1, new ListBooks(books, consoleViewStub1));
+        menuActionMap.put(2, quitMenuActionStub);
+        menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub2);
     }
 
     @Test
@@ -60,8 +60,9 @@ public class MenuExecutorTest {
     @Test
     public void shouldExitWhenQuitIsSelected() {
         when(consoleViewStub2.read()).thenReturn(2);
-        menuExecutor.executeUserCommand();
+        Boolean actualValue = menuExecutor.executeUserCommand();
 
-        verify(quitMenuActionStub).performAction();
+        assertThat(false, is(actualValue));
+
     }
 }

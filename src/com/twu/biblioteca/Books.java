@@ -18,6 +18,5 @@ public class Books {
                     + book[2];
         }
         return bookPrint;
-
     }
 }

@@ -15,9 +15,12 @@ public class BibliotecaApp {
     }
 
     public void start() {
-        consoleView.print(Messages.WELCOME_MESSAGE);
-        consoleView.print(menu.toString());
-        consoleView.print(Messages.ENTER_CHOICE_PROMPT);
-        menuExecutor.executeUserCommand();
+        Boolean shouldContinue = true;
+        while (shouldContinue) {
+            consoleView.print(Messages.WELCOME_MESSAGE);
+            consoleView.print(menu.toString());
+            consoleView.print(Messages.ENTER_CHOICE_PROMPT);
+            shouldContinue = menuExecutor.executeUserCommand();
+        }
     }
 }
