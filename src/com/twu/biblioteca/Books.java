@@ -52,6 +52,22 @@ public class Books {
     }
 
     public boolean returnBook(String bookName) {
-        return true;
+        if(isCheckedOut(bookName)){
+            for(Book book : checkedOutBooks){
+                if(book.isBookSame(bookName)){
+                    availableBooks.add(book);
+                    checkedOutBooks.remove(book);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isCheckedOut(String bookName) {
+        for (Book book : checkedOutBooks)
+            if (book.isBookSame(bookName))
+                return true;
+        return false;
     }
 }
