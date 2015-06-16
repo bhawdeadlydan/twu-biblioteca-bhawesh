@@ -7,4 +7,6 @@ public class Messages {
     public static final String ENTER_CHOICE_PROMPT = "Enter Choice :";
     public static final String QUIT = "Quit";
     public static final String BOOK_CHECKOUT_PROMPT = "Enter the name of the Book you want to checkout:";
+    public static final String CHECKOUT_BOOK = "CheckOut Book";
+    public static final String SUCCESSFULL_CHECKOUT = "Thank You! Enjoy The Book.";
 }

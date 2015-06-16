@@ -21,10 +21,13 @@ public class EntryPoint {
 
         menuMap.put(1, Messages.LIST_BOOKS);
         menuMap.put(2, Messages.QUIT);
+        menuMap.put(3, Messages.CHECKOUT_BOOK);
+
         Menu menu = new Menu(menuMap);
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
         menuActionMap.put(2, new Quit());
+        menuActionMap.put(3, new CheckOutBook(consoleView, books));
         MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleView);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);

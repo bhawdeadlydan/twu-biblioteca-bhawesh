@@ -16,13 +16,15 @@ public class
     public void performAction() {
 
         consoleView.print(Messages.BOOK_CHECKOUT_PROMPT);
-        String bookName = null;
+        String bookName = "";
         try {
             bookName = consoleView.getBookName();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        books.checkout(bookName);
+        if (books.checkout(bookName)) {
+            consoleView.print(Messages.SUCCESSFULL_CHECKOUT);
+        }
     }
 }
 

@@ -38,13 +38,11 @@ public class Books {
     }
 
     public boolean checkout(String bookName) {
-        Book bookToCheckout = null;
         if(isAvailable(bookName)){
             for(Book book : availableBooks){
                 if(book.isBookSame(bookName)){
-                    bookToCheckout = book;
-                    checkedOutBooks.add(bookToCheckout);
-                    availableBooks.remove(bookToCheckout);
+                    checkedOutBooks.add(book);
+                    availableBooks.remove(book);
                     return true;
                 }
 
