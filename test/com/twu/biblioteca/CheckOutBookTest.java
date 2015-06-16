@@ -76,4 +76,22 @@ public class CheckOutBookTest {
 
         assertThat(expectedMessage, is(actualMessage));
     }
+
+    @Test
+    public void shouldNotCheckOutBook() throws IOException {
+        checkOutBook = new CheckOutBook(consoleViewStub, books);
+        when(consoleViewStub.getBookName()).thenReturn("Book 4");
+
+        checkOutBook.performAction();
+
+        ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
+        verify(consoleViewStub, times(2)).print(stringArgumentCaptor.capture());
+
+        List<String> capturedStrings = stringArgumentCaptor.getAllValues();
+
+        String actualMessage = capturedStrings.get(1);
+        String expectedMessage = Messages.UNSUCCESSFULL_CHECKOUT;
+
+        assertThat(expectedMessage, is(actualMessage));
+    }
 }

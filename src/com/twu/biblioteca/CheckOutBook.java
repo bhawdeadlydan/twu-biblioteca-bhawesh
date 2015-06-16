@@ -24,6 +24,8 @@ public class
         }
         if (books.checkout(bookName)) {
             consoleView.print(Messages.SUCCESSFULL_CHECKOUT);
+        } else {
+            consoleView.print(Messages.UNSUCCESSFULL_CHECKOUT);
         }
     }
 }
