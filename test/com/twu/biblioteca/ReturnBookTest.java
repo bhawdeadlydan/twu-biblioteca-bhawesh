@@ -34,5 +34,13 @@ public class ReturnBookTest {
         verify(consoleViewStub).print(Messages.BOOK_RETURN_PROMPT);
     }
 
+    @Test
+    public void shouldInputBookNameFromUser() throws IOException {
+        when(consoleViewStub.getBookName()).thenReturn("Book 1");
+        returnBook.performAction();
+
+        verify(consoleViewStub).getBookName();
+    }
+
 
 }
