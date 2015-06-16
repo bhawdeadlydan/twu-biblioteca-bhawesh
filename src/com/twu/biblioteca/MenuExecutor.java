@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class MenuExecutor {
@@ -11,7 +12,7 @@ public class MenuExecutor {
         this.consoleView = consoleView;
     }
 
-    public boolean executeUserCommand() {
+    public boolean executeUserCommand() throws IOException {
         int userChoice = consoleView.read();
         if (menuActionMap.containsKey(userChoice)) {
             if (menuActionMap.get(userChoice) instanceof Quit) {

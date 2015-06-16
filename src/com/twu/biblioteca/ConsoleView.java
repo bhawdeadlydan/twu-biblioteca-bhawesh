@@ -1,25 +1,26 @@
 package com.twu.biblioteca;
 
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
 
 public class ConsoleView {
 
-    private Scanner scanner;
+    private BufferedReader bufferedReader;
 
-    public ConsoleView(Scanner scanner) {
-        this.scanner = scanner;
+    public ConsoleView(BufferedReader bufferedReader) {
+        this.bufferedReader = bufferedReader;
     }
 
     public void print(String message) {
         System.out.println(message);
     }
 
-    public int read() {
-        return scanner.nextInt();
+    public int read() throws IOException {
+        return Integer.parseInt(bufferedReader.readLine());
     }
 
-    public String getBookName() {
-        return scanner.nextLine();
+    public String getBookName() throws IOException {
+        return bufferedReader.readLine();
     }
 }

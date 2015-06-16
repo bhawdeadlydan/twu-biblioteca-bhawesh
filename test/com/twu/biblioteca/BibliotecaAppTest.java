@@ -7,12 +7,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -46,7 +44,7 @@ public class BibliotecaAppTest {
         menuMap.put(1, Messages.LIST_BOOKS);
         menuMap.put(2, Messages.QUIT);
         menu = new Menu(menuMap);
-        ConsoleView consoleView = new ConsoleView(new Scanner(System.in));
+        consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
         menuActionMap.put(2, new Quit());
@@ -57,7 +55,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldDisplayWelcomeMessageWhenBibliotecaAppStarts() {
+    public void shouldDisplayWelcomeMessageWhenBibliotecaAppStarts() throws IOException {
         ConsoleView consoleViewStub = mock(ConsoleView.class);
         ConsoleView consoleViewStub1 = mock(ConsoleView.class);
         Books booksStub = mock(Books.class);
@@ -74,7 +72,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldDisplayListOfAllLibraryBooksWithNameAuthorYearOfPublication() {
+    public void shouldDisplayListOfAllLibraryBooksWithNameAuthorYearOfPublication() throws IOException {
         ConsoleView consoleViewStub1 = mock(ConsoleView.class);
         ConsoleView consoleViewStub2 = mock(ConsoleView.class);
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
@@ -96,7 +94,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldDisplayMenuOptions() {
+    public void shouldDisplayMenuOptions() throws IOException {
         ConsoleView consoleViewStub1 = mock(ConsoleView.class);
         ConsoleView consoleViewStub2 = mock(ConsoleView.class);
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
@@ -120,7 +118,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldQuitWhenOptionIsSelected() {
+    public void shouldQuitWhenOptionIsSelected() throws IOException {
         Quit quitAction = mock(Quit.class);
         ConsoleView consoleViewStub1 = mock(ConsoleView.class);
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
@@ -136,7 +134,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void shouldContinueToGiveMenuUntilQuitIsCalled() {
+    public void shouldContinueToGiveMenuUntilQuitIsCalled() throws IOException {
         Quit quitAction = mock(Quit.class);
         ConsoleView consoleViewStub1 = mock(ConsoleView.class);
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();

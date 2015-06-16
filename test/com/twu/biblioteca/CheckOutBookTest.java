@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
@@ -28,20 +29,22 @@ public class CheckOutBookTest {
     }
 
     @Test
-    public void shouldPromptUserToEnterBookNameToCheckout() {
+    public void shouldPromptUserToEnterBookNameToCheckout() throws IOException{
+        when(consoleViewStub.getBookName()).thenReturn("Book 1");
         checkOutBook.performAction();
 
         verify(consoleViewStub).print(Messages.BOOK_CHECKOUT_PROMPT);
     }
 
     @Test
-    public void shouldInputBookNameFromUser() {
+    public void shouldInputBookNameFromUser() throws IOException {
+        when(consoleViewStub.getBookName()).thenReturn("Book 1");
         checkOutBook.performAction();
 
         verify(consoleViewStub).getBookName();
     }
     @Test
-    public void shouldCheckOutBook() {
+    public void shouldCheckOutBook() throws IOException {
         Books books = mock(Books.class);
         checkOutBook = new CheckOutBook(consoleViewStub, books);
         when(consoleViewStub.getBookName()).thenReturn("Book 1");

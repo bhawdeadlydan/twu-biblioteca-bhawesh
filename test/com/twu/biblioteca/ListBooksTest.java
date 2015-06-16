@@ -3,10 +3,11 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -29,7 +30,7 @@ public class ListBooksTest {
 
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
         Books books = new Books(availableBookList, checkedOutBookList);
-        consoleView = new ConsoleView(new Scanner(System.in));
+        consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
         listBooks = new ListBooks(books, consoleView);
 
     }

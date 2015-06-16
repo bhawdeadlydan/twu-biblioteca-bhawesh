@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -44,14 +45,14 @@ public class MenuExecutorTest {
     }
 
     @Test
-    public void shouldTakeUserChoice() {
+    public void shouldTakeUserChoice() throws IOException {
         menuExecutor.executeUserCommand();
 
         verify(consoleViewStub2).read();
     }
 
     @Test
-    public void shouldDisplayListOfBooksIfUserInputIsOne() {
+    public void shouldDisplayListOfBooksIfUserInputIsOne() throws IOException {
         when(consoleViewStub2.read()).thenReturn(1);
         menuExecutor.executeUserCommand();
 
@@ -59,7 +60,7 @@ public class MenuExecutorTest {
     }
 
     @Test
-    public void shouldExitWhenQuitIsSelected() {
+    public void shouldExitWhenQuitIsSelected() throws IOException {
         when(consoleViewStub2.read()).thenReturn(2);
         Boolean actualValue = menuExecutor.executeUserCommand();
 

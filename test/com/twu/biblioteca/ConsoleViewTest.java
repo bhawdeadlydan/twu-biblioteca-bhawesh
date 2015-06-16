@@ -6,9 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,8 +35,7 @@ public class ConsoleViewTest {
         scanner = new Scanner(System.in);
 
         System.setOut(new PrintStream(outputStream));
-        consoleView = new ConsoleView(new Scanner(System.in));
-
+        consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
     }
 
     @Test
@@ -63,7 +60,7 @@ public class ConsoleViewTest {
     }
 
     @Test
-    public void shouldBeAbleToTakeUserInput() {
+    public void shouldBeAbleToTakeUserInput() throws IOException {
         systemInMock.provideText(String.valueOf(1));
         int actualUserInput = consoleView.read();
         int expectedUserInput = 1;
@@ -72,10 +69,10 @@ public class ConsoleViewTest {
     }
 
     @Test
-    public void shouldBeAbleToGetBookName() {
+    public void shouldBeAbleToGetBookName() throws IOException {
         systemInMock.provideText("Book 1");
 
-        consoleView = new ConsoleView(scanner);
+        consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
         String actualBookName = consoleView.getBookName();
         String expectedBookName = "Book 1";
         assertThat(actualBookName, is(expectedBookName));

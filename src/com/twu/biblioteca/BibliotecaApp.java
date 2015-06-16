@@ -1,6 +1,8 @@
 package com.twu.biblioteca;
 
 
+import java.io.IOException;
+
 public class BibliotecaApp {
 
     private Books books;
@@ -14,7 +16,7 @@ public class BibliotecaApp {
         this.menuExecutor = menuExecutor;
     }
 
-    public void start() {
+    public void start() throws IOException {
         Boolean shouldContinue = true;
         while (shouldContinue) {
             consoleView.print(Messages.WELCOME_MESSAGE);

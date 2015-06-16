@@ -1,11 +1,13 @@
 package com.twu.biblioteca;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class EntryPoint {
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         ArrayList<Book> availableBookList = new ArrayList<Book>();
         availableBookList.add(new Book("Book 1", "JK Rowling", 2003));
         availableBookList.add(new Book("Book 2", "Arthur Conan Doyle", 1886));
@@ -14,7 +16,7 @@ public class EntryPoint {
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
         Books books = new Books(availableBookList, checkedOutBookList);
 
-        ConsoleView consoleView = new ConsoleView(new Scanner(System.in));
+        ConsoleView consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
         HashMap<Integer, String> menuMap = new HashMap<Integer, String>();
 
         menuMap.put(1, Messages.LIST_BOOKS);
@@ -27,5 +29,6 @@ public class EntryPoint {
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);
         bibliotecaApp.start();
+
     }
 }

@@ -45,6 +45,6 @@ public class Book {
     }
 
     public boolean isBookSame(String book) {
-        return book == this.bookName;
+        return book.equals(this.bookName);
     }
 }
