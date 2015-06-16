@@ -17,6 +17,7 @@ public class ReturnBookTest {
     private Books books;
     private ReturnBook returnBook;
     ConsoleView consoleViewStub;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -30,6 +31,7 @@ public class ReturnBookTest {
         consoleViewStub = mock(ConsoleView.class);
         returnBook = new ReturnBook(consoleViewStub, books);
     }
+
     @Test
     public void shouldPromptUserToEnterBookNameToReturn() throws IOException {
         when(consoleViewStub.getBookName()).thenReturn("Book 1");
@@ -100,6 +102,4 @@ public class ReturnBookTest {
 
         assertThat(expectedMessage, is(actualMessage));
     }
-
-
 }

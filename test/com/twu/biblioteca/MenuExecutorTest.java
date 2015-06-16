@@ -60,6 +60,14 @@ public class MenuExecutorTest {
     }
 
     @Test
+    public void shouldDisplayInvalidOptionWhenInvalidOptionIsEntered() throws IOException {
+        when(consoleViewStub2.read()).thenReturn(-1);
+        menuExecutor.executeUserCommand();
+
+        verify(consoleViewStub2).print(Messages.INVALID_OPTION_MESSAGE);
+    }
+
+    @Test
     public void shouldExitWhenQuitIsSelected() throws IOException {
         when(consoleViewStub2.read()).thenReturn(2);
         Boolean actualValue = menuExecutor.executeUserCommand();

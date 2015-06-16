@@ -152,7 +152,6 @@ public class BibliotecaAppTest {
     }
 
 
-
     @After
     public void tearDown() {
         System.setOut(null);

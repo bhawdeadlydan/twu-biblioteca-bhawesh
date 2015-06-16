@@ -16,8 +16,13 @@ public class ConsoleView {
         System.out.println(message);
     }
 
-    public int read() throws IOException {
-        return Integer.parseInt(bufferedReader.readLine());
+    public int read() throws IOException{
+        int userInput = -1;
+        try {
+            userInput = Integer.parseInt(bufferedReader.readLine());
+        } catch (NumberFormatException e) {
+        }
+        return userInput;
     }
 
     public String getBookName() throws IOException {

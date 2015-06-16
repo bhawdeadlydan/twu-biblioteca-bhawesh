@@ -38,9 +38,9 @@ public class Books {
     }
 
     public boolean checkout(String bookName) {
-        if(isAvailable(bookName)){
-            for(Book book : availableBooks){
-                if(book.isBookSame(bookName)){
+        if (isAvailable(bookName)) {
+            for (Book book : availableBooks) {
+                if (book.isBookSame(bookName)) {
                     checkedOutBooks.add(book);
                     availableBooks.remove(book);
                     return true;
@@ -52,9 +52,9 @@ public class Books {
     }
 
     public boolean returnBook(String bookName) {
-        if(isCheckedOut(bookName)){
-            for(Book book : checkedOutBooks){
-                if(book.isBookSame(bookName)){
+        if (isCheckedOut(bookName)) {
+            for (Book book : checkedOutBooks) {
+                if (book.isBookSame(bookName)) {
                     availableBooks.add(book);
                     checkedOutBooks.remove(book);
                     return true;
