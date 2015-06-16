@@ -83,5 +83,23 @@ public class ReturnBookTest {
         assertThat(expectedMessage, is(actualMessage));
     }
 
+    @Test
+    public void shouldNotBeAbleToReturnInvalidBook() throws IOException {
+        returnBook = new ReturnBook(consoleViewStub, books);
+        when(consoleViewStub.getBookName()).thenReturn("Book 1");
+
+        returnBook.performAction();
+
+        ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
+        verify(consoleViewStub, times(2)).print(stringArgumentCaptor.capture());
+
+        List<String> capturedStrings = stringArgumentCaptor.getAllValues();
+
+        String actualMessage = capturedStrings.get(1);
+        String expectedMessage = Messages.UNSUCCESSFULL_RETURN;
+
+        assertThat(expectedMessage, is(actualMessage));
+    }
+
 
 }

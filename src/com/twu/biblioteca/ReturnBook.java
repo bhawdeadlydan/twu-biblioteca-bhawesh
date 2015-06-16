@@ -20,8 +20,10 @@ public class ReturnBook implements MenuAction {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(books.returnBook(bookName)){
-         consoleView.print(Messages.SUCCESSFULL_RETURN);
+        if (books.returnBook(bookName)) {
+            consoleView.print(Messages.SUCCESSFULL_RETURN);
+        } else {
+            consoleView.print(Messages.UNSUCCESSFULL_RETURN);
         }
     }
 }

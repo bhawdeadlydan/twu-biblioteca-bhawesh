@@ -12,5 +12,6 @@ public class Messages {
     public static final String BOOK_RETURN_PROMPT = "Enter the name of the Book you want to return :";
     public static final String RETURN_BOOK = "Return Book";
     public static final String SUCCESSFULL_RETURN = "Thank you for returning the book.";
+    public static final String UNSUCCESSFULL_RETURN = "That is not a valid book to return.";
     public static String UNSUCCESSFULL_CHECKOUT = "That book is not available.";
 }
