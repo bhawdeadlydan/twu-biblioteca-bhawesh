@@ -9,5 +9,6 @@ public class Messages {
     public static final String BOOK_CHECKOUT_PROMPT = "Enter the name of the Book you want to checkout:";
     public static final String CHECKOUT_BOOK = "CheckOut Book";
     public static final String SUCCESSFULL_CHECKOUT = "Thank You! Enjoy The Book.";
+    public static final String BOOK_RETURN_PROMPT = "Enter the name of the Book you want to return :";
     public static String UNSUCCESSFULL_CHECKOUT = "That book is not available.";
 }
