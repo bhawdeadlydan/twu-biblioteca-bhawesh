@@ -54,4 +54,13 @@ public class BooksTest {
 
         assertTrue(actual);
     }
+
+    @Test
+    public void shouldReturnBook() {
+        String bookName = "Book 1";
+        books.checkout(bookName);
+        Boolean actual = books.returnBook(bookName);
+
+        assertTrue(actual);
+    }
 }
