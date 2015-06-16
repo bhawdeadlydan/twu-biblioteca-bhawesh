@@ -50,4 +50,8 @@ public class Books {
         }
         return false;
     }
+
+    public boolean returnBook(String bookName) {
+        return true;
+    }
 }

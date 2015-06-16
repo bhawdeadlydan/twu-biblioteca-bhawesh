@@ -42,5 +42,16 @@ public class ReturnBookTest {
         verify(consoleViewStub).getBookName();
     }
 
+    @Test
+    public void shouldReturnBook() throws IOException {
+        Books books = mock(Books.class);
+        returnBook = new ReturnBook(consoleViewStub, books);
+        when(consoleViewStub.getBookName()).thenReturn("Book 1");
+
+        returnBook.performAction();
+
+        verify(books).returnBook("Book 1");
+    }
+
 
 }

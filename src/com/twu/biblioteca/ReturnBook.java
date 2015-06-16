@@ -20,5 +20,6 @@ public class ReturnBook implements MenuAction {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        books.returnBook(bookName);
     }
 }
