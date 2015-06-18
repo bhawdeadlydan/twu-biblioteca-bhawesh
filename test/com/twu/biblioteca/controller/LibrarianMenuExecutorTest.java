@@ -14,7 +14,7 @@ import java.util.HashMap;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LibrarianMenuExecuterTest {
+public class LibrarianMenuExecutorTest {
 
     @Mock
     HashMap<Integer, MenuAction> menuActionMap;
@@ -28,8 +28,8 @@ public class LibrarianMenuExecuterTest {
 
     @Test
     public void shouldRemoveLoginOperation() {
-        LibraryMenuExecuter libraryMenuExecuter = new LibraryMenuExecuter(menuActionMap, consoleView);
-        libraryMenuExecuter.buildMenu();
+        LibraryMenuExecutor libraryMenuExecutor = new LibraryMenuExecutor(menuActionMap, consoleView);
+        libraryMenuExecutor.buildMenu();
 
         verify(menuActionMap).remove(8);
     }
