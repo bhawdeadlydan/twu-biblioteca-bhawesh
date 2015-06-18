@@ -1,6 +1,12 @@
 package com.twu.biblioteca;
 
 
+import com.twu.biblioteca.constants.Messages;
+import com.twu.biblioteca.controller.MenuExecutor;
+import com.twu.biblioteca.menu.Menu;
+import com.twu.biblioteca.collection.Books;
+import com.twu.biblioteca.view.ConsoleView;
+
 import java.io.IOException;
 
 public class BibliotecaApp {

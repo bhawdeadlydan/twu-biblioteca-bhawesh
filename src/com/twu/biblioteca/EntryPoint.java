@@ -1,5 +1,15 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.action.*;
+import com.twu.biblioteca.constants.Messages;
+import com.twu.biblioteca.controller.MenuExecutor;
+import com.twu.biblioteca.menu.Menu;
+import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.collection.Books;
+import com.twu.biblioteca.model.Movie;
+import com.twu.biblioteca.collection.Movies;
+import com.twu.biblioteca.view.ConsoleView;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

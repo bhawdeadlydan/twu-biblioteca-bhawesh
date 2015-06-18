@@ -7,12 +7,12 @@
     </path>
 
     <target name="clean">
-        <delete dir="out"/>
+        <delete dir="out"></delete>
     </target>
 
     <target name="compile">
         <mkdir dir="out/src/classes"/>
-        <javac srcdir="src" destdir="out/src/classes"/>
+        <javac includeantruntime="true" srcdir="src" destdir="out/src/classes"/>
     </target>
 
     <target name="compileTests">
@@ -38,15 +38,15 @@
 
     <target name="jar" depends="test">
         <mkdir dir="out/jar"/>
-        <jar destfile="out/jar/LineLength.jar" basedir="out/src/classes">
+        <jar destfile="out/jar/BibliotecaApp.jar" basedir="out/src/classes">
             <manifest>
-                <attribute name="Main-Class" value="com.pathasala.Main"/>
+                <attribute name="Main-Class" value="com.twu.biblioteca.EntryPoint"/>
             </manifest>
         </jar>
     </target>
 
     <target name="run">
-        <java jar="out/jar/LineLength.jar" fork="true"/>
+        <java jar="out/jar/BibliotecaApp.jar" fork="true"/>
     </target>
 
 </project>
