@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class MoviesTest {
     private Movies movies;
@@ -29,4 +31,18 @@ public class MoviesTest {
         assertThat(actualMoviesInLibrary, is(expectedMoviesInLibrary));
     }
 
+    @Test
+    public void shouldMatchTheMovieBasedOnNameInMovieList() {
+        boolean actual = movies.isMovieInMovieList("Movie 1");
+
+        MatcherAssert.assertThat(actual, is(true));
+    }
+
+    @Test
+    public void shouldCheckOutMovie() {
+        String movieName = "Movie 1";
+        boolean actual = movies.checkout(movieName);
+
+        assertTrue(actual);
+    }
 }

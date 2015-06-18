@@ -14,11 +14,14 @@ public class CheckOutMovie implements MenuAction {
     @Override
     public void performAction() {
         consoleView.print(Messages.MOVIE_CHECKOUT_PROMPT);
-        String movieName;
+        String movieName = "";
         try {
             movieName = consoleView.getName();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        if (movies.checkout(movieName)) {
+            consoleView.print(Messages.SUCCESSFULL_CHECKOUT);
         }
     }
 }

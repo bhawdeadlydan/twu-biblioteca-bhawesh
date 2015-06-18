@@ -44,4 +44,8 @@ public class Movie {
         result = 31 * result + rating;
         return result;
     }
+
+    public boolean isMovieSame(String movieName) {
+        return this.name.equals(movieName);
+    }
 }

@@ -45,4 +45,14 @@ public class CheckOutMovieTest {
         verify(consoleViewStub).getName();
     }
 
+    @Test
+    public void shouldCheckOutMovie() throws IOException {
+        Movies Movies = mock(Movies.class);
+        checkOutMovie = new CheckOutMovie(consoleViewStub, Movies);
+        when(consoleViewStub.getName()).thenReturn("Movie 1");
+
+        checkOutMovie.performAction();
+
+        verify(Movies).checkout("Movie 1");
+    }
 }

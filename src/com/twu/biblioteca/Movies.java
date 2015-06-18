@@ -19,4 +19,26 @@ public class Movies {
         }
         return moviePrint;
     }
+
+
+    public boolean checkout(String movieName) {
+        for (Movie Movie : availableMovieList) {
+            if (Movie.isMovieSame(movieName)) {
+                checkedOutMovieList.add(Movie);
+                availableMovieList.remove(Movie);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isMovieInMovieList(String movieName) {
+        for (Movie movie : availableMovieList)
+            if (movie.isMovieSame(movieName))
+                return true;
+        for (Movie movie : checkedOutMovieList)
+            if (movie.isMovieSame(movieName))
+                return true;
+        return false;
+    }
 }
