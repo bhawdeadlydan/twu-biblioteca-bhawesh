@@ -48,8 +48,9 @@ public class MoviesTest {
 
     @Test
     public void shouldReturnMovie() {
+        movies.checkout("Movie 1");
         String movieName = "Movie 1";
-        boolean actual = movies.checkout(movieName);
+        boolean actual = movies.returnMovie(movieName);
 
         assertTrue(actual);
     }

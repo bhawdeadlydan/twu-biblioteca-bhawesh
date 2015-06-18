@@ -43,10 +43,10 @@ public class Movies {
     }
 
     public boolean returnMovie(String movieName) {
-        for (Movie Movie : availableMovieList) {
-            if (Movie.isMovieSame(movieName)) {
-                checkedOutMovieList.add(Movie);
-                availableMovieList.remove(Movie);
+        for (Movie movie : checkedOutMovieList) {
+            if (movie.isMovieSame(movieName)) {
+                availableMovieList.add(movie);
+                checkedOutMovieList.remove(movie);
                 return true;
             }
         }

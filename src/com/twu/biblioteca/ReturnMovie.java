@@ -23,6 +23,8 @@ public class ReturnMovie implements MenuAction {
 
         if(movies.returnMovie(movieName)){
             consoleView.print(Messages.SUCCESSFULL_RETURN_MOVIE);
+        }else{
+            consoleView.print(Messages.UNSUCCESSFULL_RETURN_MOVIE);
         }
     }
 }
