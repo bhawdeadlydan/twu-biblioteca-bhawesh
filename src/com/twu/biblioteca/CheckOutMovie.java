@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.io.IOException;
+
 public class CheckOutMovie implements MenuAction {
     private ConsoleView consoleView;
     private Movies movies;
@@ -12,5 +14,11 @@ public class CheckOutMovie implements MenuAction {
     @Override
     public void performAction() {
         consoleView.print(Messages.MOVIE_CHECKOUT_PROMPT);
+        String movieName;
+        try {
+            movieName = consoleView.getName();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

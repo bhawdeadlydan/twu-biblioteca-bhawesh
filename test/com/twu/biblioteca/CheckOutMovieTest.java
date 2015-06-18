@@ -37,4 +37,12 @@ public class CheckOutMovieTest {
         verify(consoleViewStub).print(Messages.MOVIE_CHECKOUT_PROMPT);
     }
 
+    @Test
+    public void shouldInputMovieNameFromUser() throws IOException {
+        when(consoleViewStub.getName()).thenReturn("Movie 1");
+        checkOutMovie.performAction();
+
+        verify(consoleViewStub).getName();
+    }
+
 }
