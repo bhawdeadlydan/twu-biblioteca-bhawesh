@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 public class MenuBuilderTest {
     @Mock
@@ -63,5 +63,14 @@ public class MenuBuilderTest {
         librarianMenuExecutor.executeUserCommand();
 
         verify(consoleViewStub2).print(Messages.INVALID_OPTION_MESSAGE);
+    }
+
+
+    @Test
+    public void shouldExitWhenQuitIsSelected() throws IOException {
+        when(consoleViewStub2.read()).thenReturn(2);
+        Boolean actualValue = librarianMenuExecutor.executeUserCommand();
+
+        assertThat(false, is(actualValue));
     }
 }

@@ -1,6 +1,7 @@
 package com.twu.biblioteca.controller;
 
 import com.twu.biblioteca.action.MenuAction;
+import com.twu.biblioteca.action.Quit;
 import com.twu.biblioteca.constants.Messages;
 import com.twu.biblioteca.view.ConsoleView;
 
@@ -27,6 +28,8 @@ public abstract class MenuBuilder {
     public boolean executeUserCommand() throws IOException {
         int userChoice = consoleView.read();
         if (menuActionMap.containsKey(userChoice)) {
+            if(menuActionMap.get(userChoice) instanceof Quit)
+                return false;
             menuActionMap.get(userChoice).performAction();
             return true;
         } else {

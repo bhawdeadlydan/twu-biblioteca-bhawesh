@@ -80,6 +80,6 @@ public class MenuExecutorTest {
         Boolean actualValue = menuExecutor.executeUserCommand();
 
         assertThat(false, is(actualValue));
-
     }
+
 }
