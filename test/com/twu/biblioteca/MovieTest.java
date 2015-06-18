@@ -13,7 +13,7 @@ public class MovieTest {
         Movie movie = new Movie("Movie123", 2001, "steven", 1);
 
         String actualOutput = movie.toString();
-        String expectedOutput = "Movie123\tsteven\t2001\trating:1";
+        String expectedOutput = "\n"+"Movie123\tsteven\t2001\trating:1";
 
         assertEquals(expectedOutput, actualOutput);
     }

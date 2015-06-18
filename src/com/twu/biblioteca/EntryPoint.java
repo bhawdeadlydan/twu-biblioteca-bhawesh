@@ -16,6 +16,16 @@ public class EntryPoint {
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
         Books books = new Books(availableBookList, checkedOutBookList);
 
+
+        ArrayList<Movie> availableMovieList = new ArrayList<Movie>();
+        availableMovieList.add(new Movie("Movie 1", 2003, "director 1", 8));
+        availableMovieList.add(new Movie("Movie 2", 2005, "nayan", 2));
+        availableMovieList.add(new Movie("Movie 3", 2006, "ashwin", 4));
+        availableMovieList.add(new Movie("Movie 4", 2002, "abhishek", 3));
+
+        ArrayList<Movie> checkedOutMovieList = new ArrayList<Movie>();
+        Movies movies = new Movies(availableMovieList, checkedOutMovieList);
+
         ConsoleView consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
         HashMap<Integer, String> menuMap = new HashMap<Integer, String>();
 
@@ -23,6 +33,7 @@ public class EntryPoint {
         menuMap.put(2, Messages.QUIT);
         menuMap.put(3, Messages.CHECKOUT_BOOK);
         menuMap.put(4, Messages.RETURN_BOOK);
+        menuMap.put(5, Messages.LIST_MOVIES);
 
 
         Menu menu = new Menu(menuMap);
@@ -31,6 +42,7 @@ public class EntryPoint {
         menuActionMap.put(2, new Quit());
         menuActionMap.put(3, new CheckOutBook(consoleView, books));
         menuActionMap.put(4, new ReturnBook(consoleView, books));
+        menuActionMap.put(5, new ListMovies(consoleView, movies));
         MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleView);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);

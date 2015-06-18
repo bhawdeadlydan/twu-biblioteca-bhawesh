@@ -16,7 +16,7 @@ public class ConsoleView {
         System.out.println(message);
     }
 
-    public int read() throws IOException{
+    public int read() throws IOException {
         int userInput = -1;
         try {
             userInput = Integer.parseInt(bufferedReader.readLine());
