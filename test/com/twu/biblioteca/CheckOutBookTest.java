@@ -34,7 +34,7 @@ public class CheckOutBookTest {
 
     @Test
     public void shouldPromptUserToEnterBookNameToCheckout() throws IOException {
-        when(consoleViewStub.getBookName()).thenReturn("Book 1");
+        when(consoleViewStub.getName()).thenReturn("Book 1");
         checkOutBook.performAction();
 
         verify(consoleViewStub).print(Messages.BOOK_CHECKOUT_PROMPT);
@@ -42,17 +42,17 @@ public class CheckOutBookTest {
 
     @Test
     public void shouldInputBookNameFromUser() throws IOException {
-        when(consoleViewStub.getBookName()).thenReturn("Book 1");
+        when(consoleViewStub.getName()).thenReturn("Book 1");
         checkOutBook.performAction();
 
-        verify(consoleViewStub).getBookName();
+        verify(consoleViewStub).getName();
     }
 
     @Test
     public void shouldCheckOutBook() throws IOException {
         Books books = mock(Books.class);
         checkOutBook = new CheckOutBook(consoleViewStub, books);
-        when(consoleViewStub.getBookName()).thenReturn("Book 1");
+        when(consoleViewStub.getName()).thenReturn("Book 1");
 
         checkOutBook.performAction();
 
@@ -62,7 +62,7 @@ public class CheckOutBookTest {
     @Test
     public void shouldSuccessfullyCheckOutBook() throws IOException {
         checkOutBook = new CheckOutBook(consoleViewStub, books);
-        when(consoleViewStub.getBookName()).thenReturn("Book 1");
+        when(consoleViewStub.getName()).thenReturn("Book 1");
 
         checkOutBook.performAction();
 
@@ -80,7 +80,7 @@ public class CheckOutBookTest {
     @Test
     public void shouldNotCheckOutBook() throws IOException {
         checkOutBook = new CheckOutBook(consoleViewStub, books);
-        when(consoleViewStub.getBookName()).thenReturn("Book 4");
+        when(consoleViewStub.getName()).thenReturn("Book 4");
 
         checkOutBook.performAction();
 

@@ -73,7 +73,7 @@ public class ConsoleViewTest {
         systemInMock.provideText("Book 1");
 
         consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
-        String actualBookName = consoleView.getBookName();
+        String actualBookName = consoleView.getName();
         String expectedBookName = "Book 1";
         assertThat(actualBookName, is(expectedBookName));
     }

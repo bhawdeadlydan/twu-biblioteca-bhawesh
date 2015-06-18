@@ -14,5 +14,7 @@ public class Messages {
     public static final String SUCCESSFULL_RETURN = "Thank you for returning the book.";
     public static final String UNSUCCESSFULL_RETURN = "That is not a valid book to return.";
     public static final String LIST_MOVIES = "List Movies";
+    public static final String CHECKOUT_MOVIE = "CheckOut Movie";
+    public static final String MOVIE_CHECKOUT_PROMPT = "Enter the name of the Movie you want to checkout:";
     public static String UNSUCCESSFULL_CHECKOUT = "That book is not available.";
 }

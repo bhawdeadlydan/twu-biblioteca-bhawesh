@@ -25,7 +25,7 @@ public class ConsoleView {
         return userInput;
     }
 
-    public String getBookName() throws IOException {
+    public String getName() throws IOException {
         return bufferedReader.readLine();
     }
 }

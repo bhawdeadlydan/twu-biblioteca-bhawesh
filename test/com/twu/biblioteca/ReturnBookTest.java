@@ -34,7 +34,7 @@ public class ReturnBookTest {
 
     @Test
     public void shouldPromptUserToEnterBookNameToReturn() throws IOException {
-        when(consoleViewStub.getBookName()).thenReturn("Book 1");
+        when(consoleViewStub.getName()).thenReturn("Book 1");
         returnBook.performAction();
 
         verify(consoleViewStub).print(Messages.BOOK_RETURN_PROMPT);
@@ -42,17 +42,17 @@ public class ReturnBookTest {
 
     @Test
     public void shouldInputBookNameFromUser() throws IOException {
-        when(consoleViewStub.getBookName()).thenReturn("Book 1");
+        when(consoleViewStub.getName()).thenReturn("Book 1");
         returnBook.performAction();
 
-        verify(consoleViewStub).getBookName();
+        verify(consoleViewStub).getName();
     }
 
     @Test
     public void shouldReturnBook() throws IOException {
         Books books = mock(Books.class);
         returnBook = new ReturnBook(consoleViewStub, books);
-        when(consoleViewStub.getBookName()).thenReturn("Book 1");
+        when(consoleViewStub.getName()).thenReturn("Book 1");
 
         returnBook.performAction();
 
@@ -70,7 +70,7 @@ public class ReturnBookTest {
         books = new Books(availableBookList, checkedOutBookList);
         consoleViewStub = mock(ConsoleView.class);
         returnBook = new ReturnBook(consoleViewStub, books);
-        when(consoleViewStub.getBookName()).thenReturn("Book 3");
+        when(consoleViewStub.getName()).thenReturn("Book 3");
 
         returnBook.performAction();
 
@@ -88,7 +88,7 @@ public class ReturnBookTest {
     @Test
     public void shouldNotBeAbleToReturnInvalidBook() throws IOException {
         returnBook = new ReturnBook(consoleViewStub, books);
-        when(consoleViewStub.getBookName()).thenReturn("Book 1");
+        when(consoleViewStub.getName()).thenReturn("Book 1");
 
         returnBook.performAction();
 

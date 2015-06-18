@@ -18,7 +18,7 @@ public class
         consoleView.print(Messages.BOOK_CHECKOUT_PROMPT);
         String bookName = "";
         try {
-            bookName = consoleView.getBookName();
+            bookName = consoleView.getName();
         } catch (IOException e) {
             e.printStackTrace();
         }

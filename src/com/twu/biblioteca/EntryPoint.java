@@ -34,6 +34,7 @@ public class EntryPoint {
         menuMap.put(3, Messages.CHECKOUT_BOOK);
         menuMap.put(4, Messages.RETURN_BOOK);
         menuMap.put(5, Messages.LIST_MOVIES);
+        menuMap.put(6, Messages.CHECKOUT_MOVIE);
 
 
         Menu menu = new Menu(menuMap);
@@ -43,6 +44,7 @@ public class EntryPoint {
         menuActionMap.put(3, new CheckOutBook(consoleView, books));
         menuActionMap.put(4, new ReturnBook(consoleView, books));
         menuActionMap.put(5, new ListMovies(consoleView, movies));
+        menuActionMap.put(6, new CheckOutMovie(consoleView, movies));
         MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleView);
 
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);

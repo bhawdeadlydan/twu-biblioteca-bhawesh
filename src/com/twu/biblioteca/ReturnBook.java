@@ -16,7 +16,7 @@ public class ReturnBook implements MenuAction {
         consoleView.print(Messages.BOOK_RETURN_PROMPT);
         String bookName = "";
         try {
-            bookName = consoleView.getBookName();
+            bookName = consoleView.getName();
         } catch (IOException e) {
             e.printStackTrace();
         }
