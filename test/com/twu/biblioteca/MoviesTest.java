@@ -45,4 +45,12 @@ public class MoviesTest {
 
         assertTrue(actual);
     }
+
+    @Test
+    public void shouldReturnMovie() {
+        String movieName = "Movie 1";
+        boolean actual = movies.checkout(movieName);
+
+        assertTrue(actual);
+    }
 }

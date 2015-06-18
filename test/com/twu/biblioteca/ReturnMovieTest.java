@@ -38,11 +38,22 @@ public class ReturnMovieTest {
     }
 
     @Test
-    public void shouldInputBookNameFromUser() throws IOException {
-        when(consoleViewStub.getName()).thenReturn("Book 1");
+    public void shouldInputMovieNameFromUser() throws IOException {
+        when(consoleViewStub.getName()).thenReturn("Movie 1");
         returnMovie.performAction();
 
         verify(consoleViewStub).getName();
+    }
+
+    @Test
+    public void shouldBeAbleToReturnMovie() throws IOException {
+        Movies Movies = mock(Movies.class);
+        returnMovie = new ReturnMovie(consoleViewStub, Movies);
+        when(consoleViewStub.getName()).thenReturn("Movie 1");
+
+        returnMovie.performAction();
+
+        verify(Movies).returnMovie("Movie 1");
     }
 
 }

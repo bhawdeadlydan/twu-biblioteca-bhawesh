@@ -20,5 +20,6 @@ public class ReturnMovie implements MenuAction {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        movies.returnMovie(movieName);
     }
 }
