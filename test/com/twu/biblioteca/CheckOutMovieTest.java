@@ -2,14 +2,16 @@ package com.twu.biblioteca;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.*;
 
 public class CheckOutMovieTest {
     private Movies movies;
@@ -54,5 +56,23 @@ public class CheckOutMovieTest {
         checkOutMovie.performAction();
 
         verify(Movies).checkout("Movie 1");
+    }
+
+    @Test
+    public void shouldSuccessfullyCheckOutMovie() throws IOException {
+        checkOutMovie = new CheckOutMovie(consoleViewStub, movies);
+        when(consoleViewStub.getName()).thenReturn("Movie 1");
+
+        checkOutMovie.performAction();
+
+        ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
+        verify(consoleViewStub, times(2)).print(stringArgumentCaptor.capture());
+
+        List<String> capturedStrings = stringArgumentCaptor.getAllValues();
+
+        String actualMessage = capturedStrings.get(1);
+        String expectedMessage = Messages.SUCCESSFULL_CHECKOUT_MOVIE;
+
+        assertThat(expectedMessage, is(actualMessage));
     }
 }
