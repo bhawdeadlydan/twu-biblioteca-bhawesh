@@ -37,4 +37,12 @@ public class ReturnMovieTest {
         verify(consoleViewStub).print(Messages.MOVIE_RETURN_PROMPT);
     }
 
+    @Test
+    public void shouldInputBookNameFromUser() throws IOException {
+        when(consoleViewStub.getName()).thenReturn("Book 1");
+        returnMovie.performAction();
+
+        verify(consoleViewStub).getName();
+    }
+
 }
