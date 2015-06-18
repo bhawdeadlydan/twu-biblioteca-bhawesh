@@ -3,6 +3,7 @@ package com.twu.biblioteca.controller;
 import com.twu.biblioteca.action.MenuAction;
 import com.twu.biblioteca.view.ConsoleView;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public abstract class MenuBuilder {
@@ -20,6 +21,11 @@ public abstract class MenuBuilder {
         removeListingOperationOptions();
         removePrivilegedOperations();
         removeUserHistoryCheckingOperation();
+    }
+
+    public boolean executeUserCommand() throws IOException {
+        int userChoice = consoleView.read();
+        return false;
     }
 
     protected abstract void removeUserHistoryCheckingOperation();

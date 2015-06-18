@@ -5,11 +5,12 @@ import com.twu.biblioteca.view.ConsoleView;
 
 import java.util.HashMap;
 
-public class LibraryMenuExecutor extends MenuBuilder{
+public class LibrarianMenuExecutor extends MenuBuilder{
 
-    public LibraryMenuExecutor(HashMap<Integer, MenuAction> menuActionMap, ConsoleView consoleView) {
+    public LibrarianMenuExecutor(HashMap<Integer, MenuAction> menuActionMap, ConsoleView consoleView) {
         super(menuActionMap, consoleView);
     }
+
 
     @Override
     public void removeUserHistoryCheckingOperation() {

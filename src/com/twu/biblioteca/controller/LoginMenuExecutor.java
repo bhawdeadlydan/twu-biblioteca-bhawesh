@@ -28,7 +28,7 @@ public class LoginMenuExecutor extends MenuBuilder {
 
     @Override
     protected void removeLogoutOperation() {
-
+        menuActionMap.remove(9);
     }
 
     @Override

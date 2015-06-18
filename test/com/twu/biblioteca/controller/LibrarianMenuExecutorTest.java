@@ -28,8 +28,8 @@ public class LibrarianMenuExecutorTest {
 
     @Test
     public void shouldRemoveLoginOperation() {
-        LibraryMenuExecutor libraryMenuExecutor = new LibraryMenuExecutor(menuActionMap, consoleView);
-        libraryMenuExecutor.buildMenu();
+        LibrarianMenuExecutor librarianMenuExecutor = new LibrarianMenuExecutor(menuActionMap, consoleView);
+        librarianMenuExecutor.buildMenu();
 
         verify(menuActionMap).remove(8);
     }
