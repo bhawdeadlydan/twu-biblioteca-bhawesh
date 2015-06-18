@@ -16,4 +16,32 @@ public class Movie {
     public String toString() {
         return  name + "\t"+director+"\t"+year+"\t"+"rating:"+rating;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        Movie movie = (Movie) o;
+
+        if (year != movie.year)
+            return false;
+        if (rating != movie.rating)
+            return false;
+        if (!name.equals(movie.name))
+            return false;
+        return director.equals(movie.director);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + year;
+        result = 31 * result + director.hashCode();
+        result = 31 * result + rating;
+        return result;
+    }
 }
