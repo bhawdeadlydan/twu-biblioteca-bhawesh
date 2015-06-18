@@ -4,6 +4,7 @@ import com.twu.biblioteca.action.ListBooks;
 import com.twu.biblioteca.action.MenuAction;
 import com.twu.biblioteca.action.Quit;
 import com.twu.biblioteca.collection.Books;
+import com.twu.biblioteca.constants.Messages;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.view.ConsoleView;
 import org.junit.Before;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class MenuBuilderTest {
     @Mock
@@ -55,4 +57,11 @@ public class MenuBuilderTest {
         verify(consoleViewStub2).read();
     }
 
+    @Test
+    public void shouldDisplayInvalidOptionWhenInvalidOptionIsEntered() throws IOException {
+        when(consoleViewStub2.read()).thenReturn(-1);
+        librarianMenuExecutor.executeUserCommand();
+
+        verify(consoleViewStub2).print(Messages.INVALID_OPTION_MESSAGE);
+    }
 }

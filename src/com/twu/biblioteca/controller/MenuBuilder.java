@@ -1,6 +1,7 @@
 package com.twu.biblioteca.controller;
 
 import com.twu.biblioteca.action.MenuAction;
+import com.twu.biblioteca.constants.Messages;
 import com.twu.biblioteca.view.ConsoleView;
 
 import java.io.IOException;
@@ -25,7 +26,13 @@ public abstract class MenuBuilder {
 
     public boolean executeUserCommand() throws IOException {
         int userChoice = consoleView.read();
-        return false;
+        if (menuActionMap.containsKey(userChoice)) {
+            menuActionMap.get(userChoice).performAction();
+            return true;
+        } else {
+            consoleView.print(Messages.INVALID_OPTION_MESSAGE);
+            return true;
+        }
     }
 
     protected abstract void removeUserHistoryCheckingOperation();
