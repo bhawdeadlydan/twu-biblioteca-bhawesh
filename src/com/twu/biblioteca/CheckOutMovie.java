@@ -22,6 +22,8 @@ public class CheckOutMovie implements MenuAction {
         }
         if (movies.checkout(movieName)) {
             consoleView.print(Messages.SUCCESSFULL_CHECKOUT_MOVIE);
+        }else{
+            consoleView.print(Messages.UNSUCCESSFULL_CHECKOUT_MOVIE);
         }
     }
 }

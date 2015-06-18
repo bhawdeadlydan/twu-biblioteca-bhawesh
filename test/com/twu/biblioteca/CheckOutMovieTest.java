@@ -75,4 +75,23 @@ public class CheckOutMovieTest {
 
         assertThat(expectedMessage, is(actualMessage));
     }
+
+    @Test
+    public void shouldNotBeAbleCheckOutMovieIfItIsInvalid() throws IOException {
+        checkOutMovie = new CheckOutMovie(consoleViewStub, movies);
+        when(consoleViewStub.getName()).thenReturn("Movie 4");
+
+        checkOutMovie.performAction();
+
+        ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
+        verify(consoleViewStub, times(2)).print(stringArgumentCaptor.capture());
+
+        List<String> capturedStrings = stringArgumentCaptor.getAllValues();
+
+        String actualMessage = capturedStrings.get(1);
+        String expectedMessage = Messages.UNSUCCESSFULL_CHECKOUT_MOVIE;
+
+        assertThat(expectedMessage, is(actualMessage));
+    }
+
 }

@@ -18,5 +18,6 @@ public class Messages {
     public static final String MOVIE_CHECKOUT_PROMPT = "Enter the name of the Movie you want to checkout:";
     public static final String RETURN_MOVIE = "Return Movie";
     public static final String SUCCESSFULL_CHECKOUT_MOVIE = "Thank You! Enjoy the Movie.";
+    public static final String UNSUCCESSFULL_CHECKOUT_MOVIE = "That movie is not available";
     public static String UNSUCCESSFULL_CHECKOUT = "That book is not available.";
 }
