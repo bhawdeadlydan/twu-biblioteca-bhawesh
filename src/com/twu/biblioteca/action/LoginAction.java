@@ -29,6 +29,8 @@ public class LoginAction implements MenuAction {
             e.printStackTrace();
         }
 
+        consoleView.print(Messages.PASSWORD_PROMPT);
+
         try {
             password = consoleView.getName();
         } catch (IOException e) {

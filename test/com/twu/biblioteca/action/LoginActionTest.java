@@ -32,10 +32,29 @@ public class LoginActionTest {
     public void shouldPromptUserForUserName() {
         LoginAction loginAction = new LoginAction(consoleView, authenticator);
         loginAction.performAction();
+        ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
+        verify(consoleView, times(3)).print(stringArgumentCaptor.capture());
+        List<String> capturedStrings = stringArgumentCaptor.getAllValues();
+        String actualMessage = capturedStrings.get(0);
+        String expectedMessage = Messages.USERNAME_PROMPT;
 
-        verify(consoleView).print(Messages.USERNAME_PROMPT);
+        assertThat(expectedMessage, is(actualMessage));
     }
 
+    @Test
+    public void shouldPromptUserForPassword() {
+        LoginAction loginAction = new LoginAction(consoleView, authenticator);
+        loginAction.performAction();
+
+        ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
+        verify(consoleView, times(3)).print(stringArgumentCaptor.capture());
+        List<String> capturedStrings = stringArgumentCaptor.getAllValues();
+        String actualMessage = capturedStrings.get(1);
+        String expectedMessage = Messages.PASSWORD_PROMPT;
+        System.out.print(capturedStrings);
+
+        assertThat(expectedMessage, is(actualMessage));
+    }
     @Test
     public void shouldGetUserNameAndPassWord() throws IOException {
         LoginAction loginAction = new LoginAction(consoleView, authenticator);
@@ -43,6 +62,7 @@ public class LoginActionTest {
 
         verify(consoleView,times(2)).getName();
     }
+
 
     @Test
     public void shouldBeAbleToAuthenticateUser() {
@@ -58,10 +78,10 @@ public class LoginActionTest {
         LoginAction loginAction = new LoginAction(consoleView, authenticator);
         loginAction.performAction();
         ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
-        verify(consoleView, times(2)).print(stringArgumentCaptor.capture());
+        verify(consoleView, times(3)).print(stringArgumentCaptor.capture());
         List<String> capturedStrings = stringArgumentCaptor.getAllValues();
 
-        String actualMessage = capturedStrings.get(1);
+        String actualMessage = capturedStrings.get(2);
         String expectedMessage = Messages.SUCCESSFUL_LOGIN;
 
         assertThat(expectedMessage, is(actualMessage));
@@ -73,10 +93,10 @@ public class LoginActionTest {
         LoginAction loginAction = new LoginAction(consoleView, authenticator);
         loginAction.performAction();
         ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
-        verify(consoleView, times(2)).print(stringArgumentCaptor.capture());
+        verify(consoleView, times(3)).print(stringArgumentCaptor.capture());
         List<String> capturedStrings = stringArgumentCaptor.getAllValues();
 
-        String actualMessage = capturedStrings.get(1);
+        String actualMessage = capturedStrings.get(2);
         String expectedMessage = Messages.UNSUCCESSFUL_LOGIN;
 
         assertThat(expectedMessage, is(actualMessage));

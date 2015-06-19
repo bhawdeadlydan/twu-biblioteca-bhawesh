@@ -28,5 +28,6 @@ public class Messages {
     public static final String  USERNAME_PROMPT = "Enter Username :";
     public static final String SUCCESSFUL_LOGIN = "You have logged in successfully!";
     public static final String UNSUCCESSFUL_LOGIN = "Sorry ! Wrong UserName and Password";
+    public static final String PASSWORD_PROMPT = "Enter Password :";
     public static String UNSUCCESSFULL_CHECKOUT = "That book is not available.";
 }
