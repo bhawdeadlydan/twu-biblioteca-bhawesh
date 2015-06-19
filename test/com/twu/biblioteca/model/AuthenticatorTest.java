@@ -1,26 +1,36 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.model;
 
 import com.twu.biblioteca.action.*;
 import com.twu.biblioteca.collection.Books;
 import com.twu.biblioteca.collection.Movies;
 import com.twu.biblioteca.constants.Messages;
 import com.twu.biblioteca.controller.LibrarianMenuExecutor;
-import com.twu.biblioteca.controller.LoginMenuExecutor;
 import com.twu.biblioteca.controller.UserMenuExecutor;
+import com.twu.biblioteca.listener.LoginListener;
 import com.twu.biblioteca.menu.Menu;
-import com.twu.biblioteca.model.Authenticator;
-import com.twu.biblioteca.model.Book;
-import com.twu.biblioteca.model.Movie;
 import com.twu.biblioteca.view.ConsoleView;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class EntryPoint {
-    public static void main(String args[]) throws IOException {
+import static org.junit.Assert.assertTrue;
+
+@RunWith(MockitoJUnitRunner.class)
+public class AuthenticatorTest {
+    private Authenticator authenticator;
+
+    @Mock
+    LoginListener listener;
+
+    @Before
+    public void setUp() {
         ArrayList<Book> availableBookList = new ArrayList<Book>();
         availableBookList.add(new Book("Book 1", "JK Rowling", 2003));
         availableBookList.add(new Book("Book 2", "Arthur Conan Doyle", 1886));
@@ -29,7 +39,7 @@ public class EntryPoint {
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
         Books books = new Books(availableBookList, checkedOutBookList);
 
-        Menu librarianMenu =null;
+        Menu librarianMenu = null;
         Menu userMenu = null;
         Menu loginMenu = null;
 
@@ -41,7 +51,7 @@ public class EntryPoint {
 
         ArrayList<Movie> checkedOutMovieList = new ArrayList<Movie>();
         Movies movies = new Movies(availableMovieList, checkedOutMovieList);
-        LibrarianMenuExecutor librarianMenuExecutor= null;
+        LibrarianMenuExecutor librarianMenuExecutor = null;
         UserMenuExecutor userMenuExecutor = null;
         ConsoleView consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
         HashMap<Integer, String> librarianMenuMap = new HashMap<Integer, String>();
@@ -77,20 +87,18 @@ public class EntryPoint {
         loginMenuMap.put(8, Messages.LOGIN);
 
         HashMap<Integer, String[]> userNameAndPasswordMap = new HashMap<Integer, String[]>();
-        userNameAndPasswordMap.put(1, new String[]{"111-1111","librarian123"});
-        userNameAndPasswordMap.put(2, new String[]{"222-2222","user222"});
-        userNameAndPasswordMap.put(3, new String[]{"333-3333","user333"});
-        userNameAndPasswordMap.put(4, new String[]{"444-4444","user444"});
-        userNameAndPasswordMap.put(5, new String[]{"555-5555","user555"});
-        userNameAndPasswordMap.put(6, new String[]{"666-6666","user666"});
-        userNameAndPasswordMap.put(7, new String[]{"777-7777","user777"});
-        userNameAndPasswordMap.put(8, new String[]{"888-8888","user888"});
+        userNameAndPasswordMap.put(1, new String[]{"111-1111", "librarian123"});
+        userNameAndPasswordMap.put(2, new String[]{"222-2222", "user222"});
+        userNameAndPasswordMap.put(3, new String[]{"333-3333", "user333"});
+        userNameAndPasswordMap.put(4, new String[]{"444-4444", "user444"});
+        userNameAndPasswordMap.put(5, new String[]{"555-5555", "user555"});
+        userNameAndPasswordMap.put(6, new String[]{"666-6666", "user666"});
+        userNameAndPasswordMap.put(7, new String[]{"777-7777", "user777"});
+        userNameAndPasswordMap.put(8, new String[]{"888-8888", "user888"});
 
-        loginMenu = new Menu(loginMenuMap);
         userMenu = new Menu(userMenuMap);
         librarianMenu = new Menu(librarianMenuMap);
-        Authenticator authenticator = new Authenticator(userNameAndPasswordMap,librarianMenu, userMenu,librarianMenuExecutor, userMenuExecutor );
-        Menu menu = new Menu(loginMenuMap);
+        authenticator = new Authenticator(userNameAndPasswordMap, librarianMenu, userMenu, librarianMenuExecutor, userMenuExecutor);
 
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
@@ -104,12 +112,13 @@ public class EntryPoint {
 
 
         userMenuExecutor = new UserMenuExecutor(menuActionMap, consoleView);
-        LoginMenuExecutor loginMenuExecutor = new LoginMenuExecutor(menuActionMap, consoleView);
         librarianMenuExecutor = new LibrarianMenuExecutor(menuActionMap, consoleView);
-
-
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, loginMenuExecutor);
-        bibliotecaApp.start();
-
+        authenticator.addListener(listener);
     }
+
+    @Test
+    public void shouldBeAbleToAuthenticateValidUser() {
+        assertTrue(authenticator.authenticate("111-1111", "librarian123"));
+    }
+
 }

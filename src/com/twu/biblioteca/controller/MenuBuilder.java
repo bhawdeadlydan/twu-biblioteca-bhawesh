@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public abstract class MenuBuilder {
-    private ConsoleView consoleView;
+    protected ConsoleView consoleView;
     protected HashMap<Integer, MenuAction> menuActionMap;
 
     public MenuBuilder(HashMap<Integer, MenuAction> menuActionMap, ConsoleView consoleView) {
