@@ -37,6 +37,8 @@ public class LoginAction implements MenuAction {
 
         if (authenticator.authenticate(username, password)) {
             consoleView.print(Messages.SUCCESSFUL_LOGIN);
+        } else {
+            consoleView.print(Messages.UNSUCCESSFUL_LOGIN);
         }
     }
 }

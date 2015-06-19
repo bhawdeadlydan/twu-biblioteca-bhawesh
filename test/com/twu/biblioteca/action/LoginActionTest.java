@@ -66,4 +66,19 @@ public class LoginActionTest {
 
         assertThat(expectedMessage, is(actualMessage));
     }
+
+    @Test
+    public void shouldBeAbleToAlertUnSuccessfulLogin() {
+        when(authenticator.authenticate(anyString(), anyString())).thenReturn(false);
+        LoginAction loginAction = new LoginAction(consoleView, authenticator);
+        loginAction.performAction();
+        ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
+        verify(consoleView, times(2)).print(stringArgumentCaptor.capture());
+        List<String> capturedStrings = stringArgumentCaptor.getAllValues();
+
+        String actualMessage = capturedStrings.get(1);
+        String expectedMessage = Messages.UNSUCCESSFUL_LOGIN;
+
+        assertThat(expectedMessage, is(actualMessage));
+    }
 }
