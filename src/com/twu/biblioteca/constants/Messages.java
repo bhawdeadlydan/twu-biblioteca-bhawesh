@@ -22,5 +22,8 @@ public class Messages {
     public static final String MOVIE_RETURN_PROMPT = "Enter the name of the movie you want to return";
     public static final String SUCCESSFULL_RETURN_MOVIE = "Thank you for returning the movie";
     public static final String UNSUCCESSFULL_RETURN_MOVIE = "That is not a valid movie to return.";
+    public static final String LOGIN = "Login";
+    public static final String LOGOUT = "Logout";
+    public static final String DEFAULTERS_LIST = "Defaulters List";
     public static String UNSUCCESSFULL_CHECKOUT = "That book is not available.";
 }

@@ -13,12 +13,15 @@ public class LoginMenuExecutor extends MenuBuilder {
 
     @Override
     protected void removeUserHistoryCheckingOperation() {
-
+        menuActionMap.remove(11);
     }
 
     @Override
     protected void removePrivilegedOperations() {
-
+        menuActionMap.remove(3);
+        menuActionMap.remove(4);
+        menuActionMap.remove(6);
+        menuActionMap.remove(7);
     }
 
     @Override
@@ -28,11 +31,11 @@ public class LoginMenuExecutor extends MenuBuilder {
 
     @Override
     protected void removeLogoutOperation() {
-        menuActionMap.remove(9);
+
     }
 
     @Override
     protected void removeLoginOperation() {
-
+        menuActionMap.remove(8);
     }
 }

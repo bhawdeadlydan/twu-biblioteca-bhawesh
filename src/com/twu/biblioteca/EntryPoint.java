@@ -1,13 +1,13 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.action.*;
+import com.twu.biblioteca.collection.Books;
+import com.twu.biblioteca.collection.Movies;
 import com.twu.biblioteca.constants.Messages;
-import com.twu.biblioteca.controller.MenuExecutor;
+import com.twu.biblioteca.controller.LoginMenuExecutor;
 import com.twu.biblioteca.menu.Menu;
 import com.twu.biblioteca.model.Book;
-import com.twu.biblioteca.collection.Books;
 import com.twu.biblioteca.model.Movie;
-import com.twu.biblioteca.collection.Movies;
 import com.twu.biblioteca.view.ConsoleView;
 
 import java.io.BufferedReader;
@@ -37,18 +37,39 @@ public class EntryPoint {
         Movies movies = new Movies(availableMovieList, checkedOutMovieList);
 
         ConsoleView consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
-        HashMap<Integer, String> menuMap = new HashMap<Integer, String>();
+        HashMap<Integer, String> librarianMenuMap = new HashMap<Integer, String>();
 
-        menuMap.put(1, Messages.LIST_BOOKS);
-        menuMap.put(2, Messages.QUIT);
-        menuMap.put(3, Messages.CHECKOUT_BOOK);
-        menuMap.put(4, Messages.RETURN_BOOK);
-        menuMap.put(5, Messages.LIST_MOVIES);
-        menuMap.put(6, Messages.CHECKOUT_MOVIE);
-        menuMap.put(7, Messages.RETURN_MOVIE);
+        librarianMenuMap.put(1, Messages.LIST_BOOKS);
+        librarianMenuMap.put(2, Messages.QUIT);
+        librarianMenuMap.put(3, Messages.CHECKOUT_BOOK);
+        librarianMenuMap.put(4, Messages.RETURN_BOOK);
+        librarianMenuMap.put(5, Messages.LIST_MOVIES);
+        librarianMenuMap.put(6, Messages.CHECKOUT_MOVIE);
+        librarianMenuMap.put(7, Messages.RETURN_MOVIE);
+        librarianMenuMap.put(9, Messages.LOGOUT);
+        librarianMenuMap.put(11, Messages.DEFAULTERS_LIST);
+
+        HashMap<Integer, String> userMenuMap = new HashMap<Integer, String>();
+
+        userMenuMap.put(1, Messages.LIST_BOOKS);
+        userMenuMap.put(2, Messages.QUIT);
+        userMenuMap.put(3, Messages.CHECKOUT_BOOK);
+        userMenuMap.put(4, Messages.RETURN_BOOK);
+        userMenuMap.put(5, Messages.LIST_MOVIES);
+        userMenuMap.put(6, Messages.CHECKOUT_MOVIE);
+        userMenuMap.put(7, Messages.RETURN_MOVIE);
+        userMenuMap.put(9, Messages.LOGOUT);
 
 
-        Menu menu = new Menu(menuMap);
+        HashMap<Integer, String> loginMenuMap = new HashMap<Integer, String>();
+
+        loginMenuMap.put(1, Messages.LIST_BOOKS);
+        loginMenuMap.put(2, Messages.QUIT);
+        loginMenuMap.put(5, Messages.LIST_MOVIES);
+        loginMenuMap.put(8, Messages.LOGIN);
+
+
+        Menu menu = new Menu(loginMenuMap);
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
         menuActionMap.put(2, new Quit());
@@ -57,9 +78,11 @@ public class EntryPoint {
         menuActionMap.put(5, new ListMovies(consoleView, movies));
         menuActionMap.put(6, new CheckOutMovie(consoleView, movies));
         menuActionMap.put(7, new ReturnMovie(consoleView, movies));
-        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleView);
+        menuActionMap.put(8, new LoginAction(consoleView, movies));
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);
+        LoginMenuExecutor loginMenuExecutor = new LoginMenuExecutor(menuActionMap, consoleView);
+
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, loginMenuExecutor);
         bibliotecaApp.start();
 
     }

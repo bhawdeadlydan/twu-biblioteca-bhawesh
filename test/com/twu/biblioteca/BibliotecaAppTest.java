@@ -3,11 +3,11 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.action.ListBooks;
 import com.twu.biblioteca.action.MenuAction;
 import com.twu.biblioteca.action.Quit;
+import com.twu.biblioteca.collection.Books;
 import com.twu.biblioteca.constants.Messages;
-import com.twu.biblioteca.controller.MenuExecutor;
+import com.twu.biblioteca.controller.LibrarianMenuExecutor;
 import com.twu.biblioteca.menu.Menu;
 import com.twu.biblioteca.model.Book;
-import com.twu.biblioteca.collection.Books;
 import com.twu.biblioteca.view.ConsoleView;
 import org.junit.After;
 import org.junit.Before;
@@ -34,7 +34,7 @@ public class BibliotecaAppTest {
     private HashMap<Integer, String> menuMap;
     private Menu menu;
     private Books books;
-    MenuExecutor menuExecutor;
+    LibrarianMenuExecutor menuExecutor;
 
     @Mock
     ConsoleView consoleView;
@@ -57,7 +57,7 @@ public class BibliotecaAppTest {
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
         menuActionMap.put(2, new Quit());
-        menuExecutor = new MenuExecutor(menuActionMap, consoleView);
+        menuExecutor = new LibrarianMenuExecutor(menuActionMap, consoleView);
         bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);
         System.setOut(new PrintStream(outputStream));
 
@@ -71,7 +71,7 @@ public class BibliotecaAppTest {
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(booksStub, consoleView));
         menuActionMap.put(2, new Quit());
-        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub1);
+        LibrarianMenuExecutor menuExecutor = new LibrarianMenuExecutor(menuActionMap, consoleViewStub1);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleViewStub, menu, menuExecutor);
         when(consoleViewStub1.read()).thenReturn(1, 2);
 
@@ -87,7 +87,7 @@ public class BibliotecaAppTest {
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleViewStub2));
         menuActionMap.put(2, new Quit());
-        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub1);
+        LibrarianMenuExecutor menuExecutor = new LibrarianMenuExecutor(menuActionMap, consoleViewStub1);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);
 
         when(consoleViewStub1.read()).thenReturn(1, 2);
@@ -109,7 +109,7 @@ public class BibliotecaAppTest {
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
         menuActionMap.put(2, new Quit());
-        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub2);
+        LibrarianMenuExecutor menuExecutor = new LibrarianMenuExecutor(menuActionMap, consoleViewStub2);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleViewStub1, menu, menuExecutor);
         when(consoleViewStub2.read()).thenReturn(1, 2);
         bibliotecaApp.start();
@@ -133,7 +133,7 @@ public class BibliotecaAppTest {
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
         menuActionMap.put(2, quitAction);
-        menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub1);
+        menuExecutor = new LibrarianMenuExecutor(menuActionMap, consoleViewStub1);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);
         when(consoleViewStub1.read()).thenReturn(2);
 
@@ -149,7 +149,7 @@ public class BibliotecaAppTest {
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
         menuActionMap.put(2, quitAction);
-        MenuExecutor menuExecutor = new MenuExecutor(menuActionMap, consoleViewStub1);
+        LibrarianMenuExecutor menuExecutor = new LibrarianMenuExecutor(menuActionMap, consoleViewStub1);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, menuExecutor);
         when(consoleViewStub1.read()).thenReturn(1, 1, 2);
 

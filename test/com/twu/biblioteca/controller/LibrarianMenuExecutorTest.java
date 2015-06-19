@@ -33,5 +33,4 @@ public class LibrarianMenuExecutorTest {
 
         verify(menuActionMap).remove(8);
     }
-
 }

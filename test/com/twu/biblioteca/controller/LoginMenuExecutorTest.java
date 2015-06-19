@@ -10,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,14 +32,22 @@ public class LoginMenuExecutorTest {
     }
 
     @Test
-    public void shouldRemoveLogoutOperation() {
+    public void shouldNotHaveOptionsNotNeededInLoginMenu() {
         LoginMenuExecutor loginMenuExecutor = new LoginMenuExecutor(menuActionMap, consoleView);
         loginMenuExecutor.buildMenu();
         ArgumentCaptor<Integer> integerArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
-        verify(menuActionMap, times(1)).remove(integerArgumentCaptor.capture());
+        verify(menuActionMap, times(6)).remove(integerArgumentCaptor.capture());
 
         List<Integer> capturedIntegers = integerArgumentCaptor.getAllValues();
-        assertThat(capturedIntegers.get(0), is(9));
+        List<Integer> expectedIntegers = new ArrayList<Integer>();
+        expectedIntegers.add(8);
+        expectedIntegers.add(3);
+        expectedIntegers.add(4);
+        expectedIntegers.add(6);
+        expectedIntegers.add(7);
+        expectedIntegers.add(11);
+
+        assertThat(capturedIntegers, is(expectedIntegers));
     }
 
 }

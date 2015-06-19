@@ -2,21 +2,20 @@ package com.twu.biblioteca;
 
 
 import com.twu.biblioteca.constants.Messages;
-import com.twu.biblioteca.controller.MenuExecutor;
+import com.twu.biblioteca.controller.MenuBuilder;
+import com.twu.biblioteca.listener.LoginListener;
 import com.twu.biblioteca.menu.Menu;
-import com.twu.biblioteca.collection.Books;
 import com.twu.biblioteca.view.ConsoleView;
 
 import java.io.IOException;
 
-public class BibliotecaApp {
+public class BibliotecaApp implements LoginListener {
 
-    private Books books;
     private ConsoleView consoleView;
     private Menu menu;
-    private MenuExecutor menuExecutor;
+    private MenuBuilder menuExecutor;
 
-    public BibliotecaApp(ConsoleView consoleView, Menu menu, MenuExecutor menuExecutor) {
+    public BibliotecaApp(ConsoleView consoleView, Menu menu, MenuBuilder menuExecutor) {
         this.consoleView = consoleView;
         this.menu = menu;
         this.menuExecutor = menuExecutor;
@@ -30,5 +29,12 @@ public class BibliotecaApp {
             consoleView.print(Messages.ENTER_CHOICE_PROMPT);
             shouldContinue = menuExecutor.executeUserCommand();
         }
+    }
+
+
+    @Override
+    public void update(Menu menu, MenuBuilder menuExecutor) {
+        this.menu = menu;
+        this.menuExecutor = menuExecutor;
     }
 }
