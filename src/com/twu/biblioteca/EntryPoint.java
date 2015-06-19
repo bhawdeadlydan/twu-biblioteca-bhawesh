@@ -6,6 +6,7 @@ import com.twu.biblioteca.collection.Movies;
 import com.twu.biblioteca.constants.Messages;
 import com.twu.biblioteca.controller.LoginMenuExecutor;
 import com.twu.biblioteca.menu.Menu;
+import com.twu.biblioteca.model.Authenticator;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.Movie;
 import com.twu.biblioteca.view.ConsoleView;
@@ -69,6 +70,8 @@ public class EntryPoint {
         loginMenuMap.put(8, Messages.LOGIN);
 
 
+        Authenticator authenticator = new Authenticator();
+
         Menu menu = new Menu(loginMenuMap);
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
@@ -78,7 +81,7 @@ public class EntryPoint {
         menuActionMap.put(5, new ListMovies(consoleView, movies));
         menuActionMap.put(6, new CheckOutMovie(consoleView, movies));
         menuActionMap.put(7, new ReturnMovie(consoleView, movies));
-        menuActionMap.put(8, new LoginAction(consoleView));
+        menuActionMap.put(8, new LoginAction(consoleView, authenticator));
 
         LoginMenuExecutor loginMenuExecutor = new LoginMenuExecutor(menuActionMap, consoleView);
 
