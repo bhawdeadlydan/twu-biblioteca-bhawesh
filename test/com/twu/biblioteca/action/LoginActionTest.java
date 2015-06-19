@@ -27,10 +27,11 @@ public class LoginActionTest {
     }
 
     @Test
-    public void shouldGetUserName() throws IOException {
+    public void shouldGetUserNameAndPassWord() throws IOException {
         LoginAction loginAction = new LoginAction(consoleView);
         loginAction.performAction();
 
-        verify(consoleView,times(1)).getName();
+        verify(consoleView,times(2)).getName();
     }
+
 }

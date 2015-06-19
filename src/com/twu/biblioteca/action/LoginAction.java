@@ -18,8 +18,14 @@ public class LoginAction implements MenuAction {
     public void performAction() {
         consoleView.print(Messages.USERNAME_PROMPT);
         String username = "";
+        String password = "";
         try {
             username = consoleView.getName();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            password = consoleView.getName();
         } catch (IOException e) {
             e.printStackTrace();
         }
