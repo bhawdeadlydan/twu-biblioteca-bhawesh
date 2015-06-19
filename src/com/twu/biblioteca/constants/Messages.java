@@ -25,5 +25,6 @@ public class Messages {
     public static final String LOGIN = "Login";
     public static final String LOGOUT = "Logout";
     public static final String DEFAULTERS_LIST = "Defaulters List";
+    public static final String  USERNAME_PROMPT = "Enter Username :";
     public static String UNSUCCESSFULL_CHECKOUT = "That book is not available.";
 }

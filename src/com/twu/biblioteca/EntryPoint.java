@@ -78,7 +78,7 @@ public class EntryPoint {
         menuActionMap.put(5, new ListMovies(consoleView, movies));
         menuActionMap.put(6, new CheckOutMovie(consoleView, movies));
         menuActionMap.put(7, new ReturnMovie(consoleView, movies));
-        menuActionMap.put(8, new LoginAction(consoleView, movies));
+        menuActionMap.put(8, new LoginAction(consoleView));
 
         LoginMenuExecutor loginMenuExecutor = new LoginMenuExecutor(menuActionMap, consoleView);
 
