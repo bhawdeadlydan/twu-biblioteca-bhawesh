@@ -5,14 +5,19 @@ import com.twu.biblioteca.model.Authenticator;
 import com.twu.biblioteca.view.ConsoleView;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
+import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginActionTest {
@@ -47,4 +52,18 @@ public class LoginActionTest {
         verify(authenticator).authenticate(anyString(), anyString());
     }
 
+    @Test
+    public void shouldBeAbleToAlertSuccessfulLogin() {
+        when(authenticator.authenticate(anyString(), anyString())).thenReturn(true);
+        LoginAction loginAction = new LoginAction(consoleView, authenticator);
+        loginAction.performAction();
+        ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
+        verify(consoleView, times(2)).print(stringArgumentCaptor.capture());
+        List<String> capturedStrings = stringArgumentCaptor.getAllValues();
+
+        String actualMessage = capturedStrings.get(1);
+        String expectedMessage = Messages.SUCCESSFUL_LOGIN;
+
+        assertThat(expectedMessage, is(actualMessage));
+    }
 }

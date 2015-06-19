@@ -35,8 +35,8 @@ public class LoginAction implements MenuAction {
             e.printStackTrace();
         }
 
-        if(authenticator.authenticate(username, password)){
-
+        if (authenticator.authenticate(username, password)) {
+            consoleView.print(Messages.SUCCESSFUL_LOGIN);
         }
     }
 }
