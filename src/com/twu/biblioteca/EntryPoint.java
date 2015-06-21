@@ -28,10 +28,11 @@ public class EntryPoint {
 
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
         Books books = new Books(availableBookList, checkedOutBookList);
-
-        Menu librarianMenu =null;
+        HashMap<Integer, MenuAction> menuActionMap;
+        Menu librarianMenu = null;
         Menu userMenu = null;
         Menu loginMenu = null;
+        BibliotecaApp bibliotecaApp;
 
         ArrayList<Movie> availableMovieList = new ArrayList<Movie>();
         availableMovieList.add(new Movie("Movie 1", 2003, "director 1", 8));
@@ -41,7 +42,7 @@ public class EntryPoint {
 
         ArrayList<Movie> checkedOutMovieList = new ArrayList<Movie>();
         Movies movies = new Movies(availableMovieList, checkedOutMovieList);
-        LibrarianMenuExecutor librarianMenuExecutor= null;
+        LibrarianMenuExecutor librarianMenuExecutor = null;
         UserMenuExecutor userMenuExecutor = null;
         ConsoleView consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
         HashMap<Integer, String> librarianMenuMap = new HashMap<Integer, String>();
@@ -77,22 +78,22 @@ public class EntryPoint {
         loginMenuMap.put(8, Messages.LOGIN);
 
         HashMap<Integer, String[]> userNameAndPasswordMap = new HashMap<Integer, String[]>();
-        userNameAndPasswordMap.put(1, new String[]{"111-1111","librarian123"});
-        userNameAndPasswordMap.put(2, new String[]{"222-2222","user222"});
-        userNameAndPasswordMap.put(3, new String[]{"333-3333","user333"});
-        userNameAndPasswordMap.put(4, new String[]{"444-4444","user444"});
-        userNameAndPasswordMap.put(5, new String[]{"555-5555","user555"});
-        userNameAndPasswordMap.put(6, new String[]{"666-6666","user666"});
-        userNameAndPasswordMap.put(7, new String[]{"777-7777","user777"});
-        userNameAndPasswordMap.put(8, new String[]{"888-8888","user888"});
+        userNameAndPasswordMap.put(1, new String[]{"111-1111", "librarian123"});
+        userNameAndPasswordMap.put(2, new String[]{"222-2222", "user222"});
+        userNameAndPasswordMap.put(3, new String[]{"333-3333", "user333"});
+        userNameAndPasswordMap.put(4, new String[]{"444-4444", "user444"});
+        userNameAndPasswordMap.put(5, new String[]{"555-5555", "user555"});
+        userNameAndPasswordMap.put(6, new String[]{"666-6666", "user666"});
+        userNameAndPasswordMap.put(7, new String[]{"777-7777", "user777"});
+        userNameAndPasswordMap.put(8, new String[]{"888-8888", "user888"});
 
         loginMenu = new Menu(loginMenuMap);
         userMenu = new Menu(userMenuMap);
         librarianMenu = new Menu(librarianMenuMap);
-        Authenticator authenticator = new Authenticator(userNameAndPasswordMap,librarianMenu, userMenu,librarianMenuExecutor, userMenuExecutor );
-        Menu menu = new Menu(loginMenuMap);
-
-        HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
+        menuActionMap = new HashMap<Integer, MenuAction>();
+        librarianMenuExecutor = new LibrarianMenuExecutor(menuActionMap, consoleView);
+        userMenuExecutor = new UserMenuExecutor(menuActionMap, consoleView);
+        Authenticator authenticator = new Authenticator(userNameAndPasswordMap);
         menuActionMap.put(1, new ListBooks(books, consoleView));
         menuActionMap.put(2, new Quit());
         menuActionMap.put(3, new CheckOutBook(consoleView, books));
@@ -100,16 +101,14 @@ public class EntryPoint {
         menuActionMap.put(5, new ListMovies(consoleView, movies));
         menuActionMap.put(6, new CheckOutMovie(consoleView, movies));
         menuActionMap.put(7, new ReturnMovie(consoleView, movies));
-        menuActionMap.put(8, new LoginAction(consoleView, authenticator));
-
-
-        userMenuExecutor = new UserMenuExecutor(menuActionMap, consoleView);
         LoginMenuExecutor loginMenuExecutor = new LoginMenuExecutor(menuActionMap, consoleView);
-        librarianMenuExecutor = new LibrarianMenuExecutor(menuActionMap, consoleView);
+        Menu menu = new Menu(loginMenuMap);
+        LoginAction loginAction = new LoginAction(consoleView, authenticator, librarianMenu, userMenu, librarianMenuExecutor, userMenuExecutor);
+        menuActionMap.put(8, loginAction);
 
+        bibliotecaApp = new BibliotecaApp(consoleView, menu, loginMenuExecutor);
+        loginAction.addListener(bibliotecaApp);
 
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(consoleView, menu, loginMenuExecutor);
         bibliotecaApp.start();
-
     }
 }

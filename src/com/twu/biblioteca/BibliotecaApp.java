@@ -10,7 +10,6 @@ import com.twu.biblioteca.view.ConsoleView;
 import java.io.IOException;
 
 public class BibliotecaApp implements LoginListener {
-
     private ConsoleView consoleView;
     private Menu menu;
     private MenuBuilder menuExecutor;
@@ -30,7 +29,6 @@ public class BibliotecaApp implements LoginListener {
             shouldContinue = menuExecutor.executeUserCommand();
         }
     }
-
 
     @Override
     public void update(Menu menu, MenuBuilder menuExecutor) {

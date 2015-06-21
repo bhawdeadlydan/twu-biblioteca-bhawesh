@@ -1,6 +1,10 @@
 package com.twu.biblioteca.action;
 
+import com.twu.biblioteca.BibliotecaApp;
 import com.twu.biblioteca.constants.Messages;
+import com.twu.biblioteca.controller.LibrarianMenuExecutor;
+import com.twu.biblioteca.controller.UserMenuExecutor;
+import com.twu.biblioteca.menu.Menu;
 import com.twu.biblioteca.model.Authenticator;
 import com.twu.biblioteca.view.ConsoleView;
 import org.junit.Test;
@@ -15,12 +19,12 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginActionTest {
+    @Mock
+    BibliotecaApp bibliotecaApp;
 
     @Mock
     ConsoleView consoleView;
@@ -28,9 +32,16 @@ public class LoginActionTest {
     @Mock
     Authenticator authenticator;
 
+    @Mock
+    Menu librarianMenu, userMenu;
+
+    @Mock
+    LibrarianMenuExecutor librarianMenuExecutor;
+    UserMenuExecutor userMenuExecutor;
+
     @Test
     public void shouldPromptUserForUserName() {
-        LoginAction loginAction = new LoginAction(consoleView, authenticator);
+        LoginAction loginAction = new LoginAction(consoleView, authenticator, librarianMenu, userMenu, librarianMenuExecutor, userMenuExecutor);
         loginAction.performAction();
         ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
         verify(consoleView, times(3)).print(stringArgumentCaptor.capture());
@@ -43,7 +54,8 @@ public class LoginActionTest {
 
     @Test
     public void shouldPromptUserForPassword() {
-        LoginAction loginAction = new LoginAction(consoleView, authenticator);
+        LoginAction loginAction = new LoginAction(consoleView, authenticator, librarianMenu, userMenu, librarianMenuExecutor, userMenuExecutor);
+        loginAction.addListener(bibliotecaApp);
         loginAction.performAction();
 
         ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
@@ -57,7 +69,8 @@ public class LoginActionTest {
     }
     @Test
     public void shouldGetUserNameAndPassWord() throws IOException {
-        LoginAction loginAction = new LoginAction(consoleView, authenticator);
+        LoginAction loginAction = new LoginAction(consoleView, authenticator, librarianMenu, userMenu, librarianMenuExecutor, userMenuExecutor);
+        loginAction.addListener(bibliotecaApp);
         loginAction.performAction();
 
         verify(consoleView,times(2)).getName();
@@ -66,7 +79,8 @@ public class LoginActionTest {
 
     @Test
     public void shouldBeAbleToAuthenticateUser() {
-        LoginAction loginAction = new LoginAction(consoleView, authenticator);
+        LoginAction loginAction = new LoginAction(consoleView, authenticator, librarianMenu, userMenu, librarianMenuExecutor, userMenuExecutor);
+        loginAction.addListener(bibliotecaApp);
         loginAction.performAction();
 
         verify(authenticator).authenticate(anyString(), anyString());
@@ -74,30 +88,32 @@ public class LoginActionTest {
 
     @Test
     public void shouldBeAbleToAlertSuccessfulLogin() {
-        when(authenticator.authenticate(anyString(), anyString())).thenReturn(true);
-        LoginAction loginAction = new LoginAction(consoleView, authenticator);
+        when(authenticator.authenticate(anyString(), anyString())).thenReturn(1);
+        LoginAction loginAction = new LoginAction(consoleView, authenticator, librarianMenu, userMenu, librarianMenuExecutor, userMenuExecutor);
+        loginAction.addListener(bibliotecaApp);
         loginAction.performAction();
         ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
         verify(consoleView, times(3)).print(stringArgumentCaptor.capture());
         List<String> capturedStrings = stringArgumentCaptor.getAllValues();
 
         String actualMessage = capturedStrings.get(2);
-        String expectedMessage = Messages.SUCCESSFUL_LOGIN;
+        String expectedMessage = Messages.SUCCESSFUL_LOGIN_LIBRARIAN;
 
         assertThat(expectedMessage, is(actualMessage));
     }
 
     @Test
-    public void shouldBeAbleToAlertUnSuccessfulLogin() {
-        when(authenticator.authenticate(anyString(), anyString())).thenReturn(false);
-        LoginAction loginAction = new LoginAction(consoleView, authenticator);
+    public void shouldBeAbleToAlertSuccessfulLoginForUser() {
+        when(authenticator.authenticate(anyString(), anyString())).thenReturn(2);
+        LoginAction loginAction = new LoginAction(consoleView, authenticator, librarianMenu, userMenu, librarianMenuExecutor, userMenuExecutor);
+        loginAction.addListener(bibliotecaApp);
         loginAction.performAction();
         ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
         verify(consoleView, times(3)).print(stringArgumentCaptor.capture());
         List<String> capturedStrings = stringArgumentCaptor.getAllValues();
 
         String actualMessage = capturedStrings.get(2);
-        String expectedMessage = Messages.UNSUCCESSFUL_LOGIN;
+        String expectedMessage = Messages.SUCCESSFUL_LOGIN_USER;
 
         assertThat(expectedMessage, is(actualMessage));
     }

@@ -9,6 +9,7 @@ import com.twu.biblioteca.controller.UserMenuExecutor;
 import com.twu.biblioteca.listener.LoginListener;
 import com.twu.biblioteca.menu.Menu;
 import com.twu.biblioteca.view.ConsoleView;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +21,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthenticatorTest {
@@ -98,7 +99,7 @@ public class AuthenticatorTest {
 
         userMenu = new Menu(userMenuMap);
         librarianMenu = new Menu(librarianMenuMap);
-        authenticator = new Authenticator(userNameAndPasswordMap, librarianMenu, userMenu, librarianMenuExecutor, userMenuExecutor);
+        authenticator = new Authenticator(userNameAndPasswordMap);
 
         HashMap<Integer, MenuAction> menuActionMap = new HashMap<Integer, MenuAction>();
         menuActionMap.put(1, new ListBooks(books, consoleView));
@@ -108,17 +109,19 @@ public class AuthenticatorTest {
         menuActionMap.put(5, new ListMovies(consoleView, movies));
         menuActionMap.put(6, new CheckOutMovie(consoleView, movies));
         menuActionMap.put(7, new ReturnMovie(consoleView, movies));
-        menuActionMap.put(8, new LoginAction(consoleView, authenticator));
+        menuActionMap.put(8, new LoginAction(consoleView, authenticator, librarianMenu, userMenu, librarianMenuExecutor, userMenuExecutor));
 
 
         userMenuExecutor = new UserMenuExecutor(menuActionMap, consoleView);
         librarianMenuExecutor = new LibrarianMenuExecutor(menuActionMap, consoleView);
-        authenticator.addListener(listener);
+
     }
 
     @Test
-    public void shouldBeAbleToAuthenticateValidUser() {
-        assertTrue(authenticator.authenticate("111-1111", "librarian123"));
-    }
+    public void shouldBeAbleToAuthenticateLibrarian() {
+        int userParsed = authenticator.authenticate("111-1111", "librarian123");
 
+        Assert.assertThat(userParsed, is(1));
+    }
+    
 }
