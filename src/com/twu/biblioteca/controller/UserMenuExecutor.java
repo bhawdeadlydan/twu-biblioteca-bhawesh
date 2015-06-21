@@ -32,6 +32,6 @@ public class UserMenuExecutor extends MenuBuilder{
 
     @Override
     protected void removeLoginOperation() {
-
+        menuActionMap.remove(8);
     }
 }
