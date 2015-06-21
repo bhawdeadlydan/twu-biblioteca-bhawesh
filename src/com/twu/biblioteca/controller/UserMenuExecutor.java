@@ -12,7 +12,7 @@ public class UserMenuExecutor extends MenuBuilder{
 
     @Override
     protected void removeUserHistoryCheckingOperation() {
-
+        menuActionMap.remove(11);
     }
 
     @Override
