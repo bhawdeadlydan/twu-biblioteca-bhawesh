@@ -105,6 +105,8 @@ public class EntryPoint {
         Menu menu = new Menu(loginMenuMap);
         LoginAction loginAction = new LoginAction(consoleView, authenticator, librarianMenu, userMenu, librarianMenuExecutor, userMenuExecutor);
         menuActionMap.put(8, loginAction);
+        MenuAction logoutAction = new LogoutAction(consoleView, loginMenu, loginMenuExecutor);
+        menuActionMap.put(8, logoutAction);
 
         bibliotecaApp = new BibliotecaApp(consoleView, menu, loginMenuExecutor);
         loginAction.addListener(bibliotecaApp);
