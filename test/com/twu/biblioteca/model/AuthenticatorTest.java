@@ -49,4 +49,11 @@ public class AuthenticatorTest {
 
         assertThat(userParsed, is(2));
     }
+
+    @Test
+    public void shouldNotBeAbleToAuthenticateInvalidUser() {
+        int userParsed = authenticator.authenticate("222-2222", "randompass");
+
+        assertThat(userParsed, is(3));
+    }
 }
