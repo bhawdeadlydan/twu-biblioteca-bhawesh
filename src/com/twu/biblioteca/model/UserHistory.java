@@ -36,5 +36,4 @@ public class UserHistory implements LoginHistoryListener {
     public void updateMovie(Movie movie, int status) {
         this.movieChanged = movie;
     }
-
 }

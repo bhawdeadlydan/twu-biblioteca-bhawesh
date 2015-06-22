@@ -27,10 +27,11 @@ public class Movies implements HistoryListenable{
 
 
     public boolean checkout(String movieName) {
-        for (Movie Movie : availableMovieList) {
-            if (Movie.isMovieSame(movieName)) {
-                checkedOutMovieList.add(Movie);
-                availableMovieList.remove(Movie);
+        for (Movie movie : availableMovieList) {
+            if (movie.isMovieSame(movieName)) {
+                checkedOutMovieList.add(movie);
+                availableMovieList.remove(movie);
+                listener.updateMovie(movie, -1);
                 return true;
             }
         }

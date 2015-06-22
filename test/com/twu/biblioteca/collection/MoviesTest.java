@@ -1,18 +1,29 @@
 package com.twu.biblioteca.collection;
 
+import com.twu.biblioteca.listener.LoginHistoryListener;
 import com.twu.biblioteca.model.Movie;
 import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
 
+@RunWith(MockitoJUnitRunner.class)
 public class MoviesTest {
     private Movies movies;
+
+    @Mock
+    LoginHistoryListener loginHistoryListener;
+
+
     @Before
     public void setUp() {
         ArrayList<Movie> availableMovieList = new ArrayList<Movie>();
@@ -21,6 +32,7 @@ public class MoviesTest {
 
         ArrayList<Movie> checkedOutMovieList = new ArrayList<Movie>();
         movies = new Movies(availableMovieList, checkedOutMovieList);
+        movies.addListener(loginHistoryListener);
     }
 
     @Test
@@ -54,5 +66,13 @@ public class MoviesTest {
         boolean actual = movies.returnMovie(movieName);
 
         assertTrue(actual);
+    }
+
+    @Test
+    public void shouldUpdateHistoryOnCheckoutMovie() {
+        String movieName = "Movie 1";
+        Boolean actual = movies.checkout(movieName);
+
+        verify(loginHistoryListener).updateMovie(new Movie("Movie 1", 2003, "JK Rowling", 1), -1);
     }
 }

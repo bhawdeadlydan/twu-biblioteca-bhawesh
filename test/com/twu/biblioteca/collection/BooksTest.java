@@ -76,7 +76,7 @@ public class BooksTest {
     }
 
     @Test
-    public void shouldupdateHistoryOnCheckoutBook() {
+    public void shouldUpdateHistoryOnCheckoutBook() {
         String bookName = "Book 1";
         Boolean actual = books.checkout(bookName);
 
@@ -84,7 +84,7 @@ public class BooksTest {
     }
 
     @Test
-    public void shouldupdateHistoryOnReturnBook() {
+    public void shouldUpdateHistoryOnReturnBook() {
         String bookName = "Book 1";
         books.checkout(bookName);
         Boolean actual = books.returnBook(bookName);

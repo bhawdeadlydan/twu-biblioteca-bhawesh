@@ -2,12 +2,16 @@ package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.collection.Movies;
 import com.twu.biblioteca.constants.Messages;
+import com.twu.biblioteca.listener.LoginHistoryListener;
 import com.twu.biblioteca.model.Movie;
 import com.twu.biblioteca.view.ConsoleView;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,12 +20,14 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.*;
-
+@RunWith(MockitoJUnitRunner.class)
 public class CheckOutMovieTest {
     private Movies movies;
     private CheckOutMovie checkOutMovie;
     ConsoleView consoleViewStub;
 
+    @Mock
+    LoginHistoryListener loginHistoryListener;
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -31,6 +37,7 @@ public class CheckOutMovieTest {
 
         ArrayList<Movie> checkedOutMovieList = new ArrayList<Movie>();
         movies = new Movies(availableMovieList, checkedOutMovieList);
+        movies.addListener(loginHistoryListener);
         consoleViewStub = mock(ConsoleView.class);
         checkOutMovie = new CheckOutMovie(consoleViewStub, movies);
     }
