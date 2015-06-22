@@ -3,6 +3,7 @@ package com.twu.biblioteca.model;
 import com.twu.biblioteca.listener.LoginHistoryListener;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class UserHistory implements LoginHistoryListener {
 
@@ -26,10 +27,16 @@ public class UserHistory implements LoginHistoryListener {
     @Override
     public void updateBook(Book book, int status) {
         this.bookChanged = book;
-        if (status == 1)
+        if (status == -1)
             bookUserHistory.put(loggedInUser, book);
-        else if(status == -1)
-            bookUserHistory.remove(book);
+        else if(status == 1)
+            if(bookUserHistory.containsValue(book)){
+                Set<String> keys = bookUserHistory.keySet();
+                for(String key : keys){
+                    if(bookUserHistory.get(key).equals(book))
+                        bookUserHistory.remove(key);
+                }
+            }
     }
 
     @Override
