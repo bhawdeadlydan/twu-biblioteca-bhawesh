@@ -27,5 +27,6 @@ public class LogoutAction implements MenuAction, Listenable {
     @Override
     public void performAction() {
         consoleView.print(Messages.LOGOUT_MESSAGE);
+        loginListener.update(loginMenu, loginMenuExecutor);
     }
 }
