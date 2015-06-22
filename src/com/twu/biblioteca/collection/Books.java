@@ -63,6 +63,7 @@ public class Books implements HistoryListenable{
                 if (book.isBookSame(bookName)) {
                     availableBooks.add(book);
                     checkedOutBooks.remove(book);
+                    loginHistoryListener.updateBook(book, 1);
                     return true;
                 }
             }

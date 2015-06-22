@@ -1,14 +1,17 @@
 package com.twu.biblioteca.action;
 
-import com.twu.biblioteca.action.ReturnBook;
-import com.twu.biblioteca.constants.Messages;
-import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.collection.Books;
+import com.twu.biblioteca.constants.Messages;
+import com.twu.biblioteca.listener.LoginHistoryListener;
+import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.view.ConsoleView;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,11 +20,13 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
-
+@RunWith(MockitoJUnitRunner.class)
 public class ReturnBookTest {
     private Books books;
     private ReturnBook returnBook;
     ConsoleView consoleViewStub;
+    @Mock
+    LoginHistoryListener loginHistoryListener;
 
     @Before
     public void setUp() {
@@ -33,6 +38,7 @@ public class ReturnBookTest {
 
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
         books = new Books(availableBookList, checkedOutBookList);
+        books.addListener(loginHistoryListener);
         consoleViewStub = mock(ConsoleView.class);
         returnBook = new ReturnBook(consoleViewStub, books);
     }
@@ -73,6 +79,8 @@ public class ReturnBookTest {
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
         checkedOutBookList.add(new Book("Book 3", "Agatha Christie", 1800));
         books = new Books(availableBookList, checkedOutBookList);
+        books.addListener(loginHistoryListener);
+
         consoleViewStub = mock(ConsoleView.class);
         returnBook = new ReturnBook(consoleViewStub, books);
         when(consoleViewStub.getName()).thenReturn("Book 3");

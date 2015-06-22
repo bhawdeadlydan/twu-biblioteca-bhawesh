@@ -83,4 +83,13 @@ public class BooksTest {
         verify(loginHistoryListener).updateBook(new Book("Book 1", "JK Rowling", 2003), -1);
     }
 
+    @Test
+    public void shouldupdateHistoryOnReturnBook() {
+        String bookName = "Book 1";
+        books.checkout(bookName);
+        Boolean actual = books.returnBook(bookName);
+
+        verify(loginHistoryListener).updateBook(new Book("Book 1", "JK Rowling", 2003), 1);
+    }
+
 }
