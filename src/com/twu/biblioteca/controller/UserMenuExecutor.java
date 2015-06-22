@@ -5,7 +5,7 @@ import com.twu.biblioteca.view.ConsoleView;
 
 import java.util.HashMap;
 
-public class UserMenuExecutor extends MenuBuilder{
+public class UserMenuExecutor extends MenuBuilder {
     public UserMenuExecutor(HashMap<Integer, MenuAction> menuActionMap, ConsoleView consoleView) {
         super(menuActionMap, consoleView);
     }

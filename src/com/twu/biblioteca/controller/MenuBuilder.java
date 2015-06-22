@@ -28,7 +28,7 @@ public abstract class MenuBuilder {
     public boolean executeUserCommand() throws IOException {
         int userChoice = consoleView.read();
         if (menuActionMap.containsKey(userChoice)) {
-            if(menuActionMap.get(userChoice) instanceof Quit)
+            if (menuActionMap.get(userChoice) instanceof Quit)
                 return false;
             menuActionMap.get(userChoice).performAction();
             return true;

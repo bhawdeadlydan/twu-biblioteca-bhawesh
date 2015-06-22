@@ -6,7 +6,7 @@ import com.twu.biblioteca.model.Movie;
 
 import java.util.ArrayList;
 
-public class Movies implements HistoryListenable{
+public class Movies implements HistoryListenable {
     private ArrayList<Movie> availableMovieList;
     private ArrayList<Movie> checkedOutMovieList;
     private LoginHistoryListener listener;

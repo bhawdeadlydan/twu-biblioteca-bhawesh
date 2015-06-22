@@ -14,7 +14,7 @@ public class Movie {
     }
 
     public String toString() {
-        return "\n"+name + "\t" + director + "\t" + year + "\t" + "rating:" + rating;
+        return "\n" + name + "\t" + director + "\t" + year + "\t" + "rating:" + rating;
     }
 
     @Override

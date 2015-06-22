@@ -1,8 +1,8 @@
 package com.twu.biblioteca.action;
 
-import com.twu.biblioteca.view.ConsoleView;
-import com.twu.biblioteca.constants.Messages;
 import com.twu.biblioteca.collection.Movies;
+import com.twu.biblioteca.constants.Messages;
+import com.twu.biblioteca.view.ConsoleView;
 
 import java.io.IOException;
 
@@ -25,9 +25,9 @@ public class ReturnMovie implements MenuAction {
             e.printStackTrace();
         }
 
-        if(movies.returnMovie(movieName)){
+        if (movies.returnMovie(movieName)) {
             consoleView.print(Messages.SUCCESSFULL_RETURN_MOVIE);
-        }else{
+        } else {
             consoleView.print(Messages.UNSUCCESSFULL_RETURN_MOVIE);
         }
     }

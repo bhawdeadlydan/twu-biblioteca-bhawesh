@@ -1,7 +1,7 @@
 package com.twu.biblioteca.action;
 
-import com.twu.biblioteca.view.ConsoleView;
 import com.twu.biblioteca.collection.Movies;
+import com.twu.biblioteca.view.ConsoleView;
 
 public class ListMovies implements MenuAction {
     private ConsoleView consoleView;

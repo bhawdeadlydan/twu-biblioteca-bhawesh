@@ -115,6 +115,8 @@ public class EntryPoint {
         LogoutAction logoutAction = new LogoutAction(consoleView, loginMenu, loginMenuExecutor);
         menuActionMap.put(9, logoutAction);
         authenticator.addListener(userHistory);
+        UserHistoryAction userHistoryAction = new UserHistoryAction(userHistory, consoleView);
+        menuActionMap.put(11, userHistoryAction);
 
         bibliotecaApp = new BibliotecaApp(consoleView, menu, loginMenuExecutor);
         loginAction.addListener(bibliotecaApp);

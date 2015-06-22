@@ -6,7 +6,7 @@ import com.twu.biblioteca.model.Book;
 
 import java.util.ArrayList;
 
-public class Books implements HistoryListenable{
+public class Books implements HistoryListenable {
     private ArrayList<Book> availableBooks;
     private ArrayList<Book> checkedOutBooks;
     private LoginHistoryListener loginHistoryListener;

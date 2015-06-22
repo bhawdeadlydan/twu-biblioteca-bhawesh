@@ -29,11 +29,11 @@ public class UserHistory implements LoginHistoryListener {
         this.bookChanged = book;
         if (status == -1)
             bookUserHistory.put(loggedInUser, book);
-        else if(status == 1)
-            if(bookUserHistory.containsValue(book)){
+        else if (status == 1)
+            if (bookUserHistory.containsValue(book)) {
                 Set<String> keys = bookUserHistory.keySet();
-                for(String key : keys){
-                    if(bookUserHistory.get(key).equals(book))
+                for (String key : keys) {
+                    if (bookUserHistory.get(key).equals(book))
                         bookUserHistory.remove(key);
                 }
             }
@@ -44,11 +44,11 @@ public class UserHistory implements LoginHistoryListener {
         this.movieChanged = movie;
         if (status == -1)
             movieUserHistory.put(loggedInUser, movie);
-        else if(status == 1)
-            if(movieUserHistory.containsValue(movie)){
+        else if (status == 1)
+            if (movieUserHistory.containsValue(movie)) {
                 Set<String> keys = movieUserHistory.keySet();
-                for(String key : keys){
-                    if(movieUserHistory.get(key).equals(movie))
+                for (String key : keys) {
+                    if (movieUserHistory.get(key).equals(movie))
                         movieUserHistory.remove(key);
                 }
             }
@@ -58,12 +58,12 @@ public class UserHistory implements LoginHistoryListener {
     public String toString() {
         String visualRepresentation = "";
         Set<String> keys = movieUserHistory.keySet();
-        for(String key : keys){
-            visualRepresentation += "\n" + key + ": " +movieUserHistory.get(key).toString();
+        for (String key : keys) {
+            visualRepresentation += "\n" + key + ": " + movieUserHistory.get(key).toString();
         }
         Set<String> bkeys = bookUserHistory.keySet();
-        for(String key : bkeys){
-            visualRepresentation += "\n" + key + ": " +bookUserHistory.get(key).toString();
+        for (String key : bkeys) {
+            visualRepresentation += "\n" + key + ": " + bookUserHistory.get(key).toString();
         }
         return visualRepresentation;
     }

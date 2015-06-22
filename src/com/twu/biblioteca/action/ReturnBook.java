@@ -1,8 +1,8 @@
 package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.collection.Books;
-import com.twu.biblioteca.view.ConsoleView;
 import com.twu.biblioteca.constants.Messages;
+import com.twu.biblioteca.view.ConsoleView;
 
 import java.io.IOException;
 
