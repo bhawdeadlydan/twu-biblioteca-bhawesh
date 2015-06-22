@@ -8,7 +8,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.HashMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,6 +19,8 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserHistoryTest {
+    private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
     private UserHistory userHistory;
     private  ConsoleView consoleView;
     @Mock
@@ -35,6 +39,7 @@ public class UserHistoryTest {
     public void setUp() {
         userHistory = new UserHistory(bookUserHistory, movieUserHistory);
         consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
+        System.setOut(new PrintStream(outputStream));
     }
 
     @Test
@@ -87,7 +92,14 @@ public class UserHistoryTest {
         movieUserHistory.put("user222", movie);
         userHistory = new UserHistory(bookUserHistory, movieUserHistory);
 
-         consoleView.print(userHistory.toString());
+
+
+
+        String actualOutput = userHistory.toString();
+        System.out.println(actualOutput);
+        String expectedOutput = "\nuser222: \nArt Of living\tDirector\t1945\trating:4\nuser333: Raj\tComics\t2000";
+
+        assertThat(actualOutput, is(expectedOutput));
 
     }
 
