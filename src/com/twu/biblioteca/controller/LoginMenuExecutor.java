@@ -41,6 +41,6 @@ public class LoginMenuExecutor extends MenuBuilder {
 
     @Override
     protected void removeUserDetailOption() {
-
+        menuActionMap.remove(10);
     }
 }

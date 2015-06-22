@@ -36,7 +36,7 @@ public class LoginMenuExecutorTest {
         LoginMenuExecutor loginMenuExecutor = new LoginMenuExecutor(menuActionMap, consoleView);
         loginMenuExecutor.buildMenu();
         ArgumentCaptor<Integer> integerArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
-        verify(menuActionMap, times(6)).remove(integerArgumentCaptor.capture());
+        verify(menuActionMap, times(7)).remove(integerArgumentCaptor.capture());
 
         List<Integer> capturedIntegers = integerArgumentCaptor.getAllValues();
         List<Integer> expectedIntegers = new ArrayList<Integer>();
@@ -46,6 +46,7 @@ public class LoginMenuExecutorTest {
         expectedIntegers.add(6);
         expectedIntegers.add(7);
         expectedIntegers.add(11);
+        expectedIntegers.add(10);
 
         assertThat(capturedIntegers, is(expectedIntegers));
     }
