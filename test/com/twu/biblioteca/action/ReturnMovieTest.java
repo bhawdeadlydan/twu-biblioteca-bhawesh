@@ -31,6 +31,7 @@ public class ReturnMovieTest {
 
         ArrayList<Movie> checkedOutMovieList = new ArrayList<Movie>();
         movies = new Movies(availableMovieList, checkedOutMovieList);
+
         consoleViewStub = mock(ConsoleView.class);
         returnMovie = new ReturnMovie(consoleViewStub, movies);
     }

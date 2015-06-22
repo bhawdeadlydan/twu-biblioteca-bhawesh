@@ -20,12 +20,15 @@ public class Authenticator implements HistoryListenable {
         String[] loginDetail;
         loginDetail = new String[]{username, password};
         if (Arrays.equals(loginDetailsMap.get(1), (loginDetail))) {
+            loginHistoryListener.updateUser(username);
             return 1;
         } else {
             Set<Integer> keys = (Set<Integer>) loginDetailsMap.keySet();
-            for( Integer key : keys){
-                if(Arrays.equals(loginDetailsMap.get(key), loginDetail))
+            for (Integer key : keys) {
+                if (Arrays.equals(loginDetailsMap.get(key), loginDetail)) {
+                    loginHistoryListener.updateUser(username);
                     return 2;
+                }
             }
         }
         return 3;

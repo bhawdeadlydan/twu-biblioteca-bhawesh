@@ -1,6 +1,6 @@
 package com.twu.biblioteca.model;
 
-import com.twu.biblioteca.listener.LoginListener;
+import com.twu.biblioteca.listener.LoginHistoryListener;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,13 +11,14 @@ import java.util.HashMap;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AuthenticatorTest {
     private Authenticator authenticator;
 
     @Mock
-    LoginListener listener;
+    LoginHistoryListener listener;
 
     @Before
     public void setUp() {
@@ -32,6 +33,7 @@ public class AuthenticatorTest {
         userNameAndPasswordMap.put(7, new String[]{"777-7777", "user777"});
         userNameAndPasswordMap.put(8, new String[]{"888-8888", "user888"});
         authenticator = new Authenticator(userNameAndPasswordMap);
+        authenticator.addListener(listener);
 
 
     }
@@ -58,7 +60,9 @@ public class AuthenticatorTest {
     }
 
     @Test
-    public void shouldBeAbleToupdateUserHistoryWithTheCurrentLoggedInUser() {
+    public void shouldBeAbleToUpdateUserHistoryWithTheCurrentLoggedInUser() {
+        int userParsed = authenticator.authenticate("222-2222", "user222");
 
+        verify(listener).updateUser("222-2222");
     }
 }
