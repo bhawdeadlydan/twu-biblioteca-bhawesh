@@ -23,6 +23,7 @@ public abstract class MenuBuilder {
         removeListingOperationOptions();
         removePrivilegedOperations();
         removeUserHistoryCheckingOperation();
+        removeUserDetailOption();
     }
 
     public boolean executeUserCommand() throws IOException {
