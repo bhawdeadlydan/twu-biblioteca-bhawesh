@@ -1,18 +1,27 @@
 package com.twu.biblioteca.collection;
 
+import com.twu.biblioteca.listener.LoginHistoryListener;
 import com.twu.biblioteca.model.Book;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class BooksTest {
     private Books books;
+
+    @Mock
+    LoginHistoryListener loginHistoryListener;
+
 
     @Before
     public void setUp() {
@@ -23,6 +32,7 @@ public class BooksTest {
 
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
         books = new Books(availableBookList, checkedOutBookList);
+        books.addListener(loginHistoryListener);
     }
 
     @Test
@@ -63,6 +73,14 @@ public class BooksTest {
         Boolean actual = books.returnBook(bookName);
 
         assertTrue(actual);
+    }
+
+    @Test
+    public void shouldupdateHistoryOnCheckoutBook() {
+        String bookName = "Book 1";
+        Boolean actual = books.checkout(bookName);
+
+        verify(loginHistoryListener).updateBook(new Book("Book 1", "JK Rowling", 2003), -1);
     }
 
 }

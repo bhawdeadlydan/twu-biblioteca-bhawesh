@@ -1,12 +1,15 @@
 package com.twu.biblioteca.collection;
 
+import com.twu.biblioteca.listener.HistoryListenable;
+import com.twu.biblioteca.listener.LoginHistoryListener;
 import com.twu.biblioteca.model.Movie;
 
 import java.util.ArrayList;
 
-public class Movies {
+public class Movies implements HistoryListenable{
     private ArrayList<Movie> availableMovieList;
     private ArrayList<Movie> checkedOutMovieList;
+    private LoginHistoryListener listener;
 
     public Movies(ArrayList<Movie> availableMovieList, ArrayList<Movie> checkedOutMovieList) {
         this.availableMovieList = availableMovieList;
@@ -53,5 +56,10 @@ public class Movies {
             }
         }
         return false;
+    }
+
+    @Override
+    public void addListener(LoginHistoryListener listener) {
+        this.listener = listener;
     }
 }

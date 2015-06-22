@@ -56,4 +56,9 @@ public class AuthenticatorTest {
 
         assertThat(userParsed, is(3));
     }
+
+    @Test
+    public void shouldBeAbleToupdateUserHistoryWithTheCurrentLoggedInUser() {
+
+    }
 }

@@ -2,11 +2,13 @@ package com.twu.biblioteca.action;
 
 import com.twu.biblioteca.collection.Books;
 import com.twu.biblioteca.constants.Messages;
+import com.twu.biblioteca.listener.LoginHistoryListener;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.view.ConsoleView;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
@@ -22,6 +24,9 @@ public class CheckOutBookTest {
     private CheckOutBook checkOutBook;
     ConsoleView consoleViewStub;
 
+    @Mock
+    LoginHistoryListener loginHistoryListener;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -32,6 +37,7 @@ public class CheckOutBookTest {
 
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
         books = new Books(availableBookList, checkedOutBookList);
+        books.addListener(loginHistoryListener);
         consoleViewStub = mock(ConsoleView.class);
         checkOutBook = new CheckOutBook(consoleViewStub, books);
     }

@@ -11,6 +11,7 @@ import com.twu.biblioteca.menu.Menu;
 import com.twu.biblioteca.model.Authenticator;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.Movie;
+import com.twu.biblioteca.model.UserHistory;
 import com.twu.biblioteca.view.ConsoleView;
 
 import java.io.BufferedReader;
@@ -21,6 +22,10 @@ import java.util.HashMap;
 
 public class EntryPoint {
     public static void main(String args[]) throws IOException {
+        UserHistory userHistory = null;
+        HashMap<String, Book> bookUserHistory = new HashMap<String, Book>();
+        HashMap<String, Movie> movieUserHistory = new HashMap<String, Movie>();
+        userHistory = new UserHistory(bookUserHistory, movieUserHistory);
         ArrayList<Book> availableBookList = new ArrayList<Book>();
         availableBookList.add(new Book("Book 1", "JK Rowling", 2003));
         availableBookList.add(new Book("Book 2", "Arthur Conan Doyle", 1886));
@@ -28,6 +33,7 @@ public class EntryPoint {
 
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
         Books books = new Books(availableBookList, checkedOutBookList);
+        books.addListener(userHistory);
         HashMap<Integer, MenuAction> menuActionMap;
         Menu librarianMenu = null;
         Menu userMenu = null;
@@ -42,6 +48,7 @@ public class EntryPoint {
 
         ArrayList<Movie> checkedOutMovieList = new ArrayList<Movie>();
         Movies movies = new Movies(availableMovieList, checkedOutMovieList);
+        movies.addListener(userHistory);
         LibrarianMenuExecutor librarianMenuExecutor = null;
         UserMenuExecutor userMenuExecutor = null;
         ConsoleView consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
@@ -107,6 +114,7 @@ public class EntryPoint {
         menuActionMap.put(8, loginAction);
         LogoutAction logoutAction = new LogoutAction(consoleView, loginMenu, loginMenuExecutor);
         menuActionMap.put(9, logoutAction);
+        authenticator.addListener(userHistory);
 
         bibliotecaApp = new BibliotecaApp(consoleView, menu, loginMenuExecutor);
         loginAction.addListener(bibliotecaApp);

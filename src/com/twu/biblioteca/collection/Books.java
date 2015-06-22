@@ -1,12 +1,15 @@
 package com.twu.biblioteca.collection;
 
+import com.twu.biblioteca.listener.HistoryListenable;
+import com.twu.biblioteca.listener.LoginHistoryListener;
 import com.twu.biblioteca.model.Book;
 
 import java.util.ArrayList;
 
-public class Books {
+public class Books implements HistoryListenable{
     private ArrayList<Book> availableBooks;
     private ArrayList<Book> checkedOutBooks;
+    private LoginHistoryListener loginHistoryListener;
 
     public Books(ArrayList<Book> availableBookList, ArrayList<Book> checkedOutBooks) {
         this.availableBooks = availableBookList;
@@ -45,6 +48,7 @@ public class Books {
                 if (book.isBookSame(bookName)) {
                     checkedOutBooks.add(book);
                     availableBooks.remove(book);
+                    loginHistoryListener.updateBook(book, -1);
                     return true;
                 }
 
@@ -71,5 +75,10 @@ public class Books {
             if (book.isBookSame(bookName))
                 return true;
         return false;
+    }
+
+    @Override
+    public void addListener(LoginHistoryListener listener) {
+        this.loginHistoryListener = listener;
     }
 }
