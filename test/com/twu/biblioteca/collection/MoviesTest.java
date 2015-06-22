@@ -75,4 +75,13 @@ public class MoviesTest {
 
         verify(loginHistoryListener).updateMovie(new Movie("Movie 1", 2003, "JK Rowling", 1), -1);
     }
+
+    @Test
+    public void shouldUpdateHistoryOnReturnMovie() {
+        String movieName = "Movie 1";
+        movies.checkout(movieName);
+        Boolean actual = movies.returnMovie(movieName);
+
+        verify(loginHistoryListener).updateMovie(new Movie("Movie 1", 2003, "JK Rowling", 1), 1);
+    }
 }

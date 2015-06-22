@@ -53,6 +53,7 @@ public class Movies implements HistoryListenable{
             if (movie.isMovieSame(movieName)) {
                 availableMovieList.add(movie);
                 checkedOutMovieList.remove(movie);
+                listener.updateMovie(movie, 1);
                 return true;
             }
         }
