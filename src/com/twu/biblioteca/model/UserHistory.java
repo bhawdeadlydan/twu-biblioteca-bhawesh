@@ -42,5 +42,7 @@ public class UserHistory implements LoginHistoryListener {
     @Override
     public void updateMovie(Movie movie, int status) {
         this.movieChanged = movie;
+        if (status == -1)
+            movieUserHistory.put(loggedInUser, movie);
     }
 }

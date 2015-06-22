@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.HashMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserHistoryTest {
@@ -20,6 +20,9 @@ public class UserHistoryTest {
 
     @Mock
     Book book;
+
+    @Mock
+    Movie movie;
 
     @Mock
     HashMap<String, Book> bookUserHistory;
@@ -34,8 +37,9 @@ public class UserHistoryTest {
         userHistory.updateUser("user222");
         userHistory.updateBook(book, -1);
 
-        Mockito.verify(bookUserHistory).put("user222", book);
+        verify(bookUserHistory).put("user222", book);
     }
+
     @Test
     public void shouldUpdateUserHistoryOnBookReturn() {
         HashMap<String, Book> bookUserHistory = new HashMap<String, Book>();
@@ -46,6 +50,14 @@ public class UserHistoryTest {
         userHistory.updateBook(book, 1);
         HashMap<String, Book> expectedBookUserHistory = new HashMap<String, Book>();
         assertThat(bookUserHistory, is(expectedBookUserHistory));
+    }
+
+    @Test
+    public void shouldUpdateUserHistoryOnMovieCheckout() {
+        userHistory.updateUser("user222");
+        userHistory.updateMovie(movie, -1);
+
+        verify(movieUserHistory).put("user222", movie);
     }
 
 
