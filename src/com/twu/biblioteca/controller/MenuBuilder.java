@@ -47,4 +47,6 @@ public abstract class MenuBuilder {
     protected abstract void removeLogoutOperation();
 
     protected abstract void removeLoginOperation();
+
+    protected abstract void removeUserDetailOption();
 }

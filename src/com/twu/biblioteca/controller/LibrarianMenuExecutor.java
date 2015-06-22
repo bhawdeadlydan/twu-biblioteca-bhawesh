@@ -36,4 +36,9 @@ public class LibrarianMenuExecutor extends MenuBuilder {
     public void removeLoginOperation() {
         menuActionMap.remove(8);
     }
+
+    @Override
+    protected void removeUserDetailOption() {
+
+    }
 }

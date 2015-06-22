@@ -33,4 +33,12 @@ public class LibrarianMenuExecutorTest {
 
         verify(menuActionMap).remove(8);
     }
+
+    @Test
+    public void shouldRemoveUserDetailOption() {
+        LibrarianMenuExecutor librarianMenuExecutor = new LibrarianMenuExecutor(menuActionMap, consoleView);
+        librarianMenuExecutor.buildMenu();
+
+        verify(menuActionMap).remove(10);
+    }
 }
