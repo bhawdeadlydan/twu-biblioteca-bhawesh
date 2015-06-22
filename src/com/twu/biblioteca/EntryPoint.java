@@ -8,10 +8,7 @@ import com.twu.biblioteca.controller.LibrarianMenuExecutor;
 import com.twu.biblioteca.controller.LoginMenuExecutor;
 import com.twu.biblioteca.controller.UserMenuExecutor;
 import com.twu.biblioteca.menu.Menu;
-import com.twu.biblioteca.model.Authenticator;
-import com.twu.biblioteca.model.Book;
-import com.twu.biblioteca.model.Movie;
-import com.twu.biblioteca.model.UserHistory;
+import com.twu.biblioteca.model.*;
 import com.twu.biblioteca.view.ConsoleView;
 
 import java.io.BufferedReader;
@@ -85,6 +82,12 @@ public class EntryPoint {
         loginMenuMap.put(8, Messages.LOGIN);
 
         HashMap<Integer, String[]> userNameAndPasswordMap = new HashMap<Integer, String[]>();
+        User firstUser = new User("Rajesh", "222-2222", "user222", "rajesh@twu.edu", "9090898909");
+        User secondUser = new User("Abhishek", "333-3333", "user333", "abhi@twu.edu", "9090898909");
+        User thirdUser = new User("Sukreet", "444-4444", "user444", "awk@twu.edu", "9090898909");
+
+
+
         userNameAndPasswordMap.put(1, new String[]{"111-1111", "librarian123"});
         userNameAndPasswordMap.put(2, new String[]{"222-2222", "user222"});
         userNameAndPasswordMap.put(3, new String[]{"333-3333", "user333"});
@@ -117,6 +120,7 @@ public class EntryPoint {
         authenticator.addListener(userHistory);
         UserHistoryAction userHistoryAction = new UserHistoryAction(userHistory, consoleView);
         menuActionMap.put(11, userHistoryAction);
+
 
         bibliotecaApp = new BibliotecaApp(consoleView, menu, loginMenuExecutor);
         loginAction.addListener(bibliotecaApp);
