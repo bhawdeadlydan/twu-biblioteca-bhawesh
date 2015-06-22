@@ -53,4 +53,18 @@ public class UserHistory implements LoginHistoryListener {
                 }
             }
     }
+
+    @Override
+    public String toString() {
+        String visualRepresentation = "";
+        Set<String> keys = movieUserHistory.keySet();
+        for(String key : keys){
+            visualRepresentation += "\n" + key + ": " +movieUserHistory.get(key).toString();
+        }
+        Set<String> bkeys = bookUserHistory.keySet();
+        for(String key : bkeys){
+            visualRepresentation += "\n" + key + ": " +bookUserHistory.get(key).toString();
+        }
+        return visualRepresentation;
+    }
 }

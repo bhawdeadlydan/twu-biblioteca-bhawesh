@@ -1,11 +1,14 @@
 package com.twu.biblioteca.model;
 
+import com.twu.biblioteca.view.ConsoleView;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,6 +18,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class UserHistoryTest {
     private UserHistory userHistory;
+    private  ConsoleView consoleView;
     @Mock
     HashMap<String, Movie> movieUserHistory;
 
@@ -30,6 +34,7 @@ public class UserHistoryTest {
     @Before
     public void setUp() {
         userHistory = new UserHistory(bookUserHistory, movieUserHistory);
+        consoleView = new ConsoleView(new BufferedReader(new InputStreamReader(System.in)));
     }
 
     @Test
@@ -72,5 +77,18 @@ public class UserHistoryTest {
         assertThat(movieUserHistory, is(expectedMovieUserHistory));
     }
 
+    @Test
+    public void shouldBeAbleToDisplayUserHistoryForDefaulters() {
+        Book book = new Book("Raj", "Comics", 2000);
+        HashMap<String, Book> bookUserHistory = new HashMap<String, Book>();
+        bookUserHistory.put("user333", book);
+        Movie movie = new Movie("Art Of living", 1945, "Director", 4);
+        HashMap<String, Movie> movieUserHistory = new HashMap<String, Movie>();
+        movieUserHistory.put("user222", movie);
+        userHistory = new UserHistory(bookUserHistory, movieUserHistory);
+
+         consoleView.print(userHistory.toString());
+
+    }
 
 }
