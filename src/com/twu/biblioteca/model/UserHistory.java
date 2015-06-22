@@ -44,5 +44,13 @@ public class UserHistory implements LoginHistoryListener {
         this.movieChanged = movie;
         if (status == -1)
             movieUserHistory.put(loggedInUser, movie);
+        else if(status == 1)
+            if(movieUserHistory.containsValue(movie)){
+                Set<String> keys = movieUserHistory.keySet();
+                for(String key : keys){
+                    if(movieUserHistory.get(key).equals(movie))
+                        movieUserHistory.remove(key);
+                }
+            }
     }
 }

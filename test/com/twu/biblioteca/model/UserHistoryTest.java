@@ -60,6 +60,17 @@ public class UserHistoryTest {
         verify(movieUserHistory).put("user222", movie);
     }
 
+    @Test
+    public void shouldUpdateUserHistoryOnMovieReturn() {
+        HashMap<String, Book> bookUserHistory = new HashMap<String, Book>();
+        HashMap<String, Movie> movieUserHistory = new HashMap<String, Movie>();
+        movieUserHistory.put("user222", movie);
+        userHistory = new UserHistory(bookUserHistory, movieUserHistory);
+
+        userHistory.updateMovie(movie, 1);
+        HashMap<String, Movie> expectedMovieUserHistory = new HashMap<String, Movie>();
+        assertThat(movieUserHistory, is(expectedMovieUserHistory));
+    }
 
 
 }
