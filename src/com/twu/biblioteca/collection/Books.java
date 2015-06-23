@@ -70,7 +70,7 @@ public class Books implements ListenableForHistoryOfUsers {
             }
         return false;
     }
-    
+
     @Override
     public void addListener(LoginHistoryListener listener) {
         this.loginHistoryListener = listener;

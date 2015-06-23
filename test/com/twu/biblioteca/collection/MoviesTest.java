@@ -2,7 +2,6 @@ package com.twu.biblioteca.collection;
 
 import com.twu.biblioteca.listener.LoginHistoryListener;
 import com.twu.biblioteca.model.Movie;
-import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,13 +41,6 @@ public class MoviesTest {
         String expectedMoviesInLibrary = "\nName\tDirector\tYear\tRating\n\nMovie 1\tJK Rowling\t2003\trating:1\n\nMovie 2\tArthur Conan Doyle\t1886\trating:2";
 
         assertThat(actualMoviesInLibrary, is(expectedMoviesInLibrary));
-    }
-
-    @Test
-    public void shouldMatchTheMovieBasedOnNameInMovieList() {
-        boolean actual = movies.isMovieInMovieList("Movie 1");
-
-        MatcherAssert.assertThat(actual, is(true));
     }
 
     @Test

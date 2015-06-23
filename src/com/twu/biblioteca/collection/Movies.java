@@ -37,17 +37,7 @@ public class Movies implements ListenableForHistoryOfUsers {
         }
         return false;
     }
-
-    public boolean isMovieInMovieList(String movieName) {
-        for (Movie movie : availableMovieList)
-            if (movie.isMovieSame(movieName))
-                return true;
-        for (Movie movie : checkedOutMovieList)
-            if (movie.isMovieSame(movieName))
-                return true;
-        return false;
-    }
-
+    
     public boolean returnMovie(String movieName) {
         for (Movie movie : checkedOutMovieList) {
             if (movie.isMovieSame(movieName)) {
