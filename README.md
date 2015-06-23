@@ -1,9 +1,26 @@
-#TWU BIBLIOTECA [![Build Status](https://travis-ci.org/bhawdeadlydan/twu-biblioteca-bhaweshksingh.svg?branch=master)](https://travis-ci.org/bhawdeadlydan/twu-biblioteca-bhaweshksingh)
+#TWU BIBLIOTECA [![Build Status](https://travis-ci.org/bhawdeadlydan/twu-biblioteca-bhawesh.svg?branch=master)](https://travis-ci.org/bhawdeadlydan/twu-biblioteca-bhawesh)
 
 To run the application :
 Run EntryPoint
 
-Then the first screen comes :
+or
+
+ant run
+
+Login Details :
+
+Librarian :
+          111-1111
+          librarian123
+
+User      :
+          222-2222
+          user222
+
+
+
+
+On starting the first screen comes :
 
 Welcome
 
@@ -56,7 +73,3 @@ Welcome
 9 Logout
 10 Personal Details
 Enter Choice :
-
-
-
-
