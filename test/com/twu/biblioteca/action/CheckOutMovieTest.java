@@ -20,6 +20,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.*;
+
 @RunWith(MockitoJUnitRunner.class)
 public class CheckOutMovieTest {
     private Movies movies;
@@ -28,6 +29,7 @@ public class CheckOutMovieTest {
 
     @Mock
     LoginHistoryListener loginHistoryListener;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);

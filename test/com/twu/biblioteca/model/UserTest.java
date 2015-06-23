@@ -17,7 +17,7 @@ public class UserTest {
 
     @Test
     public void shouldBeEqualToItself() {
-        User firstUser = new User("Rajeev","888-8888","rogerpass", "raj@gmail.com", "9898000098");
+        User firstUser = new User("Rajeev", "888-8888", "rogerpass", "raj@gmail.com", "9898000098");
 
         boolean actual = firstUser.equals(firstUser);
 
@@ -26,8 +26,8 @@ public class UserTest {
 
     @Test
     public void shouldFollowSymmetricProperty() {
-        User firstUser = new User("Rajeev","888-8888","rogerpass", "raj@gmail.com", "9898000098");
-        User secondUser = new User("Rajeev","888-8888","rogerpass", "raj@gmail.com", "9898000098");
+        User firstUser = new User("Rajeev", "888-8888", "rogerpass", "raj@gmail.com", "9898000098");
+        User secondUser = new User("Rajeev", "888-8888", "rogerpass", "raj@gmail.com", "9898000098");
 
         boolean actual = (firstUser.equals(secondUser) == secondUser.equals(firstUser));
 
@@ -36,9 +36,9 @@ public class UserTest {
 
     @Test
     public void shouldFollowTransitiveProperty() {
-        User firstUser = new User("Rajeev","888-8888","rogerpass", "raj@gmail.com", "9898000098");
-        User secondUser = new User("Rajeev","888-8888","rogerpass", "raj@gmail.com", "9898000098");
-        User thirdUser = new User("Rajeev","888-8888","rogerpass", "raj@gmail.com", "9898000098");
+        User firstUser = new User("Rajeev", "888-8888", "rogerpass", "raj@gmail.com", "9898000098");
+        User secondUser = new User("Rajeev", "888-8888", "rogerpass", "raj@gmail.com", "9898000098");
+        User thirdUser = new User("Rajeev", "888-8888", "rogerpass", "raj@gmail.com", "9898000098");
 
         boolean actual = firstUser.equals(secondUser) &&
                 secondUser.equals(thirdUser) &&
@@ -49,8 +49,8 @@ public class UserTest {
 
     @Test
     public void shouldHaveSameHashCodeIfUsersAreEqual() {
-        User firstUser = new User("Rajeev","888-8888","rogerpass", "raj@gmail.com", "9898000098");
-        User secondUser = new User("Rajeev","888-8888","rogerpass", "raj@gmail.com", "9898000098");
+        User firstUser = new User("Rajeev", "888-8888", "rogerpass", "raj@gmail.com", "9898000098");
+        User secondUser = new User("Rajeev", "888-8888", "rogerpass", "raj@gmail.com", "9898000098");
 
         boolean actual = firstUser.equals(secondUser) && (firstUser.hashCode() == secondUser.hashCode());
 
@@ -59,7 +59,7 @@ public class UserTest {
 
     @Test
     public void shouldBeAbleToIdentifyUserEqualityIfUsersHaveSameUserName() {
-        User firstUser = new User("Rajeev","888-8888","rogerpass", "raj@gmail.com", "9898000098");
+        User firstUser = new User("Rajeev", "888-8888", "rogerpass", "raj@gmail.com", "9898000098");
 
         boolean actual = firstUser.isSameAs("888-8888");
 

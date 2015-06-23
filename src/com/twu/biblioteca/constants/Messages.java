@@ -31,5 +31,6 @@ public class Messages {
     public static final String PASSWORD_PROMPT = "Enter Password :";
     public static final String SUCCESSFUL_LOGIN_USER = "You have logged in successfully as a user!";
     public static final String LOGOUT_MESSAGE = "You have been logged out! Thank you! Have a nice day!";
+    public static final String USER_DETAIL = "User Detail";
     public static String UNSUCCESSFULL_CHECKOUT = "That book is not available.";
 }

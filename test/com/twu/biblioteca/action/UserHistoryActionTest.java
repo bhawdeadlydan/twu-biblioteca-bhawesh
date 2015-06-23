@@ -18,7 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UserHistoryActionTest {
     private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    private  UserHistoryAction userHistoryAction;
+    private UserHistoryAction userHistoryAction;
     private UserHistory userHistory;
 
     @Before
@@ -34,6 +34,7 @@ public class UserHistoryActionTest {
         userHistory = new UserHistory(bookUserHistory, movieUserHistory);
         userHistoryAction = new UserHistoryAction(userHistory, consoleView);
     }
+
     @Test
     public void shouldBeAbleToDisplayUserHistory() {
         userHistoryAction.performAction();

@@ -22,7 +22,7 @@ public class UserHistoryTest {
     private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     private UserHistory userHistory;
-    private  ConsoleView consoleView;
+    private ConsoleView consoleView;
     @Mock
     HashMap<String, Movie> movieUserHistory;
 
@@ -91,8 +91,6 @@ public class UserHistoryTest {
         HashMap<String, Movie> movieUserHistory = new HashMap<String, Movie>();
         movieUserHistory.put("user222", movie);
         userHistory = new UserHistory(bookUserHistory, movieUserHistory);
-
-
 
 
         String actualOutput = userHistory.toString();

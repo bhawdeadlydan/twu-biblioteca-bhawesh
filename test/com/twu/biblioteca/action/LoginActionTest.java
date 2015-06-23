@@ -67,13 +67,14 @@ public class LoginActionTest {
 
         assertThat(expectedMessage, is(actualMessage));
     }
+
     @Test
     public void shouldGetUserNameAndPassWord() throws IOException {
         LoginAction loginAction = new LoginAction(consoleView, authenticator, librarianMenu, userMenu, librarianMenuExecutor, userMenuExecutor);
         loginAction.addListener(bibliotecaApp);
         loginAction.performAction();
 
-        verify(consoleView,times(2)).getName();
+        verify(consoleView, times(2)).getName();
     }
 
 

@@ -72,6 +72,7 @@ public class EntryPoint {
         userMenuMap.put(6, Messages.CHECKOUT_MOVIE);
         userMenuMap.put(7, Messages.RETURN_MOVIE);
         userMenuMap.put(9, Messages.LOGOUT);
+        userMenuMap.put(10, Messages.USER_DETAIL);
 
 
         HashMap<Integer, String> loginMenuMap = new HashMap<Integer, String>();
@@ -82,6 +83,7 @@ public class EntryPoint {
         loginMenuMap.put(8, Messages.LOGIN);
 
         HashMap<Integer, String[]> userNameAndPasswordMap = new HashMap<Integer, String[]>();
+        User superUser = new User("Librarian", "111-1111", "librarian123", "admin@twu.edu", "08048048089");
         User firstUser = new User("Rajesh", "222-2222", "user222", "rajesh@twu.edu", "9090898909");
         User secondUser = new User("Abhishek", "333-3333", "user333", "abhi@twu.edu", "9090898909");
         User thirdUser = new User("Sukreet", "444-4444", "user444", "awk@twu.edu", "9090898909");
@@ -123,7 +125,7 @@ public class EntryPoint {
         UserHistoryAction userHistoryAction = new UserHistoryAction(userHistory, consoleView);
         menuActionMap.put(11, userHistoryAction);
 
-        UserDetailAction userDetailAction = new UserDetailAction(userList, authenticator);
+        UserDetailAction userDetailAction = new UserDetailAction(userList, authenticator, consoleView);
         menuActionMap.put(10, userDetailAction);
         bibliotecaApp = new BibliotecaApp(consoleView, menu, loginMenuExecutor);
         loginAction.addListener(bibliotecaApp);

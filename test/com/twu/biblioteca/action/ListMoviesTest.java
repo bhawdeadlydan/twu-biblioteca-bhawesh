@@ -42,7 +42,7 @@ public class ListMoviesTest {
         listMovies.performAction();
 
         String actualListOfMovies = outputStream.toString();
-        String expectedListOfMovies ="\nName\tDirector\tYear\tRating\n\nMovie 1\tJK Rowling\t2003\trating:1\n\nMovie 2\tArthur Conan Doyle\t1886\trating:2\n";
+        String expectedListOfMovies = "\nName\tDirector\tYear\tRating\n\nMovie 1\tJK Rowling\t2003\trating:1\n\nMovie 2\tArthur Conan Doyle\t1886\trating:2\n";
 
         assertThat(expectedListOfMovies, is(actualListOfMovies));
     }
