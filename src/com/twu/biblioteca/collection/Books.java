@@ -47,9 +47,7 @@ public class Books implements ListenableForHistoryOfUsers {
         return false;
     }
 
-
     public boolean checkout(String bookName) {
-        if (isBookAvailable(bookName)) {
             for (Book book : availableBooks) {
                 if (book.isBookSame(bookName)) {
                     checkedOutBooks.add(book);
@@ -57,14 +55,11 @@ public class Books implements ListenableForHistoryOfUsers {
                     loginHistoryListener.updateBook(book, -1);
                     return true;
                 }
-
             }
-        }
         return false;
     }
 
     public boolean returnBook(String bookName) {
-        if (isCheckedOut(bookName)) {
             for (Book book : checkedOutBooks) {
                 if (book.isBookSame(bookName)) {
                     availableBooks.add(book);
@@ -73,16 +68,9 @@ public class Books implements ListenableForHistoryOfUsers {
                     return true;
                 }
             }
-        }
         return false;
     }
-
-    private boolean isCheckedOut(String bookName) {
-        if (isBookInCheckedOutBooks(bookName))
-            return true;
-        return false;
-    }
-
+    
     @Override
     public void addListener(LoginHistoryListener listener) {
         this.loginHistoryListener = listener;
