@@ -1,4 +1,4 @@
-#TWU BIBLIOTECA [![Build Status](https://travis-ci.org/bhawdeadlydan/twu-biblioteca-bhawesh.svg?branch=master)](https://travis-ci.org/bhawdeadlydan/twu-biblioteca-bhawesh)
+#TWU BIBLIOTECA [![Build Status](https://travis-ci.org/bhawdeadlydan/twu-biblioteca-bhaweshksingh.svg?branch=master)](https://travis-ci.org/bhawdeadlydan/twu-biblioteca-bhaweshksingh)
 
 To run the application :
 Run EntryPoint
