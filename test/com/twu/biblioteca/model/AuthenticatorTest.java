@@ -75,5 +75,22 @@ public class AuthenticatorTest {
         verify(listener).updateUser("222-2222");
     }
 
+    @Test
+    public void shouldBeAbleToProvideTheCurrentUser() {
+        Authenticator authenticator = new Authenticator(userNameAndPasswordMap);
+        authenticator.addListener(listener);
+        User firstUser = new User("Rajesh", "222-2222", "user222", "rajesh@twu.edu", "9090898909");
+        User secondUser = new User("Abhishek", "333-3333", "user333", "abhi@twu.edu", "9090898909");
+        User thirdUser = new User("Sukreet", "444-4444", "user444", "awk@twu.edu", "9090898909");
+        ArrayList<User> userList = new ArrayList<User>();
+        userList.add(firstUser);
+        userList.add(secondUser);
+        userList.add(thirdUser);
+        authenticator.authenticate("222-2222", "user222");
+        ArrayList<User> expectedListOfUsers = new ArrayList<User>();
+        expectedListOfUsers.add(firstUser);
+        ArrayList<User> actualListOfUsers = authenticator.authenticatedUser(userList);
 
+        assertThat(actualListOfUsers, is(expectedListOfUsers));
+    }
 }

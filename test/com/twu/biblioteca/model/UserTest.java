@@ -56,4 +56,13 @@ public class UserTest {
 
         assertThat(actual, is(true));
     }
+
+    @Test
+    public void shouldBeAbleToIdentifyUserEqualityIfUsersHaveSameUserName() {
+        User firstUser = new User("Rajeev","888-8888","rogerpass", "raj@gmail.com", "9898000098");
+
+        boolean actual = firstUser.isSameAs("888-8888");
+
+        assertThat(actual, is(true));
+    }
 }

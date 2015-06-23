@@ -56,4 +56,8 @@ public class User {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
+
+    public boolean isSameAs(String userName) {
+        return this.userName.equals(userName);
+    }
 }

@@ -43,6 +43,12 @@ public class Authenticator implements ListenableForHistoryOfUsers {
     }
 
     public ArrayList<User> authenticatedUser(ArrayList<User> userList) {
-        return userList;
+        ArrayList<User> userListWithCurrentLoggedInUser = new ArrayList<User>();
+        for (User user : userList) {
+            if (user.isSameAs(this.currentLoggedInUser)) {
+                userListWithCurrentLoggedInUser.add(user);
+            }
+        }
+        return userListWithCurrentLoggedInUser;
     }
 }
