@@ -31,10 +31,8 @@ public class ReturnMovieTest {
         ArrayList<Movie> availableMovieList = new ArrayList<Movie>();
         availableMovieList.add(new Movie("Movie 1", 2003, "JK Rowling", 1));
         availableMovieList.add(new Movie("Movie 2", 1886, "Arthur Conan Doyle", 2));
-
         ArrayList<Movie> checkedOutMovieList = new ArrayList<Movie>();
         movies = new Movies(availableMovieList, checkedOutMovieList);
-
         consoleViewStub = mock(ConsoleView.class);
         returnMovie = new ReturnMovie(consoleViewStub, movies);
     }

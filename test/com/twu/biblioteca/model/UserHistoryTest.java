@@ -56,9 +56,10 @@ public class UserHistoryTest {
         bookUserHistory.put("user222", book);
         HashMap<String, Movie> movieUserHistory = new HashMap<String, Movie>();
         userHistory = new UserHistory(bookUserHistory, movieUserHistory);
-
         userHistory.updateBook(book, 1);
+
         HashMap<String, Book> expectedBookUserHistory = new HashMap<String, Book>();
+
         assertThat(bookUserHistory, is(expectedBookUserHistory));
     }
 
@@ -76,9 +77,10 @@ public class UserHistoryTest {
         HashMap<String, Movie> movieUserHistory = new HashMap<String, Movie>();
         movieUserHistory.put("user222", movie);
         userHistory = new UserHistory(bookUserHistory, movieUserHistory);
-
         userHistory.updateMovie(movie, 1);
+
         HashMap<String, Movie> expectedMovieUserHistory = new HashMap<String, Movie>();
+
         assertThat(movieUserHistory, is(expectedMovieUserHistory));
     }
 
@@ -94,7 +96,6 @@ public class UserHistoryTest {
 
 
         String actualOutput = userHistory.toString();
-        System.out.println(actualOutput);
         String expectedOutput = "\nuser222: \nArt Of living\tDirector\t1945\trating:4\nuser333: Raj\tComics\t2000";
 
         assertThat(actualOutput, is(expectedOutput));

@@ -76,21 +76,16 @@ public class ReturnBookTest {
         ArrayList<Book> availableBookList = new ArrayList<Book>();
         availableBookList.add(new Book("Book 1", "JK Rowling", 2003));
         availableBookList.add(new Book("Book 2", "Arthur Conan Doyle", 1886));
-
         ArrayList<Book> checkedOutBookList = new ArrayList<Book>();
         checkedOutBookList.add(new Book("Book 3", "Agatha Christie", 1800));
         books = new Books(availableBookList, checkedOutBookList);
         books.addListener(loginHistoryListener);
-
         consoleViewStub = mock(ConsoleView.class);
         returnBook = new ReturnBook(consoleViewStub, books);
         when(consoleViewStub.getName()).thenReturn("Book 3");
-
         returnBook.performAction();
-
         ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
         verify(consoleViewStub, times(2)).print(stringArgumentCaptor.capture());
-
         List<String> capturedStrings = stringArgumentCaptor.getAllValues();
 
         String actualMessage = capturedStrings.get(1);

@@ -36,7 +36,6 @@ public class CheckOutMovieTest {
         ArrayList<Movie> availableMovieList = new ArrayList<Movie>();
         availableMovieList.add(new Movie("Movie 1", 2003, "JK Rowling", 1));
         availableMovieList.add(new Movie("Movie 2", 1886, "Arthur Conan Doyle", 2));
-
         ArrayList<Movie> checkedOutMovieList = new ArrayList<Movie>();
         movies = new Movies(availableMovieList, checkedOutMovieList);
         movies.addListener(loginHistoryListener);
@@ -75,12 +74,9 @@ public class CheckOutMovieTest {
     public void shouldSuccessfullyCheckOutMovie() throws IOException {
         checkOutMovie = new CheckOutMovie(consoleViewStub, movies);
         when(consoleViewStub.getName()).thenReturn("Movie 1");
-
         checkOutMovie.performAction();
-
         ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
         verify(consoleViewStub, times(2)).print(stringArgumentCaptor.capture());
-
         List<String> capturedStrings = stringArgumentCaptor.getAllValues();
 
         String actualMessage = capturedStrings.get(1);
@@ -93,12 +89,9 @@ public class CheckOutMovieTest {
     public void shouldNotBeAbleCheckOutMovieIfItIsInvalid() throws IOException {
         checkOutMovie = new CheckOutMovie(consoleViewStub, movies);
         when(consoleViewStub.getName()).thenReturn("Movie 4");
-
         checkOutMovie.performAction();
-
         ArgumentCaptor<String> stringArgumentCaptor = ArgumentCaptor.forClass(String.class);
         verify(consoleViewStub, times(2)).print(stringArgumentCaptor.capture());
-
         List<String> capturedStrings = stringArgumentCaptor.getAllValues();
 
         String actualMessage = capturedStrings.get(1);
