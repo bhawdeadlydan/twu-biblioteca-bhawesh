@@ -26,24 +26,30 @@ public class Books implements ListenableForHistoryOfUsers {
     }
 
     public boolean isBookInBookList(String greatBook) {
-        for (Book book : availableBooks)
-            if (book.isBookSame(greatBook))
-                return true;
+        if (isBookAvailable(greatBook))
+            return true;
+        if (isBookInCheckedOutBooks(greatBook))
+            return true;
+        return false;
+    }
+
+    private boolean isBookInCheckedOutBooks(String greatBook) {
         for (Book book : checkedOutBooks)
             if (book.isBookSame(greatBook))
                 return true;
         return false;
     }
 
-    public boolean isAvailable(String bookName) {
+    private boolean isBookAvailable(String greatBook) {
         for (Book book : availableBooks)
-            if (book.isBookSame(bookName))
+            if (book.isBookSame(greatBook))
                 return true;
         return false;
     }
 
+
     public boolean checkout(String bookName) {
-        if (isAvailable(bookName)) {
+        if (isBookAvailable(bookName)) {
             for (Book book : availableBooks) {
                 if (book.isBookSame(bookName)) {
                     checkedOutBooks.add(book);
@@ -72,9 +78,8 @@ public class Books implements ListenableForHistoryOfUsers {
     }
 
     private boolean isCheckedOut(String bookName) {
-        for (Book book : checkedOutBooks)
-            if (book.isBookSame(bookName))
-                return true;
+        if (isBookInCheckedOutBooks(bookName))
+            return true;
         return false;
     }
 

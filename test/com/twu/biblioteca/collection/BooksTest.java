@@ -37,6 +37,7 @@ public class BooksTest {
 
     @Test
     public void shouldGiveAllBooksFromLibrary() {
+
         String actualBooksInLibrary = books.toString();
         String expectedBooksInLibrary = "\nName\tAuthor\tPublication Year\nBook 1\tJK Rowling\t2003\nBook 2\tArthur Conan Doyle\t1886\nBook 3\tAgatha Christie\t1800";
 
@@ -46,13 +47,6 @@ public class BooksTest {
     @Test
     public void shouldMatchTheBookBasedOnNameInBookList() {
         boolean actual = books.isBookInBookList("Book 1");
-
-        assertThat(actual, is(true));
-    }
-
-    @Test
-    public void shouldCheckAvailablityOfBook() {
-        boolean actual = books.isAvailable("Book 1");
 
         assertThat(actual, is(true));
     }
