@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -16,6 +17,8 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class AuthenticatorTest {
     private Authenticator authenticator;
+    private ArrayList<User> userList;
+    private HashMap<Integer, String[]> userNameAndPasswordMap;
 
     @Mock
     LoginHistoryListener listener;
@@ -23,7 +26,7 @@ public class AuthenticatorTest {
     @Before
     public void setUp() {
 
-        HashMap<Integer, String[]> userNameAndPasswordMap = new HashMap<Integer, String[]>();
+        userNameAndPasswordMap = new HashMap<Integer, String[]>();
         userNameAndPasswordMap.put(1, new String[]{"111-1111", "librarian123"});
         userNameAndPasswordMap.put(2, new String[]{"222-2222", "user222"});
         userNameAndPasswordMap.put(3, new String[]{"333-3333", "user333"});
@@ -34,7 +37,13 @@ public class AuthenticatorTest {
         userNameAndPasswordMap.put(8, new String[]{"888-8888", "user888"});
         authenticator = new Authenticator(userNameAndPasswordMap);
         authenticator.addListener(listener);
-
+        User firstUser = new User("Rajesh", "222-2222", "user222", "rajesh@twu.edu", "9090898909");
+        User secondUser = new User("Abhishek", "333-3333", "user333", "abhi@twu.edu", "9090898909");
+        User thirdUser = new User("Sukreet", "444-4444", "user444", "awk@twu.edu", "9090898909");
+        userList = new ArrayList<User>();
+        userList.add(firstUser);
+        userList.add(secondUser);
+        userList.add(thirdUser);
 
     }
 
@@ -65,4 +74,6 @@ public class AuthenticatorTest {
 
         verify(listener).updateUser("222-2222");
     }
+
+
 }

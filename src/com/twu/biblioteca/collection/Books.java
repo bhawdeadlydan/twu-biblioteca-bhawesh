@@ -1,12 +1,12 @@
 package com.twu.biblioteca.collection;
 
-import com.twu.biblioteca.listener.HistoryListenable;
+import com.twu.biblioteca.listener.ListenableForHistoryOfUsers;
 import com.twu.biblioteca.listener.LoginHistoryListener;
 import com.twu.biblioteca.model.Book;
 
 import java.util.ArrayList;
 
-public class Books implements HistoryListenable {
+public class Books implements ListenableForHistoryOfUsers {
     private ArrayList<Book> availableBooks;
     private ArrayList<Book> checkedOutBooks;
     private LoginHistoryListener loginHistoryListener;

@@ -1,12 +1,12 @@
 package com.twu.biblioteca.collection;
 
-import com.twu.biblioteca.listener.HistoryListenable;
+import com.twu.biblioteca.listener.ListenableForHistoryOfUsers;
 import com.twu.biblioteca.listener.LoginHistoryListener;
 import com.twu.biblioteca.model.Movie;
 
 import java.util.ArrayList;
 
-public class Movies implements HistoryListenable {
+public class Movies implements ListenableForHistoryOfUsers {
     private ArrayList<Movie> availableMovieList;
     private ArrayList<Movie> checkedOutMovieList;
     private LoginHistoryListener listener;

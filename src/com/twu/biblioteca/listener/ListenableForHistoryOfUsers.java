@@ -1,5 +1,5 @@
 package com.twu.biblioteca.listener;
 
-public interface HistoryListenable {
+public interface ListenableForHistoryOfUsers {
     void addListener(LoginHistoryListener listener);
 }

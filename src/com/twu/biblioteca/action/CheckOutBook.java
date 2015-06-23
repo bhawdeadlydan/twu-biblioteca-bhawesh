@@ -6,8 +6,7 @@ import com.twu.biblioteca.view.ConsoleView;
 
 import java.io.IOException;
 
-public class
-        CheckOutBook implements MenuAction {
+public class CheckOutBook implements MenuAction {
     private Books books;
     private ConsoleView consoleView;
 

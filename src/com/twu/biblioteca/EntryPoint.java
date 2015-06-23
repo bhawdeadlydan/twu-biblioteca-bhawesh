@@ -85,8 +85,10 @@ public class EntryPoint {
         User firstUser = new User("Rajesh", "222-2222", "user222", "rajesh@twu.edu", "9090898909");
         User secondUser = new User("Abhishek", "333-3333", "user333", "abhi@twu.edu", "9090898909");
         User thirdUser = new User("Sukreet", "444-4444", "user444", "awk@twu.edu", "9090898909");
-
-
+        ArrayList<User> userList = new ArrayList<User>();
+        userList.add(firstUser);
+        userList.add(secondUser);
+        userList.add(thirdUser);
 
         userNameAndPasswordMap.put(1, new String[]{"111-1111", "librarian123"});
         userNameAndPasswordMap.put(2, new String[]{"222-2222", "user222"});
@@ -121,7 +123,8 @@ public class EntryPoint {
         UserHistoryAction userHistoryAction = new UserHistoryAction(userHistory, consoleView);
         menuActionMap.put(11, userHistoryAction);
 
-
+        UserDetailAction userDetailAction = new UserDetailAction(userList, authenticator);
+        menuActionMap.put(10, userDetailAction);
         bibliotecaApp = new BibliotecaApp(consoleView, menu, loginMenuExecutor);
         loginAction.addListener(bibliotecaApp);
         logoutAction.addListener(bibliotecaApp);

@@ -1,11 +1,11 @@
 package com.twu.biblioteca.model;
 
 public class User {
-    private  String userName;
-    private  String name;
-    private  String password;
-    private  String phone;
-    private  String email;
+    private String userName;
+    private String name;
+    private String password;
+    private String phone;
+    private String email;
 
     public User(String name, String userName, String password, String email, String phone) {
         this.name = name;
